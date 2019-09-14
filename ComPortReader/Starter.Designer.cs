@@ -1,4 +1,4 @@
-﻿namespace ComPortReader
+﻿namespace AFRMonitor
 {
     partial class Starter
     {
@@ -32,6 +32,7 @@
             this.BCont = new System.Windows.Forms.Button();
             this.CDCheck = new System.Windows.Forms.CheckBox();
             this.LongScanCheck = new System.Windows.Forms.CheckBox();
+            this.RFFBut = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // VCont
@@ -78,11 +79,23 @@
             this.LongScanCheck.UseVisualStyleBackColor = true;
             this.LongScanCheck.CheckedChanged += new System.EventHandler(this.LongScanCheck_CheckedChanged);
             // 
+            // RFFBut
+            // 
+            this.RFFBut.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RFFBut.Location = new System.Drawing.Point(234, 133);
+            this.RFFBut.Name = "RFFBut";
+            this.RFFBut.Size = new System.Drawing.Size(127, 47);
+            this.RFFBut.TabIndex = 4;
+            this.RFFBut.Text = "Read From File";
+            this.RFFBut.UseVisualStyleBackColor = true;
+            this.RFFBut.Click += new System.EventHandler(this.RFFBut_Click);
+            // 
             // Starter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(592, 192);
+            this.Controls.Add(this.RFFBut);
             this.Controls.Add(this.LongScanCheck);
             this.Controls.Add(this.CDCheck);
             this.Controls.Add(this.BCont);
@@ -101,5 +114,6 @@
         private System.Windows.Forms.Button BCont;
         private System.Windows.Forms.CheckBox CDCheck;
         private System.Windows.Forms.CheckBox LongScanCheck;
+        private System.Windows.Forms.Button RFFBut;
     }
 }

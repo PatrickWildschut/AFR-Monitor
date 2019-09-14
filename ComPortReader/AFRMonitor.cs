@@ -14,7 +14,7 @@ using System.Windows.Threading;
 using System.IO;
 using System.Speech.Synthesis;
 
-namespace ComPortReader
+namespace AFRMonitor
 {
     public partial class AFRMonitor : Form
     {
@@ -34,15 +34,19 @@ namespace ComPortReader
             {
                 StBut.Visible = false;
                 Choices commands = new Choices();
-                commands.Add(new string[] { "start", "stop" });
+                commands.Add(new string[] { "start", "stop", "reset" });
                 GrammarBuilder gBuild = new GrammarBuilder();
                 gBuild.Append(commands);
                 Grammar grammar = new Grammar(gBuild);
 
-                sre.LoadGrammarAsync(grammar);
-                sre.SetInputToDefaultAudioDevice();
-                sre.SpeechRecognized += Sre_SpeechRecognized;
-                sre.RecognizeAsync(RecognizeMode.Multiple);
+                try
+                {
+                    sre.LoadGrammarAsync(grammar);
+                    sre.SetInputToDefaultAudioDevice();
+                    sre.SpeechRecognized += Sre_SpeechRecognized;
+                    sre.RecognizeAsync(RecognizeMode.Multiple);
+                }
+                catch(Exception e) { MessageBox.Show("Error Code 2, output: " + e); }
                 Listening = true;
             }
             if(Helper.LongScanMode)
@@ -52,6 +56,12 @@ namespace ComPortReader
             ChartView.ChartAreas[0].AxisY.Minimum = 10;
             ChartView.ChartAreas[0].AxisY.Maximum = 20;
             label2.Visible = false;
+            label3.Visible = false;
+            label4.Visible = false;
+            label5.Visible = false;
+            label6.Visible = false;
+            label7.Visible = false;
+            label8.Visible = false;
             CurLab.Visible = false;
             RichOrLean.Visible = false;
             Lean.Visible = false;
@@ -72,6 +82,9 @@ namespace ComPortReader
                     break;
                 case "stop":
                     Stop();
+                    break;
+                case "reset":
+                    RTB_Click(null, null);
                     break;
                 default:
                     MessageBox.Show("Error Code 1, output: " + e.Result.Text + ".", "Fatal error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -128,33 +141,51 @@ namespace ComPortReader
 
         private void Start()
         {
-            StBut.Text = "Stop";
-            stop = false;
-            label2.Visible = true;
-            CurLab.Visible = true;
-            RichOrLean.Visible = true;
-            Lean.Visible = true;
-            Rich.Visible = true;
-            try
+            if(stop)
             {
-                SerialP.PortName = ComSelector.Text;
-                SerialP.Open();
+                StBut.Text = "Stop";
+                stop = false;
+                label2.Visible = true;
+                label3.Visible = true;
+                label4.Visible = true;
+                label5.Visible = true;
+                label6.Visible = true;
+                label7.Visible = true;
+                label8.Visible = true;
+                CurLab.Visible = true;
+                RichOrLean.Visible = true;
+                Lean.Visible = true;
+                Rich.Visible = true;
+                try
+                {
+                    SerialP.PortName = ComSelector.Text;
+                    SerialP.Open();
+                }
+                catch { }
+                UpdateAsync();
             }
-            catch { }
-            UpdateAsync();
-            
         }
 
         private void Stop()
         {
-            stop = true;
-            SerialP.Close();
-            label2.Visible = false;
-            CurLab.Visible = false;
-            RichOrLean.Visible = false;
-            Lean.Visible = false;
-            Rich.Visible = false;
-            StBut.Text = "Start";
+            if(!stop)
+            {
+                stop = true;
+                SerialP.Close();
+                label2.Visible = false;
+                label3.Visible = false;
+                label4.Visible = false;
+                label5.Visible = false;
+                label6.Visible = false;
+                label7.Visible = false;
+                label8.Visible = false;
+                CurLab.Visible = false;
+                RichOrLean.Visible = false;
+                Lean.Visible = false;
+                Rich.Visible = false;
+                StBut.Text = "Start";
+            }
+            
         }
 
         bool stop = true;
@@ -245,18 +276,25 @@ namespace ComPortReader
         private async Task SaveToFile()
         {
             string returns = "";
+            int Number = 0;
             double LastValue = 0;
             foreach (double d in Values)
             {
                 returns += d.ToString() + "\n";
-                if((LastValue - d) > 0.5 | (d - LastValue) > -0.5)
+                if((LastValue - d) > 0.5 | (d - LastValue) > 0.5)
                 {
                     DifZeroFive++;
                 }
                 LastValue = d;
                 Scans++;
             }
-            File.WriteAllText(Application.StartupPath + "\\Output.txt", "Lowest Value: " + Helper.LowestValue + "\nScans: " + Scans.ToString() + "\nDifference 0,5 or more: " + DifZeroFive.ToString() + "\n\n" + returns); ;
+            Check:
+            if(File.Exists(Application.StartupPath + "\\Output" + Number + ".txt"))
+            {
+                Number++;
+                goto Check;
+            }
+            File.WriteAllText(Application.StartupPath + "\\Output" + Number + ".txt", "Lowest Value: " + Helper.LowestValue + "\nScans: " + Scans.ToString() + "\nDifference 0,5 or more: " + DifZeroFive.ToString() + "\n\nValues\n" + returns); ;
 
             STFB.Invoke(new Action(() => STFB.Text = "Done"));
             await Task.Delay(1000);
@@ -269,6 +307,7 @@ namespace ComPortReader
             ChartView.Series["Value"].Points.Clear();
             Helper.LowestValue = int.MaxValue;
             LowValueValue.Text = "--,-";
+            i = 0;
         }
 
         private async void CountDown()
@@ -284,14 +323,22 @@ namespace ComPortReader
                 {
                     CurLab.Text = CountDownCount.ToString();
                 }
-                synthesizer.SpeakAsyncCancelAll();
-                synthesizer.SpeakAsync(CountDownCount.ToString());
+                try
+                {
+                    synthesizer.SpeakAsyncCancelAll();
+                    synthesizer.SpeakAsync(CountDownCount.ToString());
+                }
+                catch { }
                 await Task.Delay(1000);
                 CountDownCount -= 1;
             }
             CountDownCount = 3;
-            synthesizer.SpeakAsyncCancelAll();
-            synthesizer.SpeakAsync("Go");
+            try
+            {
+                synthesizer.SpeakAsyncCancelAll();
+                synthesizer.SpeakAsync("Go");
+            }
+            catch { }
             Start();
 
         }

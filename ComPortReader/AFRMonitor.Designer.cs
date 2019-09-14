@@ -1,4 +1,4 @@
-﻿namespace ComPortReader
+﻿namespace AFRMonitor
 {
     partial class AFRMonitor
     {

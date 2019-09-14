@@ -8,10 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ComPortReader
+namespace AFRMonitor
 {
     public partial class Starter : Form
     {
+        OpenFileDialog ofd = new OpenFileDialog() { Multiselect = false };
         public Starter()
         {
             InitializeComponent();
@@ -50,6 +51,18 @@ namespace ComPortReader
             else
             {
                 Helper.LongScanMode = false;
+            }
+        }
+
+        private void RFFBut_Click(object sender, EventArgs e)
+        {
+            if(ofd.ShowDialog() == DialogResult.OK)
+            {
+                Helper.ReadFileLocation = ofd.FileName;
+                // stuff to helper
+                //
+                //
+                new ReadFFile().ShowDialog();
             }
         }
     }
