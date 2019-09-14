@@ -30,6 +30,8 @@
         {
             this.VCont = new System.Windows.Forms.Button();
             this.BCont = new System.Windows.Forms.Button();
+            this.CDCheck = new System.Windows.Forms.CheckBox();
+            this.LongScanCheck = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // VCont
@@ -54,17 +56,42 @@
             this.BCont.UseVisualStyleBackColor = true;
             this.BCont.Click += new System.EventHandler(this.BCont_Click);
             // 
+            // CDCheck
+            // 
+            this.CDCheck.AutoSize = true;
+            this.CDCheck.Location = new System.Drawing.Point(244, 44);
+            this.CDCheck.Name = "CDCheck";
+            this.CDCheck.Size = new System.Drawing.Size(104, 17);
+            this.CDCheck.TabIndex = 2;
+            this.CDCheck.Text = "Use CountDown";
+            this.CDCheck.UseVisualStyleBackColor = true;
+            this.CDCheck.CheckedChanged += new System.EventHandler(this.CDCheck_CheckedChanged);
+            // 
+            // LongScanCheck
+            // 
+            this.LongScanCheck.AutoSize = true;
+            this.LongScanCheck.Location = new System.Drawing.Point(244, 12);
+            this.LongScanCheck.Name = "LongScanCheck";
+            this.LongScanCheck.Size = new System.Drawing.Size(108, 17);
+            this.LongScanCheck.TabIndex = 3;
+            this.LongScanCheck.Text = "Long Scan Mode";
+            this.LongScanCheck.UseVisualStyleBackColor = true;
+            this.LongScanCheck.CheckedChanged += new System.EventHandler(this.LongScanCheck_CheckedChanged);
+            // 
             // Starter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(592, 192);
+            this.Controls.Add(this.LongScanCheck);
+            this.Controls.Add(this.CDCheck);
             this.Controls.Add(this.BCont);
             this.Controls.Add(this.VCont);
             this.Name = "Starter";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Text = "Starter";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -72,5 +99,7 @@
 
         private System.Windows.Forms.Button VCont;
         private System.Windows.Forms.Button BCont;
+        private System.Windows.Forms.CheckBox CDCheck;
+        private System.Windows.Forms.CheckBox LongScanCheck;
     }
 }

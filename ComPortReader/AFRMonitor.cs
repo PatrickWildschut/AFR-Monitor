@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Windows.Threading;
 using System.IO;
+using System.Speech.Synthesis;
 
 namespace ComPortReader
 {
@@ -22,10 +23,13 @@ namespace ComPortReader
 
         // For voice control only
         SpeechRecognitionEngine sre = new SpeechRecognitionEngine();
+        SpeechSynthesizer synthesizer = new SpeechSynthesizer();
+        int CountDownCount = 3;
         List<double> Values = new List<double>();
         public AFRMonitor()
         {
             InitializeComponent();
+            synthesizer.Rate = 1;
             if(Helper.UsageVariable == 1)
             {
                 StBut.Visible = false;
@@ -41,6 +45,12 @@ namespace ComPortReader
                 sre.RecognizeAsync(RecognizeMode.Multiple);
                 Listening = true;
             }
+            if(Helper.LongScanMode)
+            {
+                ChartView.ChartAreas[0].AxisX.Maximum = 200;
+            }
+            ChartView.ChartAreas[0].AxisY.Minimum = 10;
+            ChartView.ChartAreas[0].AxisY.Maximum = 20;
             label2.Visible = false;
             CurLab.Visible = false;
             RichOrLean.Visible = false;
@@ -58,7 +68,7 @@ namespace ComPortReader
             switch (e.Result.Text)
             {
                 case "start":
-                    Start();
+                    StartBetween();
                     break;
                 case "stop":
                     Stop();
@@ -70,13 +80,32 @@ namespace ComPortReader
             }
 
         }
+
+        private void StartBetween()
+        {
+            if (Helper.CountDown)
+            {
+                CountDown();
+            }
+            else
+            {
+                Start();
+            }
+        }
         private void StBut_Click(object sender, EventArgs e)
         {
             if (ComSelector.Items.Count > 0)
             {
                 if (StBut.Text == "Start")
                 {
-                    Start();
+                    if (Helper.CountDown)
+                    {
+                        CountDown();
+                    }
+                    else
+                    {
+                        Start();
+                    }
                 }
                 else
                 {
@@ -93,6 +122,7 @@ namespace ComPortReader
             {
                 sre.RecognizeAsyncStop();
             }
+            synthesizer.Dispose();
             Stop();
         }
 
@@ -128,6 +158,7 @@ namespace ComPortReader
         }
 
         bool stop = true;
+        int i = 0;
         private async Task UpdateAsync()
         {
             await Task.Run(() =>
@@ -159,6 +190,11 @@ namespace ComPortReader
                         if (ChartView.InvokeRequired)
                         {
                             ChartView.Invoke(new Action(() => ChartView.Series["Value"].Points.AddY((PortOutputDouble) / 10)));
+                            i++;
+                            if (i >= 200 & Helper.LongScanMode)
+                            {
+                                ChartView.Series[0].Points.RemoveAt(0);
+                            }
                         }
                         else
                         {
@@ -204,15 +240,24 @@ namespace ComPortReader
         {
             SaveToFile();
         }
-
+        public int DifZeroFive = -1;
+        public int Scans = 0;
         private async Task SaveToFile()
         {
             string returns = "";
+            double LastValue = 0;
             foreach (double d in Values)
             {
                 returns += d.ToString() + "\n";
+                if((LastValue - d) > 0.5 | (d - LastValue) > -0.5)
+                {
+                    DifZeroFive++;
+                }
+                LastValue = d;
+                Scans++;
             }
-            File.WriteAllText(Application.StartupPath + "\\Output.txt", "Lowest Value: " + Helper.LowestValue + "\n\n" + returns);
+            File.WriteAllText(Application.StartupPath + "\\Output.txt", "Lowest Value: " + Helper.LowestValue + "\nScans: " + Scans.ToString() + "\nDifference 0,5 or more: " + DifZeroFive.ToString() + "\n\n" + returns); ;
+
             STFB.Invoke(new Action(() => STFB.Text = "Done"));
             await Task.Delay(1000);
             STFB.Invoke(new Action(() => STFB.Text = "Save To File"));
@@ -226,14 +271,30 @@ namespace ComPortReader
             LowValueValue.Text = "--,-";
         }
 
-        //private void Button1_Click(object sender, EventArgs e)
-        //{
-        //    CurLab.Text = SerialP.ReadExisting().ToString();
-        //}
+        private async void CountDown()
+        {
+            while(CountDownCount > 0)
+            {
+                CurLab.Visible = true;
+                if (CurLab.InvokeRequired)
+                {
+                    CurLab.Invoke(new Action(() => CurLab.Text = CountDownCount.ToString()));
+                }
+                else
+                {
+                    CurLab.Text = CountDownCount.ToString();
+                }
+                synthesizer.SpeakAsyncCancelAll();
+                synthesizer.SpeakAsync(CountDownCount.ToString());
+                await Task.Delay(1000);
+                CountDownCount -= 1;
+            }
+            CountDownCount = 3;
+            synthesizer.SpeakAsyncCancelAll();
+            synthesizer.SpeakAsync("Go");
+            Start();
 
-        //private static void Reader()
-        //{
-        //    CurLab.Text = 
-        //}
+        }
+
     }
 }

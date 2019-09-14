@@ -149,11 +149,11 @@
             // 
             // ChartView
             // 
-            chartArea1.Name = "ChartArea1";
+            chartArea1.Name = "ChartValue";
             this.ChartView.ChartAreas.Add(chartArea1);
             this.ChartView.Location = new System.Drawing.Point(51, 284);
             this.ChartView.Name = "ChartView";
-            series1.ChartArea = "ChartArea1";
+            series1.ChartArea = "ChartValue";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series1.Name = "Value";
             this.ChartView.Series.Add(series1);

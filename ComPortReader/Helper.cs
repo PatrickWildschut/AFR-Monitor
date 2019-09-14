@@ -10,6 +10,8 @@ namespace ComPortReader
     {
         public static int UsageVariable = 0; // 1 = Voice Control, 2 = Button Control
         public static double LowestValue = int.MaxValue;
+        public static bool CountDown = false;
+        public static bool LongScanMode = false;
 
         /* Errors
          *

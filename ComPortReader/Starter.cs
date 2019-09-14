@@ -28,5 +28,29 @@ namespace ComPortReader
             Helper.UsageVariable = 1;
             new AFRMonitor().ShowDialog();
         }
+
+        private void CDCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            if(CDCheck.Checked)
+            {
+                Helper.CountDown = true;
+            }
+            else
+            {
+                Helper.CountDown = false;
+            }
+        }
+
+        private void LongScanCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            if(LongScanCheck.Checked)
+            {
+                Helper.LongScanMode = true;
+            }
+            else
+            {
+                Helper.LongScanMode = false;
+            }
+        }
     }
 }
