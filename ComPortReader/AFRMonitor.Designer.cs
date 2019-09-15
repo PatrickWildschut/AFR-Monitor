@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AFRMonitor));
             this.SerialP = new System.IO.Ports.SerialPort(this.components);
             this.ComSelector = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -118,6 +119,9 @@
             // 
             // RichOrLean
             // 
+            this.RichOrLean.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.RichOrLean.Location = new System.Drawing.Point(51, 193);
             this.RichOrLean.Maximum = 200;
             this.RichOrLean.Minimum = 100;
@@ -129,6 +133,8 @@
             // 
             // Lean
             // 
+            this.Lean.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.Lean.AutoSize = true;
             this.Lean.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lean.Location = new System.Drawing.Point(12, 213);
@@ -139,6 +145,7 @@
             // 
             // Rich
             // 
+            this.Rich.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Rich.AutoSize = true;
             this.Rich.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Rich.Location = new System.Drawing.Point(564, 213);
@@ -149,6 +156,9 @@
             // 
             // ChartView
             // 
+            this.ChartView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             chartArea1.Name = "ChartValue";
             this.ChartView.ChartAreas.Add(chartArea1);
             this.ChartView.Location = new System.Drawing.Point(51, 284);
@@ -283,6 +293,7 @@
             this.Controls.Add(this.ComSelector);
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AFRMonitor";
             this.Text = "Air Fuel Ratio Monitor - Patrick Wildschut";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_FormClosing);

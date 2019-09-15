@@ -30,7 +30,8 @@ namespace AFRMonitor
         {
             InitializeComponent();
             synthesizer.Rate = 1;
-            if(Helper.UsageVariable == 1)
+            #region Voice Setup
+            if (Helper.UsageVariable == 1)
             {
                 StBut.Visible = false;
                 Choices commands = new Choices();
@@ -49,10 +50,12 @@ namespace AFRMonitor
                 catch(Exception e) { MessageBox.Show("Error Code 2, output: " + e); }
                 Listening = true;
             }
-            if(Helper.LongScanMode)
+            #endregion
+            if (Helper.LongScanMode)
             {
                 ChartView.ChartAreas[0].AxisX.Maximum = 200;
             }
+            #region Setup UI
             ChartView.ChartAreas[0].AxisY.Minimum = 10;
             ChartView.ChartAreas[0].AxisY.Maximum = 20;
             label2.Visible = false;
@@ -71,6 +74,7 @@ namespace AFRMonitor
             {
                 ComSelector.SelectedIndex = 0;
             }
+            #endregion
         }
 
         private void Sre_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
@@ -276,26 +280,38 @@ namespace AFRMonitor
         private async Task SaveToFile()
         {
             string returns = "";
-            int Number = 0;
+            int Number = 2;
             double LastValue = 0;
             foreach (double d in Values)
             {
                 returns += d.ToString() + "\n";
-                if((LastValue - d) > 0.5 | (d - LastValue) > 0.5)
+                if((LastValue - d) > 1 | (d - LastValue) > 1)
                 {
                     DifZeroFive++;
                 }
                 LastValue = d;
                 Scans++;
             }
-            Check:
-            if(File.Exists(Application.StartupPath + "\\Output" + Number + ".txt"))
+            string Name = Helper.CountDown ? "With Count" : "No Count" + " And ";
+            Name += Helper.LongScanMode ? "With LongScan" : "No LongScan";
+        Check:
+            if (File.Exists(Application.StartupPath + "\\" + Name + ".txt"))
             {
-                Number++;
-                goto Check;
+                if(File.Exists(Application.StartupPath + "\\" + Name + " " + Number + ".txt"))
+                {
+                    Number++;
+                    goto Check;
+                }
             }
-            File.WriteAllText(Application.StartupPath + "\\Output" + Number + ".txt", "Lowest Value: " + Helper.LowestValue + "\nScans: " + Scans.ToString() + "\nDifference 0,5 or more: " + DifZeroFive.ToString() + "\n\nValues\n" + returns); ;
-
+            
+            if(!File.Exists(Application.StartupPath + "\\" + Name + ".txt"))
+            {
+                File.WriteAllText(Application.StartupPath + "\\" + Name + ".txt", "Lowest Value: " + Helper.LowestValue + "\nScans: " + Scans.ToString() + "\nDifference 0,5 or more: " + DifZeroFive.ToString() + "\n\nValues\n" + returns);
+            }
+            else
+            {
+                File.WriteAllText(Application.StartupPath + "\\" + Name + " " + Number + ".txt", "Lowest Value: " + Helper.LowestValue + "\nScans: " + Scans.ToString() + "\nDifference 0,5 or more: " + DifZeroFive.ToString() + "\n\nValues\n" + returns);
+            }
             STFB.Invoke(new Action(() => STFB.Text = "Done"));
             await Task.Delay(1000);
             STFB.Invoke(new Action(() => STFB.Text = "Save To File"));

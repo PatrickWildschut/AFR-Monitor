@@ -16,20 +16,27 @@ namespace AFRMonitor
     {
         public string OutText = "";
         public string[] OutSepText;
-        public string[] ToChart;
         public ReadFFile()
         {
             InitializeComponent();
             ChartReadView.ChartAreas[0].AxisY.Minimum = 10;
             ChartReadView.ChartAreas[0].AxisY.Maximum = 20;
+            #region Chart
             OutSepText = File.ReadAllText(Helper.ReadFileLocation).Split('s');
             OutText = OutSepText[3];
-            ToChart = OutText.Split('\n');
-            foreach(string d in ToChart)
+            OutSepText = OutText.Split('\n');
+            foreach(string d in OutSepText)
             {
                 if(!string.IsNullOrEmpty(d))
                 ChartReadView.Series[0].Points.AddY(Convert.ToDouble(d));
             }
+            #endregion
+            #region Label
+            OutSepText = File.ReadAllText(Helper.ReadFileLocation).Split(':');
+            OutSepText = OutSepText[1].Split('\n');
+            LowValValue.Text = OutSepText[0].Trim(' ');
+            #endregion
+
         }
 
         private void ChartReadView_DoubleClick(object sender, EventArgs e)
