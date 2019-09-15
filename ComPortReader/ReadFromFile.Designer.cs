@@ -36,11 +36,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.LowValLab = new System.Windows.Forms.Label();
             this.LowValValue = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ChartReadView)).BeginInit();
             this.SuspendLayout();
             // 
             // ChartReadView
             // 
+            this.ChartReadView.AllowDrop = true;
             this.ChartReadView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -51,20 +53,23 @@
             this.ChartReadView.Location = new System.Drawing.Point(12, 53);
             this.ChartReadView.Name = "ChartReadView";
             series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series1.Color = System.Drawing.Color.Red;
             series1.Legend = "Legend1";
             series1.Name = "Value";
             this.ChartReadView.Series.Add(series1);
             this.ChartReadView.Size = new System.Drawing.Size(546, 287);
             this.ChartReadView.TabIndex = 0;
             this.ChartReadView.Text = "chart1";
+            this.ChartReadView.DragDrop += new System.Windows.Forms.DragEventHandler(this.ChartReadView_DragDrop);
+            this.ChartReadView.DragEnter += new System.Windows.Forms.DragEventHandler(this.ChartReadView_DragEnter);
             this.ChartReadView.DoubleClick += new System.EventHandler(this.ChartReadView_DoubleClick);
             // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(209, 16);
+            this.label1.Location = new System.Drawing.Point(412, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(146, 13);
             this.label1.TabIndex = 1;
@@ -92,11 +97,23 @@
             this.LowValValue.TabIndex = 3;
             this.LowValValue.Text = "--,-";
             // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 20);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(125, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Drag&Drop file to compare";
+            // 
             // ReadFFile
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(570, 429);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.LowValValue);
             this.Controls.Add(this.LowValLab);
             this.Controls.Add(this.label1);
@@ -116,5 +133,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label LowValLab;
         private System.Windows.Forms.Label LowValValue;
+        private System.Windows.Forms.Label label2;
     }
 }

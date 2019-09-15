@@ -43,5 +43,18 @@ namespace AFRMonitor
         {
             Process.Start("explorer.exe", Helper.ReadFileLocation);
         }
+
+        private void ChartReadView_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] saver = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+            Helper.ReadFileLocation = saver[0];
+            new ReadFFile().Show();
+        }
+
+        private void ChartReadView_DragEnter(object sender, DragEventArgs e)
+        {
+            //MessageBox.Show("Hovering");
+            e.Effect = DragDropEffects.Copy;
+        }
     }
 }

@@ -145,7 +145,8 @@
             // 
             // Rich
             // 
-            this.Rich.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Rich.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.Rich.AutoSize = true;
             this.Rich.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Rich.Location = new System.Drawing.Point(564, 213);
@@ -163,8 +164,10 @@
             this.ChartView.ChartAreas.Add(chartArea1);
             this.ChartView.Location = new System.Drawing.Point(51, 284);
             this.ChartView.Name = "ChartView";
+            series1.BorderColor = System.Drawing.Color.White;
             series1.ChartArea = "ChartValue";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series1.Color = System.Drawing.Color.Red;
             series1.Name = "Value";
             this.ChartView.Series.Add(series1);
             this.ChartView.Size = new System.Drawing.Size(507, 300);
@@ -250,6 +253,7 @@
             // 
             // label7
             // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(526, 177);
             this.label7.Name = "label7";

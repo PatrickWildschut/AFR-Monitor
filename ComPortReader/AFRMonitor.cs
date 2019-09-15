@@ -306,11 +306,11 @@ namespace AFRMonitor
             
             if(!File.Exists(Application.StartupPath + "\\" + Name + ".txt"))
             {
-                File.WriteAllText(Application.StartupPath + "\\" + Name + ".txt", "Lowest Value: " + Helper.LowestValue + "\nScans: " + Scans.ToString() + "\nDifference 0,5 or more: " + DifZeroFive.ToString() + "\n\nValues\n" + returns);
+                File.WriteAllText(Application.StartupPath + "\\" + Name + ".txt", "Lowest Value: " + Helper.LowestValue + "\nScans: " + Scans.ToString() + "\nDifference 1 or more: " + DifZeroFive.ToString() + "\n\nValues\n" + returns);
             }
             else
             {
-                File.WriteAllText(Application.StartupPath + "\\" + Name + " " + Number + ".txt", "Lowest Value: " + Helper.LowestValue + "\nScans: " + Scans.ToString() + "\nDifference 0,5 or more: " + DifZeroFive.ToString() + "\n\nValues\n" + returns);
+                File.WriteAllText(Application.StartupPath + "\\" + Name + " " + Number + ".txt", "Lowest Value: " + Helper.LowestValue + "\nScans: " + Scans.ToString() + "\nDifference 1 or more: " + DifZeroFive.ToString() + "\n\nValues\n" + returns);
             }
             STFB.Invoke(new Action(() => STFB.Text = "Done"));
             await Task.Delay(1000);
