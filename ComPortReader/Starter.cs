@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ namespace AFRMonitor
 {
     public partial class Starter : Form
     {
-        OpenFileDialog ofd = new OpenFileDialog() { Multiselect = false };
+        OpenFileDialog ofd = new OpenFileDialog() { Multiselect = false, InitialDirectory = Application.StartupPath, Filter = "Text Documents Only|*.txt" };
         public Starter()
         {
             InitializeComponent();
@@ -59,11 +60,13 @@ namespace AFRMonitor
             if(ofd.ShowDialog() == DialogResult.OK)
             {
                 Helper.ReadFileLocation = ofd.FileName;
-                // stuff to helper
-                //
-                //
-                new ReadFFile().ShowDialog();
+                try { new ReadFFile().ShowDialog(); } catch { }
             }
+        }
+
+        private void InstagramConnect_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://www.instagram.com/patrick_wildschut/");
         }
     }
 }

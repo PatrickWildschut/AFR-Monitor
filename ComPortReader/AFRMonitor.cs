@@ -30,6 +30,7 @@ namespace AFRMonitor
         {
             InitializeComponent();
             synthesizer.Rate = 1;
+            ChartView.ChartAreas[0].AxisY.Interval = 1;
             #region Voice Setup
             if (Helper.UsageVariable == 1)
             {
@@ -58,13 +59,13 @@ namespace AFRMonitor
             #region Setup UI
             ChartView.ChartAreas[0].AxisY.Minimum = 10;
             ChartView.ChartAreas[0].AxisY.Maximum = 20;
-            label2.Visible = false;
-            label3.Visible = false;
-            label4.Visible = false;
-            label5.Visible = false;
-            label6.Visible = false;
-            label7.Visible = false;
-            label8.Visible = false;
+            CurValLab.Visible = false;
+            FourteenSaveLab.Visible = false;
+            FourteenLab.Visible = false;
+            ElevenSaveLab.Visible = false;
+            ElevenLab.Visible = false;
+            TenSaveLab.Visible = false;
+            TenLab.Visible = false;
             CurLab.Visible = false;
             RichOrLean.Visible = false;
             Lean.Visible = false;
@@ -149,13 +150,13 @@ namespace AFRMonitor
             {
                 StBut.Text = "Stop";
                 stop = false;
-                label2.Visible = true;
-                label3.Visible = true;
-                label4.Visible = true;
-                label5.Visible = true;
-                label6.Visible = true;
-                label7.Visible = true;
-                label8.Visible = true;
+                CurValLab.Visible = true;
+                FourteenSaveLab.Visible = true;
+                FourteenLab.Visible = true;
+                ElevenSaveLab.Visible = true;
+                ElevenLab.Visible = true;
+                TenSaveLab.Visible = true;
+                TenLab.Visible = true;
                 CurLab.Visible = true;
                 RichOrLean.Visible = true;
                 Lean.Visible = true;
@@ -176,13 +177,13 @@ namespace AFRMonitor
             {
                 stop = true;
                 SerialP.Close();
-                label2.Visible = false;
-                label3.Visible = false;
-                label4.Visible = false;
-                label5.Visible = false;
-                label6.Visible = false;
-                label7.Visible = false;
-                label8.Visible = false;
+                CurValLab.Visible = false;
+                FourteenSaveLab.Visible = false;
+                FourteenLab.Visible = false;
+                ElevenSaveLab.Visible = false;
+                ElevenLab.Visible = false;
+                TenSaveLab.Visible = false;
+                TenLab.Visible = false;
                 CurLab.Visible = false;
                 RichOrLean.Visible = false;
                 Lean.Visible = false;
@@ -245,7 +246,7 @@ namespace AFRMonitor
                 }
             });
         }
-
+        int TimesLowestOccured = 0;
         private async Task LowestValue(double Value)
         {
             await Task.Run(() =>
@@ -253,14 +254,11 @@ namespace AFRMonitor
                 if(Value < Helper.LowestValue)
                 {
                     Helper.LowestValue = Value;
-                    if(LowValueValue.InvokeRequired)
-                    {
-                        LowValueValue.Invoke(new Action(() => LowValueValue.Text = Value.ToString()));
-                    }
-                    else
-                    {
-                        LowValueValue.Text = Value.ToString();
-                    }
+                    LowValueValue.Invoke(new Action(() => LowValueValue.Text = Value.ToString()));
+                    TimesLowestOccured = 0;
+                } else if(Value == Helper.LowestValue)
+                {
+                    TimesLowestOccured++;
                 }
             });
         }
@@ -359,5 +357,56 @@ namespace AFRMonitor
 
         }
 
+        private void AFRMonitor_SizeChanged(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Maximized)
+            {
+                SetLocationsAsync(true);
+            }
+            else
+            {
+                SetLocationsAsync(false);
+            }
+        }
+
+        private async Task SetLocationsAsync(bool fullscreen)
+        {
+            await Task.Run(() =>
+            {
+                if(fullscreen)
+                {
+                    TenLab.Invoke(new Action(() => TenLab.Visible = false));
+                    TenSaveLab.Invoke(new Action(() => TenSaveLab.Visible = false));
+                    ElevenLab.Invoke(new Action(() => ElevenLab.Visible = false));
+                    ElevenSaveLab.Invoke(new Action(() => ElevenSaveLab.Visible = false));
+                    FourteenLab.Invoke(new Action(() => FourteenLab.Visible = false));
+                    FourteenSaveLab.Invoke(new Action(() => FourteenSaveLab.Visible = false));
+                    CurValLab.Invoke(new Action(() => CurValLab.Font = new Font("Arial", 20, FontStyle.Bold)));
+                    CurValLab.Invoke(new Action(() => CurValLab.Location = new Point(CurValLab.Location.X - 200, CurValLab.Location.Y)));
+                    CurLab.Invoke(new Action(() => CurLab.Font = new Font("Arial", 60)));
+                    CurLab.Invoke(new Action(() => CurLab.Location = new Point(CurLab.Location.X - 202, CurLab.Location.Y)));
+                    LowValueValue.Invoke(new Action(() => LowValueValue.Font = new Font("Arial", 30, FontStyle.Bold)));
+                }
+                else
+                {
+                    TenLab.Invoke(new Action(() => TenLab.Visible = true));
+                    TenSaveLab.Invoke(new Action(() => TenSaveLab.Visible = true));
+                    ElevenLab.Invoke(new Action(() => ElevenLab.Visible = true));
+                    ElevenSaveLab.Invoke(new Action(() => ElevenSaveLab.Visible = true));
+                    FourteenLab.Invoke(new Action(() => FourteenLab.Visible = true));
+                    FourteenSaveLab.Invoke(new Action(() => FourteenSaveLab.Visible = true));
+                    CurValLab.Invoke(new Action(() => CurValLab.Font = new Font("Arial", 12, FontStyle.Bold)));
+                    CurValLab.Invoke(new Action(() => CurValLab.Location = new Point(CurValLab.Location.X + 200, CurValLab.Location.Y)));
+                    CurLab.Invoke(new Action(() => CurLab.Font = new Font("Arial", 36)));
+                    CurLab.Invoke(new Action(() => CurLab.Location = new Point(CurLab.Location.X + 202, CurLab.Location.Y)));
+                    LowValueValue.Invoke(new Action(() => LowValueValue.Font = new Font("Arial", 22, FontStyle.Bold)));
+                }
+            });
+        }
+
+        private void LowValueValue_MouseHover(object sender, EventArgs e)
+        {
+            LowestValueToolTip.Show("Times occured: " + TimesLowestOccured.ToString(), LowValueValue);
+        }
     }
 }

@@ -50,7 +50,7 @@
             this.ChartReadView.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.ChartReadView.Legends.Add(legend1);
-            this.ChartReadView.Location = new System.Drawing.Point(12, 53);
+            this.ChartReadView.Location = new System.Drawing.Point(12, 36);
             this.ChartReadView.Name = "ChartReadView";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
@@ -58,7 +58,7 @@
             series1.Legend = "Legend1";
             series1.Name = "Value";
             this.ChartReadView.Series.Add(series1);
-            this.ChartReadView.Size = new System.Drawing.Size(546, 287);
+            this.ChartReadView.Size = new System.Drawing.Size(546, 323);
             this.ChartReadView.TabIndex = 0;
             this.ChartReadView.Text = "chart1";
             this.ChartReadView.DragDrop += new System.Windows.Forms.DragEventHandler(this.ChartReadView_DragDrop);
@@ -67,7 +67,8 @@
             // 
             // label1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(412, 20);
             this.label1.Name = "label1";
@@ -80,7 +81,7 @@
             this.LowValLab.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.LowValLab.AutoSize = true;
             this.LowValLab.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LowValLab.Location = new System.Drawing.Point(12, 352);
+            this.LowValLab.Location = new System.Drawing.Point(9, 362);
             this.LowValLab.Name = "LowValLab";
             this.LowValLab.Size = new System.Drawing.Size(91, 16);
             this.LowValLab.TabIndex = 2;
@@ -91,7 +92,7 @@
             this.LowValValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.LowValValue.AutoSize = true;
             this.LowValValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LowValValue.Location = new System.Drawing.Point(30, 379);
+            this.LowValValue.Location = new System.Drawing.Point(28, 388);
             this.LowValValue.Name = "LowValValue";
             this.LowValValue.Size = new System.Drawing.Size(32, 20);
             this.LowValValue.TabIndex = 3;
@@ -99,13 +100,14 @@
             // 
             // label2
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 20);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(125, 13);
+            this.label2.Size = new System.Drawing.Size(144, 13);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Drag&Drop file to compare";
+            this.label2.Text = "Drop file on chart to compare";
             // 
             // ReadFFile
             // 

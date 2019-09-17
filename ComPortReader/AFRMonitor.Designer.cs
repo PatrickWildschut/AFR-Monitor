@@ -34,11 +34,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AFRMonitor));
             this.SerialP = new System.IO.Ports.SerialPort(this.components);
             this.ComSelector = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.SelectLab = new System.Windows.Forms.Label();
             this.StBut = new System.Windows.Forms.Button();
             this.ReBut = new System.Windows.Forms.Button();
             this.CurLab = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.CurValLab = new System.Windows.Forms.Label();
             this.RichOrLean = new System.Windows.Forms.ProgressBar();
             this.Lean = new System.Windows.Forms.Label();
             this.Rich = new System.Windows.Forms.Label();
@@ -47,12 +47,13 @@
             this.LowValueValue = new System.Windows.Forms.Label();
             this.STFB = new System.Windows.Forms.Button();
             this.RTB = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.FourteenSaveLab = new System.Windows.Forms.Label();
+            this.FourteenLab = new System.Windows.Forms.Label();
+            this.ElevenSaveLab = new System.Windows.Forms.Label();
+            this.ElevenLab = new System.Windows.Forms.Label();
+            this.TenSaveLab = new System.Windows.Forms.Label();
+            this.TenLab = new System.Windows.Forms.Label();
+            this.LowestValueToolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.ChartView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,15 +65,15 @@
             this.ComSelector.Size = new System.Drawing.Size(121, 21);
             this.ComSelector.TabIndex = 0;
             // 
-            // label1
+            // SelectLab
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(13, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 16);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Select:";
+            this.SelectLab.AutoSize = true;
+            this.SelectLab.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SelectLab.Location = new System.Drawing.Point(13, 13);
+            this.SelectLab.Name = "SelectLab";
+            this.SelectLab.Size = new System.Drawing.Size(49, 16);
+            this.SelectLab.TabIndex = 1;
+            this.SelectLab.Text = "Select:";
             // 
             // StBut
             // 
@@ -98,29 +99,30 @@
             // 
             // CurLab
             // 
+            this.CurLab.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.CurLab.AutoSize = true;
             this.CurLab.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CurLab.Location = new System.Drawing.Point(441, 59);
+            this.CurLab.Location = new System.Drawing.Point(439, 59);
             this.CurLab.Name = "CurLab";
             this.CurLab.Size = new System.Drawing.Size(117, 55);
             this.CurLab.TabIndex = 4;
             this.CurLab.Text = "O_o";
             // 
-            // label2
+            // CurValLab
             // 
-            this.label2.AutoSize = true;
-            this.label2.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(442, 13);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(125, 20);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Current Value:";
+            this.CurValLab.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.CurValLab.AutoSize = true;
+            this.CurValLab.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.CurValLab.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CurValLab.Location = new System.Drawing.Point(442, 13);
+            this.CurValLab.Name = "CurValLab";
+            this.CurValLab.Size = new System.Drawing.Size(125, 20);
+            this.CurValLab.TabIndex = 5;
+            this.CurValLab.Text = "Current Value:";
             // 
             // RichOrLean
             // 
-            this.RichOrLean.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.RichOrLean.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.RichOrLean.Location = new System.Drawing.Point(51, 193);
             this.RichOrLean.Maximum = 200;
@@ -137,7 +139,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.Lean.AutoSize = true;
             this.Lean.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lean.Location = new System.Drawing.Point(12, 213);
+            this.Lean.Location = new System.Drawing.Point(10, 213);
             this.Lean.Name = "Lean";
             this.Lean.Size = new System.Drawing.Size(35, 13);
             this.Lean.TabIndex = 7;
@@ -186,12 +188,13 @@
             // LowValueValue
             // 
             this.LowValueValue.AutoSize = true;
-            this.LowValueValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LowValueValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LowValueValue.Location = new System.Drawing.Point(25, 111);
             this.LowValueValue.Name = "LowValueValue";
-            this.LowValueValue.Size = new System.Drawing.Size(47, 29);
+            this.LowValueValue.Size = new System.Drawing.Size(57, 33);
             this.LowValueValue.TabIndex = 11;
             this.LowValueValue.Text = "--,-";
+            this.LowValueValue.MouseHover += new System.EventHandler(this.LowValueValue_MouseHover);
             // 
             // STFB
             // 
@@ -215,72 +218,74 @@
             this.RTB.UseVisualStyleBackColor = true;
             this.RTB.Click += new System.EventHandler(this.RTB_Click);
             // 
-            // label3
+            // FourteenSaveLab
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(315, 177);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(9, 13);
-            this.label3.TabIndex = 14;
-            this.label3.Text = "|";
+            this.FourteenSaveLab.AutoSize = true;
+            this.FourteenSaveLab.Location = new System.Drawing.Point(315, 177);
+            this.FourteenSaveLab.Name = "FourteenSaveLab";
+            this.FourteenSaveLab.Size = new System.Drawing.Size(9, 13);
+            this.FourteenSaveLab.TabIndex = 14;
+            this.FourteenSaveLab.Text = "|";
             // 
-            // label4
+            // FourteenLab
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(305, 164);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(28, 13);
-            this.label4.TabIndex = 15;
-            this.label4.Text = "14,7";
+            this.FourteenLab.AutoSize = true;
+            this.FourteenLab.Location = new System.Drawing.Point(305, 164);
+            this.FourteenLab.Name = "FourteenLab";
+            this.FourteenLab.Size = new System.Drawing.Size(28, 13);
+            this.FourteenLab.TabIndex = 15;
+            this.FourteenLab.Text = "14,7";
             // 
-            // label5
+            // ElevenSaveLab
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(461, 177);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(9, 13);
-            this.label5.TabIndex = 16;
-            this.label5.Text = "|";
+            this.ElevenSaveLab.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ElevenSaveLab.AutoSize = true;
+            this.ElevenSaveLab.Location = new System.Drawing.Point(461, 177);
+            this.ElevenSaveLab.Name = "ElevenSaveLab";
+            this.ElevenSaveLab.Size = new System.Drawing.Size(9, 13);
+            this.ElevenSaveLab.TabIndex = 16;
+            this.ElevenSaveLab.Text = "|";
             // 
-            // label6
+            // ElevenLab
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(448, 164);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(28, 13);
-            this.label6.TabIndex = 17;
-            this.label6.Text = "11,8";
+            this.ElevenLab.AutoSize = true;
+            this.ElevenLab.Location = new System.Drawing.Point(448, 164);
+            this.ElevenLab.Name = "ElevenLab";
+            this.ElevenLab.Size = new System.Drawing.Size(28, 13);
+            this.ElevenLab.TabIndex = 17;
+            this.ElevenLab.Text = "11,8";
             // 
-            // label7
+            // TenSaveLab
             // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(526, 177);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(9, 13);
-            this.label7.TabIndex = 18;
-            this.label7.Text = "|";
+            this.TenSaveLab.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TenSaveLab.AutoSize = true;
+            this.TenSaveLab.Location = new System.Drawing.Point(526, 177);
+            this.TenSaveLab.Name = "TenSaveLab";
+            this.TenSaveLab.Size = new System.Drawing.Size(9, 13);
+            this.TenSaveLab.TabIndex = 18;
+            this.TenSaveLab.Text = "|";
             // 
-            // label8
+            // TenLab
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(516, 164);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(28, 13);
-            this.label8.TabIndex = 19;
-            this.label8.Text = "10,5";
+            this.TenLab.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TenLab.AutoSize = true;
+            this.TenLab.Location = new System.Drawing.Point(516, 164);
+            this.TenLab.Name = "TenLab";
+            this.TenLab.Size = new System.Drawing.Size(28, 13);
+            this.TenLab.TabIndex = 19;
+            this.TenLab.Text = "10,5";
             // 
             // AFRMonitor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(609, 596);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.TenLab);
+            this.Controls.Add(this.TenSaveLab);
+            this.Controls.Add(this.ElevenLab);
+            this.Controls.Add(this.ElevenSaveLab);
+            this.Controls.Add(this.FourteenLab);
+            this.Controls.Add(this.FourteenSaveLab);
             this.Controls.Add(this.RTB);
             this.Controls.Add(this.STFB);
             this.Controls.Add(this.LowValueValue);
@@ -289,11 +294,11 @@
             this.Controls.Add(this.Rich);
             this.Controls.Add(this.Lean);
             this.Controls.Add(this.RichOrLean);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.CurValLab);
             this.Controls.Add(this.CurLab);
             this.Controls.Add(this.ReBut);
             this.Controls.Add(this.StBut);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.SelectLab);
             this.Controls.Add(this.ComSelector);
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -301,6 +306,7 @@
             this.Name = "AFRMonitor";
             this.Text = "Air Fuel Ratio Monitor - Patrick Wildschut";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_FormClosing);
+            this.SizeChanged += new System.EventHandler(this.AFRMonitor_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.ChartView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -311,11 +317,11 @@
 
         private System.IO.Ports.SerialPort SerialP;
         private System.Windows.Forms.ComboBox ComSelector;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label SelectLab;
         private System.Windows.Forms.Button StBut;
         private System.Windows.Forms.Button ReBut;
         private System.Windows.Forms.Label CurLab;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label CurValLab;
         private System.Windows.Forms.ProgressBar RichOrLean;
         private System.Windows.Forms.Label Lean;
         private System.Windows.Forms.Label Rich;
@@ -324,12 +330,13 @@
         private System.Windows.Forms.Label LowValueValue;
         private System.Windows.Forms.Button STFB;
         private System.Windows.Forms.Button RTB;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label FourteenSaveLab;
+        private System.Windows.Forms.Label FourteenLab;
+        private System.Windows.Forms.Label ElevenSaveLab;
+        private System.Windows.Forms.Label ElevenLab;
+        private System.Windows.Forms.Label TenSaveLab;
+        private System.Windows.Forms.Label TenLab;
+        private System.Windows.Forms.ToolTip LowestValueToolTip;
     }
 }
 

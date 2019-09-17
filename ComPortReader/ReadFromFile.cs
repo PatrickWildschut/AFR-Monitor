@@ -21,15 +21,20 @@ namespace AFRMonitor
             InitializeComponent();
             ChartReadView.ChartAreas[0].AxisY.Minimum = 10;
             ChartReadView.ChartAreas[0].AxisY.Maximum = 20;
+            ChartReadView.ChartAreas[0].AxisY.Interval = 1;
             #region Chart
             OutSepText = File.ReadAllText(Helper.ReadFileLocation).Split('s');
             OutText = OutSepText[3];
             OutSepText = OutText.Split('\n');
-            foreach(string d in OutSepText)
+            try
             {
-                if(!string.IsNullOrEmpty(d))
-                ChartReadView.Series[0].Points.AddY(Convert.ToDouble(d));
+                foreach (string d in OutSepText)
+                {
+                    if (!string.IsNullOrEmpty(d))
+                        ChartReadView.Series[0].Points.AddY(Convert.ToDouble(d));
+                }
             }
+            catch { MessageBox.Show("Corrupted txt file.", "Corrupted", MessageBoxButtons.OK, MessageBoxIcon.Error); this.Close(); }
             #endregion
             #region Label
             OutSepText = File.ReadAllText(Helper.ReadFileLocation).Split(':');
@@ -47,8 +52,17 @@ namespace AFRMonitor
         private void ChartReadView_DragDrop(object sender, DragEventArgs e)
         {
             string[] saver = (string[])e.Data.GetData(DataFormats.FileDrop, false);
-            Helper.ReadFileLocation = saver[0];
-            new ReadFFile().Show();
+            string[] ToHelper = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+            saver = saver[0].Split('.');
+            if(saver[saver.Length - 1] == "txt")
+            {
+                Helper.ReadFileLocation = ToHelper[0];
+                new ReadFFile().Show();
+            }
+            else
+            {
+                MessageBox.Show("Only .txt files created by this program can be used.", "Wrong file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void ChartReadView_DragEnter(object sender, DragEventArgs e)
