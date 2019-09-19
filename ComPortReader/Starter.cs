@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,6 +18,33 @@ namespace AFRMonitor
         public Starter()
         {
             InitializeComponent();
+            if(!Helper.IsActivated())
+            {
+                VCont.Enabled = false;
+                RFFBut.Enabled = false;
+                LongScanCheck.Enabled = false;
+                FreeLab.Visible = true;
+                ActBut.Visible = true;
+                FreeDays.Visible = true;
+                FreeDays.Text = "Trial times left to use: " + Helper.GetTrialDaysLeft();
+                if (Convert.ToInt32(Helper.GetTrialDaysLeft()) != Convert.ToInt32(Helper.GetSaveTrialDaysLeft()))
+                {
+                    Helper.SetTrialDaysLeft(0);
+                    FreeDays.Text = "Out of trial times...";
+                    BCont.Enabled = false;
+                    CDCheck.Enabled = false;
+                }
+                else if(Convert.ToInt32(Helper.GetTrialDaysLeft()) > 0)
+                {
+                    Helper.SubtractTrialDays(1);
+                }
+                else
+                {
+                    FreeDays.Text = "Out of trial times...";
+                    BCont.Enabled = false;
+                    CDCheck.Enabled = false;
+                }
+            }
         }
 
         private void BCont_Click(object sender, EventArgs e)
@@ -67,6 +95,11 @@ namespace AFRMonitor
         private void InstagramConnect_Click(object sender, EventArgs e)
         {
             Process.Start("https://www.instagram.com/patrick_wildschut/");
+        }
+
+        private void ActBut_Click(object sender, EventArgs e)
+        {
+            new ActivateBox().ShowDialog();
         }
     }
 }

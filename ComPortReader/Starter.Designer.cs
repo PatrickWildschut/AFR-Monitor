@@ -36,6 +36,10 @@
             this.RFFBut = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.StartPage = new System.Windows.Forms.TabPage();
+            this.FreeDays = new System.Windows.Forms.Label();
+            this.ActBut = new System.Windows.Forms.Button();
+            this.FreeLab = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.InfoPage = new System.Windows.Forms.TabPage();
             this.InstagramConnect = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -43,12 +47,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.StartPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.InfoPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // VCont
@@ -130,6 +133,9 @@
             // 
             // StartPage
             // 
+            this.StartPage.Controls.Add(this.FreeDays);
+            this.StartPage.Controls.Add(this.ActBut);
+            this.StartPage.Controls.Add(this.FreeLab);
             this.StartPage.Controls.Add(this.pictureBox2);
             this.StartPage.Controls.Add(this.VCont);
             this.StartPage.Controls.Add(this.CDCheck);
@@ -143,6 +149,49 @@
             this.StartPage.TabIndex = 0;
             this.StartPage.Text = "Start";
             this.StartPage.UseVisualStyleBackColor = true;
+            // 
+            // FreeDays
+            // 
+            this.FreeDays.AutoSize = true;
+            this.FreeDays.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FreeDays.Location = new System.Drawing.Point(353, 163);
+            this.FreeDays.Name = "FreeDays";
+            this.FreeDays.Size = new System.Drawing.Size(91, 20);
+            this.FreeDays.TabIndex = 8;
+            this.FreeDays.Text = "Trial Open";
+            this.FreeDays.Visible = false;
+            // 
+            // ActBut
+            // 
+            this.ActBut.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ActBut.Location = new System.Drawing.Point(464, 6);
+            this.ActBut.Name = "ActBut";
+            this.ActBut.Size = new System.Drawing.Size(90, 29);
+            this.ActBut.TabIndex = 7;
+            this.ActBut.Text = "Activate";
+            this.ActBut.UseVisualStyleBackColor = true;
+            this.ActBut.Visible = false;
+            this.ActBut.Click += new System.EventHandler(this.ActBut_Click);
+            // 
+            // FreeLab
+            // 
+            this.FreeLab.AutoSize = true;
+            this.FreeLab.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FreeLab.Location = new System.Drawing.Point(3, 3);
+            this.FreeLab.Name = "FreeLab";
+            this.FreeLab.Size = new System.Drawing.Size(197, 20);
+            this.FreeLab.TabIndex = 6;
+            this.FreeLab.Text = "Trial/Restricted Version";
+            this.FreeLab.Visible = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Location = new System.Drawing.Point(231, 70);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(100, 50);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 5;
+            this.pictureBox2.TabStop = false;
             // 
             // InfoPage
             // 
@@ -193,7 +242,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(234, 13);
             this.label4.TabIndex = 3;
-            this.label4.Text = "Current Build Release Date: 15 September 2019";
+            this.label4.Text = "Current Build Release Date: 19 September 2019";
             // 
             // label3
             // 
@@ -224,16 +273,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Version: 1.0.02";
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Location = new System.Drawing.Point(231, 70);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(100, 50);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 5;
-            this.pictureBox2.TabStop = false;
+            this.label1.Text = "Version: 1.0.03";
             // 
             // Starter
             // 
@@ -249,10 +289,10 @@
             this.tabControl1.ResumeLayout(false);
             this.StartPage.ResumeLayout(false);
             this.StartPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.InfoPage.ResumeLayout(false);
             this.InfoPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -274,5 +314,8 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button InstagramConnect;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label FreeLab;
+        private System.Windows.Forms.Button ActBut;
+        private System.Windows.Forms.Label FreeDays;
     }
 }
