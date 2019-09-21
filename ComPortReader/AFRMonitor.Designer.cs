@@ -194,7 +194,6 @@
             this.LowValueValue.Size = new System.Drawing.Size(57, 33);
             this.LowValueValue.TabIndex = 11;
             this.LowValueValue.Text = "--,-";
-            this.LowValueValue.MouseHover += new System.EventHandler(this.LowValueValue_MouseHover);
             // 
             // STFB
             // 

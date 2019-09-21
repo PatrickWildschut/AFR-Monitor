@@ -37,6 +37,10 @@
             this.LowValLab = new System.Windows.Forms.Label();
             this.LowValValue = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.TTRT = new System.Windows.Forms.Label();
+            this.TTRTValue = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ChartReadView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,7 +62,7 @@
             series1.Legend = "Legend1";
             series1.Name = "Value";
             this.ChartReadView.Series.Add(series1);
-            this.ChartReadView.Size = new System.Drawing.Size(546, 323);
+            this.ChartReadView.Size = new System.Drawing.Size(812, 323);
             this.ChartReadView.TabIndex = 0;
             this.ChartReadView.Text = "chart1";
             this.ChartReadView.DragDrop += new System.Windows.Forms.DragEventHandler(this.ChartReadView_DragDrop);
@@ -70,7 +74,7 @@
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(412, 20);
+            this.label1.Location = new System.Drawing.Point(678, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(146, 13);
             this.label1.TabIndex = 1;
@@ -92,7 +96,7 @@
             this.LowValValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.LowValValue.AutoSize = true;
             this.LowValValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LowValValue.Location = new System.Drawing.Point(28, 388);
+            this.LowValValue.Location = new System.Drawing.Point(27, 388);
             this.LowValValue.Name = "LowValValue";
             this.LowValValue.Size = new System.Drawing.Size(32, 20);
             this.LowValValue.TabIndex = 3;
@@ -109,12 +113,60 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Drop file on chart to compare";
             // 
+            // TTRT
+            // 
+            this.TTRT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.TTRT.AutoSize = true;
+            this.TTRT.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TTRT.Location = new System.Drawing.Point(729, 363);
+            this.TTRT.Name = "TTRT";
+            this.TTRT.Size = new System.Drawing.Size(87, 15);
+            this.TTRT.TabIndex = 5;
+            this.TTRT.Text = "Total Runtime:";
+            // 
+            // TTRTValue
+            // 
+            this.TTRTValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.TTRTValue.AutoSize = true;
+            this.TTRTValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TTRTValue.Location = new System.Drawing.Point(732, 388);
+            this.TTRTValue.Name = "TTRTValue";
+            this.TTRTValue.Size = new System.Drawing.Size(65, 20);
+            this.TTRTValue.TabIndex = 6;
+            this.TTRTValue.Text = "--,- sec";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(389, 344);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(56, 15);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Samples";
+            // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(12, 173);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(30, 15);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "AFR";
+            // 
             // ReadFFile
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(570, 429);
+            this.ClientSize = new System.Drawing.Size(836, 429);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.TTRTValue);
+            this.Controls.Add(this.TTRT);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.LowValValue);
             this.Controls.Add(this.LowValLab);
@@ -136,5 +188,9 @@
         private System.Windows.Forms.Label LowValLab;
         private System.Windows.Forms.Label LowValValue;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label TTRT;
+        private System.Windows.Forms.Label TTRTValue;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }

@@ -1,10 +1,12 @@
 ﻿using Microsoft.Win32;
+using PWCSharpHelper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +20,7 @@ namespace AFRMonitor
         public Starter()
         {
             InitializeComponent();
-            if(!Helper.IsActivated())
+            if (!Helper.IsActivated())
             {
                 VCont.Enabled = false;
                 RFFBut.Enabled = false;
@@ -29,17 +31,13 @@ namespace AFRMonitor
                 if (Helper.Restart)
                 {
                     this.Close();
-                } else if (Convert.ToInt32(Helper.GetTrialDaysLeft()) != Convert.ToInt32(Helper.GetSaveTrialDaysLeft()))
-                {
-                    Helper.SetTrialDaysLeft(0);
-                    FreeDays.Text = "Out of trial times...";
-                    BCont.Enabled = false;
-                    CDCheck.Enabled = false;
                 }
-                else if (Convert.ToInt32(Helper.GetTrialDaysLeft()) > 0)
+                else if (Convert.ToInt32(EasyXml.Elements.GetInnerText(Helper.XmlLocation, "/Root/TrialDays")) > 0)
                 {
-                    Helper.SubtractTrialDays(1);
-                    FreeDays.Text = "Trial times left to use: " + Helper.GetTrialDaysLeft();
+                    File.SetAttributes(Helper.XmlLocation, FileAttributes.Normal);
+                    EasyXml.Elements.SetInnerText(Helper.XmlLocation, "/Root/TrialDays", (Convert.ToInt32(EasyXml.Elements.GetInnerText(Helper.XmlLocation, "/Root/TrialDays")) - 1).ToString());
+                    File.SetAttributes(Helper.XmlLocation, FileAttributes.Hidden);
+                    FreeDays.Text = "Trial times left to use: " + Convert.ToInt32(EasyXml.Elements.GetInnerText(Helper.XmlLocation, "/Root/TrialDays"));
                 }
                 else
                 {

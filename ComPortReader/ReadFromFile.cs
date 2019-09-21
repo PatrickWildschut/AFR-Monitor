@@ -26,7 +26,7 @@ namespace AFRMonitor
             try
             {
                 OutSepText = File.ReadAllText(Helper.ReadFileLocation).Split('s');
-                OutText = OutSepText[3];
+                OutText = OutSepText[OutSepText.Length - 1];
                 OutSepText = OutText.Split('\n');
                 foreach (string d in OutSepText)
                 {
@@ -38,6 +38,7 @@ namespace AFRMonitor
             #endregion
             #region Label
             OutSepText = File.ReadAllText(Helper.ReadFileLocation).Split(':');
+            TTRTValue.Text = OutSepText[OutSepText.Length - 1];
             OutSepText = OutSepText[1].Split('\n');
             LowValValue.Text = OutSepText[0].Trim(' ');
             #endregion

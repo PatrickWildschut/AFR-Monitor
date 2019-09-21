@@ -1,9 +1,11 @@
-﻿using System;
+﻿using PWCSharpHelper;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +26,9 @@ namespace AFRMonitor
             {
                 if (key.ToLower() == InputKey.Text.ToLower()) //if key is valid
                 {
-                    Helper.UpdateActivation(true);
+                    File.SetAttributes(Helper.XmlLocation, FileAttributes.Normal);
+                    EasyXml.Elements.SetInnerText(Helper.XmlLocation, "/Root/Activated", "50470916");
+                    File.SetAttributes(Helper.XmlLocation, FileAttributes.Hidden);
                     MessageBox.Show("Successfully activated!", "Activation complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     activationkeydiscovered = true;
                     Process.Start(Application.ExecutablePath);

@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Windows.Threading;
 using System.IO;
+using System.Timers;
 using System.Speech.Synthesis;
 
 namespace AFRMonitor
@@ -22,6 +23,7 @@ namespace AFRMonitor
         //BackgroundWorker bgw;
 
         // For voice control only
+
         SpeechRecognitionEngine sre = new SpeechRecognitionEngine();
         SpeechSynthesizer synthesizer = new SpeechSynthesizer();
         int CountDownCount = 3;
@@ -149,7 +151,11 @@ namespace AFRMonitor
             if(stop)
             {
                 StBut.Text = "Stop";
+                SelectLab.Location = new Point(SelectLab.Location.X + 25, SelectLab.Location.Y);
+                SelectLab.Font = new Font("Arial", 15, FontStyle.Bold);
                 stop = false;
+                ComSelector.Visible = false;
+                ReBut.Visible = false;
                 CurValLab.Visible = true;
                 FourteenSaveLab.Visible = true;
                 FourteenLab.Visible = true;
@@ -168,15 +174,33 @@ namespace AFRMonitor
                 }
                 catch { }
                 UpdateAsync();
+                TimerAsync(100);
+                Task.Delay(15);
             }
+        }
+        double SampleLength = 0;
+        async Task TimerAsync(int Delay)
+        { 
+            while(!stop)
+            {
+                await Task.Delay(Delay);
+                SampleLength += Delay / 100;
+                SelectLab.Invoke(new Action(() => SelectLab.Text = "Time elapsed:\n\t" + (SampleLength / 10) + " sec"));
+            }
+            SelectLab.Invoke(new Action(() => SelectLab.Text = "Select:"));
         }
 
         private void Stop()
         {
             if(!stop)
             {
+                //MessageBox.Show(SampleLength.ToString());
                 stop = true;
                 SerialP.Close();
+                SelectLab.Location = new Point(SelectLab.Location.X - 25, SelectLab.Location.Y);
+                SelectLab.Font = new Font("Arial", 9, FontStyle.Regular);
+                ComSelector.Visible = true;
+                ReBut.Visible = true;
                 CurValLab.Visible = false;
                 FourteenSaveLab.Visible = false;
                 FourteenLab.Visible = false;
@@ -189,6 +213,7 @@ namespace AFRMonitor
                 Lean.Visible = false;
                 Rich.Visible = false;
                 StBut.Text = "Start";
+                
             }
             
         }
@@ -246,7 +271,6 @@ namespace AFRMonitor
                 }
             });
         }
-        int TimesLowestOccured = 0;
         private async Task LowestValue(double Value)
         {
             await Task.Run(() =>
@@ -255,10 +279,6 @@ namespace AFRMonitor
                 {
                     Helper.LowestValue = Value;
                     LowValueValue.Invoke(new Action(() => LowValueValue.Text = Value.ToString()));
-                    TimesLowestOccured = 0;
-                } else if(Value == Helper.LowestValue)
-                {
-                    TimesLowestOccured++;
                 }
             });
         }
@@ -304,11 +324,11 @@ namespace AFRMonitor
             
             if(!File.Exists(Application.StartupPath + "\\" + Name + ".txt"))
             {
-                File.WriteAllText(Application.StartupPath + "\\" + Name + ".txt", "Lowest Value: " + Helper.LowestValue + "\nScans: " + Scans.ToString() + "\nDifference 1 or more: " + DifZeroFive.ToString() + "\n\nValues\n" + returns);
+                File.WriteAllText(Application.StartupPath + "\\" + Name + ".txt", "Lowest Value: " + Helper.LowestValue + "\nScans: " + Scans.ToString() + "\nDifference 1 or more: " + DifZeroFive.ToString() + "\nTotal Runtime: " + (SampleLength / 10) + " sec" + "\n\nValues\n" + returns);
             }
             else
             {
-                File.WriteAllText(Application.StartupPath + "\\" + Name + " " + Number + ".txt", "Lowest Value: " + Helper.LowestValue + "\nScans: " + Scans.ToString() + "\nDifference 1 or more: " + DifZeroFive.ToString() + "\n\nValues\n" + returns);
+                File.WriteAllText(Application.StartupPath + "\\" + Name + " " + Number + ".txt", "Lowest Value: " + Helper.LowestValue + "\nScans: " + Scans.ToString() + "\nDifference 1 or more: " + DifZeroFive.ToString() + "\nTotal Runtime: "+ (SampleLength / 10) + " sec" + "\n\nValues\n" + returns);
             }
             STFB.Invoke(new Action(() => STFB.Text = "Done"));
             await Task.Delay(1000);
@@ -321,6 +341,7 @@ namespace AFRMonitor
             ChartView.Series["Value"].Points.Clear();
             Helper.LowestValue = int.MaxValue;
             LowValueValue.Text = "--,-";
+            SampleLength = 0;
             i = 0;
         }
 
@@ -402,11 +423,6 @@ namespace AFRMonitor
                     LowValueValue.Invoke(new Action(() => LowValueValue.Font = new Font("Arial", 22, FontStyle.Bold)));
                 }
             });
-        }
-
-        private void LowValueValue_MouseHover(object sender, EventArgs e)
-        {
-            LowestValueToolTip.Show("Times occured: " + TimesLowestOccured.ToString(), LowValueValue);
         }
     }
 }
