@@ -26,17 +26,20 @@ namespace AFRMonitor
                 FreeLab.Visible = true;
                 ActBut.Visible = true;
                 FreeDays.Visible = true;
-                FreeDays.Text = "Trial times left to use: " + Helper.GetTrialDaysLeft();
-                if (Convert.ToInt32(Helper.GetTrialDaysLeft()) != Convert.ToInt32(Helper.GetSaveTrialDaysLeft()))
+                if (Helper.Restart)
+                {
+                    this.Close();
+                } else if (Convert.ToInt32(Helper.GetTrialDaysLeft()) != Convert.ToInt32(Helper.GetSaveTrialDaysLeft()))
                 {
                     Helper.SetTrialDaysLeft(0);
                     FreeDays.Text = "Out of trial times...";
                     BCont.Enabled = false;
                     CDCheck.Enabled = false;
                 }
-                else if(Convert.ToInt32(Helper.GetTrialDaysLeft()) > 0)
+                else if (Convert.ToInt32(Helper.GetTrialDaysLeft()) > 0)
                 {
                     Helper.SubtractTrialDays(1);
+                    FreeDays.Text = "Trial times left to use: " + Helper.GetTrialDaysLeft();
                 }
                 else
                 {

@@ -23,11 +23,11 @@ namespace AFRMonitor
             ChartReadView.ChartAreas[0].AxisY.Maximum = 20;
             ChartReadView.ChartAreas[0].AxisY.Interval = 1;
             #region Chart
-            OutSepText = File.ReadAllText(Helper.ReadFileLocation).Split('s');
-            OutText = OutSepText[3];
-            OutSepText = OutText.Split('\n');
             try
             {
+                OutSepText = File.ReadAllText(Helper.ReadFileLocation).Split('s');
+                OutText = OutSepText[3];
+                OutSepText = OutText.Split('\n');
                 foreach (string d in OutSepText)
                 {
                     if (!string.IsNullOrEmpty(d))
@@ -61,7 +61,7 @@ namespace AFRMonitor
             }
             else
             {
-                MessageBox.Show("Only .txt files created by this program can be used.", "Wrong file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Only .txt files created by this program and not modified can be used.", "Wrong file", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

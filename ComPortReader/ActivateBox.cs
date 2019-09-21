@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -25,15 +26,21 @@ namespace AFRMonitor
                 {
                     Helper.UpdateActivation(true);
                     MessageBox.Show("Successfully activated!", "Activation complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    MessageBox.Show("Restart the application to apply changes", "Restart required", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     activationkeydiscovered = true;
-                    this.Close();
+                    Process.Start(Application.ExecutablePath);
+                    Application.Exit();
                     break;
                 }
             }
             if(!activationkeydiscovered)
             MessageBox.Show("Invalid Key. To buy a key, click on the buy button.", "Bad key", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://www.instagram.com/patrick_wildschut/");
+            MessageBox.Show("Send me a DM", "DM Me", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace AFRMonitor
 {
@@ -18,6 +20,8 @@ namespace AFRMonitor
             return ForceQuit = tof;
         }
 
+        public static bool Restart = false;
+
         public static RegistryKey AFRTrialKey = Registry.CurrentConfig.OpenSubKey("Software\\AFRMonitor", true);
         public static RegistryKey AFRRegistryKey = Registry.CurrentUser.OpenSubKey("Software\\AFRMonitor", true);
         public static int UsageVariable = 0; // 1 = Voice Control, 2 = Button Control
@@ -27,20 +31,30 @@ namespace AFRMonitor
         public static string ReadFileLocation = "";
         public static bool IsActivated()
         {
-            if (Helper.AFRRegistryKey.GetValue("Activation", null).ToString() == "50470916") // true
+            try
             {
-                return true;
+                if (Helper.AFRRegistryKey.GetValue("Activation", null).ToString() == "50470916") // true
+                {
+                    return true;
+                }
+                else if (Helper.AFRRegistryKey.GetValue("Activation", null).ToString() == "50501750") // false
+                {
+                    return false;
+                }
+                else
+                {
+                    // Error 3, registry not working properly
+
+                    return false;
+                }
             }
-            else if (Helper.AFRRegistryKey.GetValue("Activation", null).ToString() == "50501750") // false
+            catch
             {
+                Process.Start(Application.ExecutablePath);
+                Restart = true;
                 return false;
             }
-            else
-            {
-                // Error 3, registry not working properly
-                
-                return false;
-            }
+            
         }
         public static void UpdateActivation(bool ToTrue)
         {
