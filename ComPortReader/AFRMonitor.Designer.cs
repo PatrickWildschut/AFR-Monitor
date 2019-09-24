@@ -54,6 +54,7 @@
             this.TenSaveLab = new System.Windows.Forms.Label();
             this.TenLab = new System.Windows.Forms.Label();
             this.LowestValueToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.Words = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ChartView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -274,11 +275,23 @@
             this.TenLab.TabIndex = 19;
             this.TenLab.Text = "10,5";
             // 
+            // Words
+            // 
+            this.Words.AutoSize = true;
+            this.Words.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Words.Location = new System.Drawing.Point(243, 20);
+            this.Words.Name = "Words";
+            this.Words.Size = new System.Drawing.Size(182, 13);
+            this.Words.TabIndex = 20;
+            this.Words.Text = "Configured Words: Start, Stop, Reset";
+            this.Words.Visible = false;
+            // 
             // AFRMonitor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(609, 596);
+            this.Controls.Add(this.Words);
             this.Controls.Add(this.TenLab);
             this.Controls.Add(this.TenSaveLab);
             this.Controls.Add(this.ElevenLab);
@@ -336,6 +349,7 @@
         private System.Windows.Forms.Label TenSaveLab;
         private System.Windows.Forms.Label TenLab;
         private System.Windows.Forms.ToolTip LowestValueToolTip;
+        private System.Windows.Forms.Label Words;
     }
 }
 

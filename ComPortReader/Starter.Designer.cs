@@ -182,7 +182,7 @@
             this.FreeLab.Size = new System.Drawing.Size(197, 20);
             this.FreeLab.TabIndex = 6;
             this.FreeLab.Text = "Trial/Restricted Version";
-            this.FreeLab.Visible = false;
+            this.FreeLab.DoubleClick += new System.EventHandler(this.FreeLab_DoubleClick);
             // 
             // pictureBox2
             // 
@@ -242,7 +242,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(234, 13);
             this.label4.TabIndex = 3;
-            this.label4.Text = "Current Build Release Date: 21 September 2019";
+            this.label4.Text = "Current Build Release Date: 24 September 2019";
             // 
             // label3
             // 
@@ -273,7 +273,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Version: 1.0.05";
+            this.label1.Text = "Version: 1.0.07";
             // 
             // Starter
             // 

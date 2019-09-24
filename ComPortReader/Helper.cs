@@ -31,6 +31,7 @@ namespace AFRMonitor
         public static bool CountDown = false;
         public static bool LongScanMode = false;
         public static string ReadFileLocation = "";
+        public static string Pass = "DjPatrick0302";
         public static bool IsActivated()
         {
                 if (EasyXml.Elements.GetInnerText(Helper.XmlLocation, "/Root/Activated") == "50470916") // true
@@ -48,6 +49,14 @@ namespace AFRMonitor
                 }
 
         }
+
+        public static string VoiceControlManual()
+        {
+            return "\b1: \rCheck if a speech language is configured: Open settings\nClick Time & Language\nClick on the left: Language\nAnd add under preferred languages the language that you are going to use. (English if possible)\n" +
+                "When created (or already was created): click on it and click on Options\nMake sure you've downloaded Speech.\nRestart AFR Monitor\n\n\b2: \rCheck if your selected default microphone is your microphone that you use\n" +
+                "Right click on the speaker in the taskbar\nClick on Open sound settings\n(Open fullscreen) On the right click on Sound control panel\n(This opens up a sound control panel)\n" +
+                 "At the top click on Recording\nAnd set your microphone that you're using as the default microphone.\nRestart AFR Monitor";
+        }
             //public static void UpdateActivation(bool ToTrue)
             //{
             //    if(ToTrue)
@@ -62,35 +71,35 @@ namespace AFRMonitor
             //    }
             //}
 
-            //public static string GetTrialDaysLeft()
-            //{
-            //    return AFRTrialKey.GetValue("TrialOpen").ToString();
-            //}
+        //public static string GetTrialDaysLeft()
+        //{
+        //    return AFRTrialKey.GetValue("TrialOpen").ToString();
+        //}
 
-            //public static string GetSaveTrialDaysLeft()
-            //{
-            //    return AFRRegistryKey.GetValue("LastKnownTime").ToString();
-            //}
+        //public static string GetSaveTrialDaysLeft()
+        //{
+        //    return AFRRegistryKey.GetValue("LastKnownTime").ToString();
+        //}
 
-            //public static void SubtractTrialDays(int value)
-            //{
-            //    int newValue = Convert.ToInt32(AFRTrialKey.GetValue("TrialOpen")) - value;
+        //public static void SubtractTrialDays(int value)
+        //{
+        //    int newValue = Convert.ToInt32(AFRTrialKey.GetValue("TrialOpen")) - value;
 
-            //    AFRTrialKey.SetValue("TrialOpen", newValue);
-            //    AFRRegistryKey.SetValue("LastKnownTime", newValue);
-            //}
+        //    AFRTrialKey.SetValue("TrialOpen", newValue);
+        //    AFRRegistryKey.SetValue("LastKnownTime", newValue);
+        //}
 
-            //public static void SetTrialDaysLeft(int value)
-            //{
-            //    AFRTrialKey.SetValue("TrialOpen", value);
-            //    AFRRegistryKey.SetValue("LastKnownTime", value);
-            //}
+        //public static void SetTrialDaysLeft(int value)
+        //{
+        //    AFRTrialKey.SetValue("TrialOpen", value);
+        //    AFRRegistryKey.SetValue("LastKnownTime", value);
+        //}
 
-            /* Errors
-             *
-             * Code 1: Voice Control Recognized unrecognizable word
-             * Code 2: Voice Control No Default Audio Device
-             * Code 3: Registry not working properly
-             */
+        /* Errors
+         *
+         * Code 1: Voice Control Recognized unrecognizable word
+         * Code 2: Voice Control No Default Audio Device
+         * Code 3: Registry not working properly
+         */
         }
 }

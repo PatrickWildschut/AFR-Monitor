@@ -60,7 +60,7 @@ namespace AFRMonitor
             Helper.ValidActivationKeys[3] = "p4we98043nnw";
             Helper.ValidActivationKeys[4] = "p5io69270mow";
 
-            try { Application.Run(new Starter()); } catch { }
+            /*try { */Application.Run(new Starter()); //} catch { }
         }
     }
 }

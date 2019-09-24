@@ -17,15 +17,16 @@ namespace AFRMonitor
     public partial class Starter : Form
     {
         OpenFileDialog ofd = new OpenFileDialog() { Multiselect = false, InitialDirectory = Application.StartupPath, Filter = "Text Documents Only|*.txt" };
+        public bool Activated = false;
         public Starter()
         {
             InitializeComponent();
             if (!Helper.IsActivated())
             {
                 VCont.Enabled = false;
+                Activated = false;
                 RFFBut.Enabled = false;
                 LongScanCheck.Enabled = false;
-                FreeLab.Visible = true;
                 ActBut.Visible = true;
                 FreeDays.Visible = true;
                 if (Helper.Restart)
@@ -45,6 +46,13 @@ namespace AFRMonitor
                     BCont.Enabled = false;
                     CDCheck.Enabled = false;
                 }
+            }
+            else
+            {
+                Activated = true;
+                FreeLab.Location = new Point(FreeLab.Location.X, FreeLab.Location.Y + 32);
+                FreeLab.Font = new Font("Arial", 9, FontStyle.Regular);
+                FreeLab.Text = "If Voice Control doesn't work, \ndouble click me";
             }
         }
 
@@ -101,6 +109,14 @@ namespace AFRMonitor
         private void ActBut_Click(object sender, EventArgs e)
         {
             new ActivateBox().ShowDialog();
+        }
+
+        private void FreeLab_DoubleClick(object sender, EventArgs e)
+        {
+            if(Activated)
+            {
+                MessageBox.Show(Helper.VoiceControlManual(), "Voice Control Manual", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }

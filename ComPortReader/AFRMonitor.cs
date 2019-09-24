@@ -36,6 +36,7 @@ namespace AFRMonitor
             #region Voice Setup
             if (Helper.UsageVariable == 1)
             {
+                Words.Visible = true;
                 StBut.Visible = false;
                 Choices commands = new Choices();
                 commands.Add(new string[] { "start", "stop", "reset" });

@@ -43,8 +43,9 @@ namespace AFRMonitor
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            Process.Start("https://www.instagram.com/patrick_wildschut/");
-            MessageBox.Show("Send me a DM", "DM Me", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //Process.Start("https://www.instagram.com/patrick_wildschut/");
+            //MessageBox.Show("Send me a DM", "DM Me", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            new BuyForm().ShowDialog();
         }
     }
 }
