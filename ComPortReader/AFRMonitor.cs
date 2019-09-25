@@ -104,34 +104,39 @@ namespace AFRMonitor
 
         private void StartBetween()
         {
-            if (Helper.CountDown)
+            if (ComSelector.Items.Count > 0)
             {
-                CountDown();
+                if (Helper.CountDown)
+                {
+                    CountDown();
+                }
+                else
+                {
+                    Start();
+                }
             }
             else
             {
-                Start();
+                ReBut_Click(null, null);
             }
         }
         private void StBut_Click(object sender, EventArgs e)
         {
-            if (ComSelector.Items.Count > 0)
+            
+            if (StBut.Text == "Start")
             {
-                if (StBut.Text == "Start")
+                if (Helper.CountDown)
                 {
-                    if (Helper.CountDown)
-                    {
-                        CountDown();
-                    }
-                    else
-                    {
-                        Start();
-                    }
+                    CountDown();
                 }
                 else
                 {
-                    Stop();
+                    Start();
                 }
+            }
+            else
+            {
+                Stop();
             }
             
             
@@ -288,6 +293,10 @@ namespace AFRMonitor
         {
             ComSelector.Items.Clear();
             ComSelector.Items.AddRange(SerialPort.GetPortNames());
+            if(ComSelector.Items.Count > 0)
+            {
+                ComSelector.SelectedIndex = 0;
+            }
         }
 
         private void STFB_Click(object sender, EventArgs e)

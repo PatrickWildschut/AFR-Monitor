@@ -27,7 +27,7 @@ namespace AFRMonitor
 
         private void AFKBut_Click(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(textBox1.Text))
+            if(!string.IsNullOrEmpty(textBox1.Text) && !string.IsNullOrEmpty(MidASur.Text))
             {
                 if(textBox1.Text.Contains("@") && textBox1.Text.Contains("."))
                 {
@@ -47,7 +47,7 @@ namespace AFRMonitor
             }
             else
             {
-                MessageBox.Show("Input your e-mail address before sending.", "No email", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Input your e-mail address and/or surname before sending.", "No email", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

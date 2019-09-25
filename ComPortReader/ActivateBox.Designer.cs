@@ -33,13 +33,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.PSTBut = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // InputKey
             // 
             this.InputKey.Location = new System.Drawing.Point(16, 22);
             this.InputKey.Name = "InputKey";
-            this.InputKey.Size = new System.Drawing.Size(202, 20);
+            this.InputKey.Size = new System.Drawing.Size(186, 20);
             this.InputKey.TabIndex = 0;
             // 
             // label1
@@ -74,7 +75,7 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(145, 72);
+            this.button2.Location = new System.Drawing.Point(208, 72);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(73, 27);
             this.button2.TabIndex = 4;
@@ -82,11 +83,23 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
+            // PSTBut
+            // 
+            this.PSTBut.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PSTBut.Location = new System.Drawing.Point(208, 18);
+            this.PSTBut.Name = "PSTBut";
+            this.PSTBut.Size = new System.Drawing.Size(73, 27);
+            this.PSTBut.TabIndex = 5;
+            this.PSTBut.Text = "Paste";
+            this.PSTBut.UseVisualStyleBackColor = true;
+            this.PSTBut.Click += new System.EventHandler(this.PSTBut_Click);
+            // 
             // ActivateBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(230, 106);
+            this.ClientSize = new System.Drawing.Size(293, 106);
+            this.Controls.Add(this.PSTBut);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
@@ -106,5 +119,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button PSTBut;
     }
 }

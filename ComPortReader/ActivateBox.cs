@@ -47,5 +47,10 @@ namespace AFRMonitor
             //MessageBox.Show("Send me a DM", "DM Me", MessageBoxButtons.OK, MessageBoxIcon.Information);
             new BuyForm().ShowDialog();
         }
+
+        private void PSTBut_Click(object sender, EventArgs e)
+        {
+            InputKey.Text = Clipboard.GetText();
+        }
     }
 }
