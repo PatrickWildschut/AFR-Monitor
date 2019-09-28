@@ -198,6 +198,7 @@
             // 
             // STFB
             // 
+            this.STFB.Enabled = false;
             this.STFB.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.STFB.Location = new System.Drawing.Point(280, 75);
             this.STFB.Name = "STFB";
@@ -209,6 +210,7 @@
             // 
             // RTB
             // 
+            this.RTB.Enabled = false;
             this.RTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RTB.Location = new System.Drawing.Point(190, 75);
             this.RTB.Name = "RTB";

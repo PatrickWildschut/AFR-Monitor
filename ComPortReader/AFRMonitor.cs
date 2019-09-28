@@ -14,6 +14,7 @@ using System.Windows.Threading;
 using System.IO;
 using System.Timers;
 using System.Speech.Synthesis;
+using System.Diagnostics;
 
 namespace AFRMonitor
 {
@@ -106,6 +107,8 @@ namespace AFRMonitor
         {
             if (ComSelector.Items.Count > 0)
             {
+                STFB.Enabled = true;
+                RTB.Enabled = true;
                 if (Helper.CountDown)
                 {
                     CountDown();
@@ -125,13 +128,14 @@ namespace AFRMonitor
             
             if (StBut.Text == "Start")
             {
+                if(ComSelector.Items.Count > 0)
                 if (Helper.CountDown)
                 {
                     CountDown();
                 }
                 else
                 {
-                    Start();
+                    StartBetween();
                 }
             }
             else
@@ -144,7 +148,9 @@ namespace AFRMonitor
         bool Listening = false;
         void Form_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(Listening)
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            if (Listening)
             {
                 sre.RecognizeAsyncStop();
             }
@@ -186,15 +192,20 @@ namespace AFRMonitor
         }
         double SampleLength = 0;
         async Task TimerAsync(int Delay)
-        { 
-            while(!stop)
+        {
+            //Stopwatch stopwatch = Stopwatch.StartNew();
+            while (!stop)
             {
                 await Task.Delay(Delay);
                 SampleLength += Delay / 100;
-                SelectLab.Invoke(new Action(() => SelectLab.Text = "Time elapsed:\n\t" + (SampleLength / 10) + " sec"));
+                SelectLab.Text = "Time elapsed:\n\t" + (SampleLength / 10) + " sec";
+                //SelectLab.Text = "Time elapsed:\n\t" + stopwatch.Elapsed.TotalSeconds;
             }
-            SelectLab.Invoke(new Action(() => SelectLab.Text = "Select:"));
+            SelectLab.Text = "Select:";
+            //SelectLab.Text = "Select:";
         }
+
+
 
         private void Stop()
         {
@@ -256,7 +267,7 @@ namespace AFRMonitor
 
                         if (ChartView.InvokeRequired)
                         {
-                            ChartView.Invoke(new Action(() => ChartView.Series["Value"].Points.AddY((PortOutputDouble) / 10)));
+                            ChartView.Invoke(new Action(() => ChartView.Series["Value"].Points.AddY(PortOutputDouble / 10)));
                             i++;
                             if (i >= 200 & Helper.LongScanMode)
                             {
@@ -307,6 +318,7 @@ namespace AFRMonitor
         public int Scans = 0;
         private async Task SaveToFile()
         {
+            STFB.Invoke(new Action(() => STFB.Text = "Wait"));
             string returns = "";
             int Number = 2;
             double LastValue = 0;
@@ -347,6 +359,16 @@ namespace AFRMonitor
 
         private void RTB_Click(object sender, EventArgs e)
         {
+            if(!stop)
+            {
+                STFB.Enabled = true;
+                RTB.Enabled = true;
+            }
+            else
+            {
+                STFB.Enabled = false;
+                RTB.Enabled = false;
+            }
             Values.Clear();
             ChartView.Series["Value"].Points.Clear();
             Helper.LowestValue = int.MaxValue;

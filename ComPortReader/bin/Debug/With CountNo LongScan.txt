@@ -1,0 +1,6 @@
+Lowest Value: 11
+Scans: 0
+Difference 1 or more: -1
+Total Runtime: 0 sec
+
+Values
