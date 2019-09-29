@@ -332,8 +332,9 @@ namespace AFRMonitor
                 LastValue = d;
                 Scans++;
             }
-            string Name = Helper.CountDown ? "With Count" : "No Count" + " And ";
-            Name += Helper.LongScanMode ? "With LongScan" : "No LongScan";
+            string[] Date = DateTime.Now.Date.ToString().Split(' ');
+            Date = Date[0].Split('/');
+            string Name = "AFR Results";/* + Date[0] + "." + Date[1] + "." + Date[2];*/
         Check:
             if (File.Exists(Application.StartupPath + "\\" + Name + ".txt"))
             {
@@ -375,6 +376,8 @@ namespace AFRMonitor
             LowValueValue.Text = "--,-";
             SampleLength = 0;
             i = 0;
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         private async void CountDown()

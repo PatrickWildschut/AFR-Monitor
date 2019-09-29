@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace AFRMonitor
 {
@@ -16,6 +17,7 @@ namespace AFRMonitor
     {
         public string OutText = "";
         public string[] OutSepText;
+        public List<CustomLabel> clSave = new List<CustomLabel>();
         public ReadFFile()
         {
             InitializeComponent();
@@ -25,14 +27,33 @@ namespace AFRMonitor
             #region Chart
             try
             {
+                int i = 0;
+                int Times = 0;
                 OutSepText = File.ReadAllText(Helper.ReadFileLocation).Split('s');
                 OutText = OutSepText[OutSepText.Length - 1];
                 OutSepText = OutText.Split('\n');
                 foreach (string d in OutSepText)
                 {
                     if (!string.IsNullOrEmpty(d))
+                    {
                         ChartReadView.Series[0].Points.AddY(Convert.ToDouble(d));
+                        i++;
+                        if (i >= 20 && OutSepText.Length < 149)
+                        {
+                            Times++;
+                            i = 0;
+                            clSave.Add(new CustomLabel(20.7 * Times - 5, 20.7 * Times + 5, (3.5 * Times).ToString(), 0, LabelMarkStyle.None, GridTickTypes.All));
+                        }
+                        else if (i >= 50)
+                        {
+                            Times++;
+                            i = 0;
+                            clSave.Add(new CustomLabel(50.5 * Times - 10, 50.5 * Times + 10, (8.5 * Times).ToString(), 0, LabelMarkStyle.None, GridTickTypes.All));
+                        }
+                    }
+                        
                 }
+                
             }
             catch { MessageBox.Show("Corrupted txt file.", "Corrupted", MessageBoxButtons.OK, MessageBoxIcon.Error); this.Close(); }
             #endregion
@@ -70,6 +91,24 @@ namespace AFRMonitor
         {
             //MessageBox.Show("Hovering");
             e.Effect = DragDropEffects.Copy;
+        }
+
+        private void TCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            if(tCheck.Checked)
+            {
+                SamplesLab.Text = "Time in sec";
+                foreach (CustomLabel cl in clSave)
+                {
+                    ChartReadView.ChartAreas[0].AxisX.CustomLabels.Add(cl);
+                }
+            }
+            else
+            {
+                ChartReadView.ChartAreas[0].AxisX.CustomLabels.Clear();
+                GC.Collect();
+                SamplesLab.Text = "Samples";
+            }
         }
     }
 }

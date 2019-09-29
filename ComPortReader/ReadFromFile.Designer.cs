@@ -39,8 +39,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.TTRT = new System.Windows.Forms.Label();
             this.TTRTValue = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.SamplesLab = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.tCheck = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.ChartReadView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -135,16 +136,16 @@
             this.TTRTValue.TabIndex = 6;
             this.TTRTValue.Text = "--,- sec";
             // 
-            // label3
+            // SamplesLab
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(389, 344);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 15);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Samples";
+            this.SamplesLab.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.SamplesLab.AutoSize = true;
+            this.SamplesLab.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SamplesLab.Location = new System.Drawing.Point(389, 344);
+            this.SamplesLab.Name = "SamplesLab";
+            this.SamplesLab.Size = new System.Drawing.Size(56, 15);
+            this.SamplesLab.TabIndex = 7;
+            this.SamplesLab.Text = "Samples";
             // 
             // label4
             // 
@@ -157,14 +158,27 @@
             this.label4.TabIndex = 8;
             this.label4.Text = "AFR";
             // 
+            // tCheck
+            // 
+            this.tCheck.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.tCheck.AutoSize = true;
+            this.tCheck.Location = new System.Drawing.Point(391, 388);
+            this.tCheck.Name = "tCheck";
+            this.tCheck.Size = new System.Drawing.Size(54, 17);
+            this.tCheck.TabIndex = 9;
+            this.tCheck.Text = "Times";
+            this.tCheck.UseVisualStyleBackColor = true;
+            this.tCheck.CheckedChanged += new System.EventHandler(this.TCheck_CheckedChanged);
+            // 
             // ReadFFile
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(836, 429);
+            this.Controls.Add(this.tCheck);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.SamplesLab);
             this.Controls.Add(this.TTRTValue);
             this.Controls.Add(this.TTRT);
             this.Controls.Add(this.label2);
@@ -190,7 +204,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label TTRT;
         private System.Windows.Forms.Label TTRTValue;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label SamplesLab;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox tCheck;
     }
 }
