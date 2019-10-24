@@ -29,6 +29,7 @@ namespace AFRMonitor
         SpeechSynthesizer synthesizer = new SpeechSynthesizer();
         int CountDownCount = 3;
         List<double> Values = new List<double>();
+        bool IsSaved = false;
         public AFRMonitor()
         {
             InitializeComponent();
@@ -128,7 +129,7 @@ namespace AFRMonitor
             
             if (StBut.Text == "Start")
             {
-                if(ComSelector.Items.Count > 0)
+                if (ComSelector.Items.Count > 0)
                 if (Helper.CountDown)
                 {
                     CountDown();
@@ -156,12 +157,21 @@ namespace AFRMonitor
             }
             synthesizer.Dispose();
             Stop();
+            if(!IsSaved)
+            {
+                if(MessageBox.Show("Are you sure you want to exit without saving?", "Save or quit", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    SaveToFile();
+                    IsSaved = true;
+                }
+            }
         }
 
         private void Start()
         {
             if(stop)
             {
+                IsSaved = false;
                 StBut.Text = "Stop";
                 SelectLab.Location = new Point(SelectLab.Location.X + 25, SelectLab.Location.Y);
                 SelectLab.Font = new Font("Arial", 15, FontStyle.Bold);
@@ -313,6 +323,7 @@ namespace AFRMonitor
         private void STFB_Click(object sender, EventArgs e)
         {
             SaveToFile();
+            IsSaved = true;
         }
         public int DifZeroFive = -1;
         public int Scans = 0;
