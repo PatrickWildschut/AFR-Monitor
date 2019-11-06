@@ -29,7 +29,7 @@ namespace AFRMonitor
         SpeechSynthesizer synthesizer = new SpeechSynthesizer();
         int CountDownCount = 3;
         List<double> Values = new List<double>();
-        bool IsSaved = false;
+        bool IsSaved = true;
         public AFRMonitor()
         {
             InitializeComponent();
@@ -159,7 +159,7 @@ namespace AFRMonitor
             Stop();
             if(!IsSaved)
             {
-                if(MessageBox.Show("Are you sure you want to exit without saving?", "Save or quit", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if(MessageBox.Show("Are you sure you want to exit without saving?", "Save or quit", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                 {
                     SaveToFile();
                     IsSaved = true;
@@ -364,7 +364,7 @@ namespace AFRMonitor
             {
                 File.WriteAllText(Application.StartupPath + "\\" + Name + " " + Number + ".txt", "Lowest Value: " + Helper.LowestValue + "\nScans: " + Scans.ToString() + "\nDifference 1 or more: " + DifZeroFive.ToString() + "\nTotal Runtime: "+ (SampleLength / 10) + " sec" + "\n\nValues\n" + returns);
             }
-            STFB.Invoke(new Action(() => STFB.Text = "Done"));
+            STFB.Invoke(new Action(() => STFB.Text = "Saved"));
             await Task.Delay(1000);
             STFB.Invoke(new Action(() => STFB.Text = "Save To File"));
         }
