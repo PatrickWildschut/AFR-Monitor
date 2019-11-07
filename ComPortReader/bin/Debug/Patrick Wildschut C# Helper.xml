@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Patrick Wildschut C# Helper</name>
+    </assembly>
+    <members>
+        <member name="T:PWCSharpHelper.XmlElements">
+            <summary>
+            XmlElements class.
+            </summary>
+        </member>
+        <member name="M:PWCSharpHelper.XmlElements.GetAttributeValue(System.String,System.String,System.Int32)">
+            <summary>
+            Returns the attribute his value from the element it is attached to.
+            </summary>
+            <param name="Xmlpath">XML Path, with xml name and .xml extention.</param>
+            <param name="ElementName">Element name where the attribute is attached to.</param>
+            <param name="AttributeIndex">Elements could have more than one attribute, input the index of the attribute you want to return.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PWCSharpHelper.XmlElements.GetAllAttributeValues(System.String,System.String,System.Int32)">
+            <summary>
+            Returns all attribute values of child elements.
+            </summary>
+            <param name="Xmlpath">XML Path, with xml name and .xml extention.</param>
+            <param name="InXmlPath">Path inside of the xml, example: /Root/MyElement (Parent)</param>
+            <param name="AttributeIndex">Elements could have more than one attribute, input the index of the attribute you want to return.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PWCSharpHelper.XmlElements.SetAttributeValue(System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Sets the value of an Attribute.
+            </summary>
+            <param name="Xmlpath">XML Path, with xml name and .xml extention.</param>
+            <param name="ElementName">Element name where the attribute is attached to.</param>
+            <param name="NewValue">Value of the attribute.</param>
+            <param name="AttributeIndex">Which attribute?</param>
+        </member>
+        <member name="M:PWCSharpHelper.XmlElements.AddAttribute(System.String,System.String,System.String,System.String)">
+            <summary>
+            Adds an Attribute to the given Element.
+            </summary>
+            <param name="Xmlpath">XML Path, with xml name and .xml extention.</param>
+            <param name="InXmlPath">Path inside of the xml, example: /Root/Element (Wit element name that you want to add the attribute to)</param>
+            <param name="AttributeName">Name of the attribute you want to add.</param>
+            <param name="AttributeValue">Value of the attribute you're creating.</param>
+        </member>
+        <member name="M:PWCSharpHelper.XmlElements.AddElement(System.String,System.String,System.String,System.String)">
+            <summary>
+            Adds an Element to the xml file.
+            </summary>
+            <param name="Xmlpath">XML Path, with xml name and .xml extention.</param>
+            <param name="InXmlLocation">Location inside of the xml, example: /Root/Element (Without element name that you want to create)</param>
+            <param name="ElementName">Name of the element you want to create.</param>
+            <param name="Innertext">Innertext of the element.</param>
+        </member>
+        <member name="M:PWCSharpHelper.XmlElements.RemoveElement(System.String,System.String)">
+            <summary>
+            Removes the given element.
+            </summary>
+            <param name="Xmlpath">XML Path, with xml name and .xml extention.</param>
+            <param name="InXmlPath">Path inside of the xml, example: /Root/MyElement</param>
+        </member>
+        <member name="M:PWCSharpHelper.XmlElements.RemoveAllElements(System.String,System.String)">
+            <summary>
+            Removes all elements in given xml file.
+            </summary>
+            <param name="Xmlpath">XML Path, with xml name and .xml extention.</param>
+            <param name="RootName">Name of the root, default: "Root"</param>
+        </member>
+        <member name="M:PWCSharpHelper.XmlElements.RemoveAllElementsExceptName(System.String,System.String,System.String)">
+            <summary>
+            Removes all elements except the element with the given name.
+            </summary>
+            <param name="Xmlpath">XML Path, with xml name and .xml extention.</param>
+            <param name="RemainingElementName">Removes all the elements except this name.</param>
+            <param name="RootName">Name of the root, default: "Root"</param>
+        </member>
+        <member name="M:PWCSharpHelper.XmlElements.RemoveAllElementsExceptIndex(System.String,System.Int32,System.String)">
+            <summary>
+            Removes all elements except the element with the given index.
+            </summary>
+            <param name="Xmlpath">XML Path, with xml name and .xml extention.</param>
+            <param name="RemainingElementIndex">Removes all the elements except this index.</param>
+            <param name="RootName">Name of the root, default: "Root"</param>
+        </member>
+        <member name="M:PWCSharpHelper.XmlElements.GetElementNames(System.String,System.String)">
+            <summary>
+            Gets the child element names of "InXmlPath".
+            </summary>
+            <param name="Xmlpath">XML Path, with xml name and .xml extention.</param>
+            <param name="InXmlPath">Path inside of the xml, example: /Root/MyElement</param>
+            <returns>List of type string.</returns>
+        </member>
+        <member name="M:PWCSharpHelper.XmlElements.GetElementCount(System.String,System.String)">
+            <summary>
+            Gets the count of the child elements of "InXmlPath".
+            </summary>
+            <param name="Xmlpath">XML Path, with xml name and .xml extention.</param>
+            <param name="InXmlPath">Path inside of the xml, example: /Root/MyElement</param>
+            <returns>The count of the child elements.</returns>
+        </member>
+        <member name="M:PWCSharpHelper.XmlElements.GetElementsWithContainingName(System.String,System.String,System.String)">
+            <summary>
+            Gets the Elements which have a name that contains "ContainingName".
+            </summary>
+            <param name="Xmlpath">XML Path, with xml name and .xml extention.</param>
+            <param name="ContainingName">The name that the elements who get returned must have.</param>
+            <param name="LookUnder">Where the method is going to look for the elements.</param>
+            <returns>List of type XmlNode</returns>
+        </member>
+        <member name="M:PWCSharpHelper.XmlElements.GetInnerText(System.String,System.String)">
+            <summary>
+            Gets the innertext of given Element.
+            </summary>
+            <param name="Xmlpath">XML Path, with xml name and .xml extention.</param>
+            <param name="InXmlPath">Path inside of the xml, example: /Root/MyElement</param>
+            <returns>Innertext of the given Element.</returns>
+        </member>
+        <member name="M:PWCSharpHelper.XmlElements.SetInnerText(System.String,System.String,System.String)">
+            <summary>
+            Sets the innertext of given Element.
+            </summary>
+            <param name="Xmlpath">XML Path, with xml name and .xml extention.</param>
+            <param name="InXmlPath">Path inside of the xml, example: /Root/MyElement</param>
+            <param name="NewInnerText">New innertext you desire.</param>
+        </member>
+        <member name="T:PWCSharpHelper.EasyXml">
+            <summary>
+            Main class for easy xml creation and modification.
+            </summary>
+        </member>
+        <member name="P:PWCSharpHelper.EasyXml.Elements">
+            <summary>
+            Extention methods to do more with your elements inside your xml.
+            </summary>
+        </member>
+        <member name="M:PWCSharpHelper.EasyXml.TryLoad(System.String)">
+            <summary>
+            Tries to load the given xml file. True if it succeeded, false if it failed.
+            </summary>
+            <param name="Xmlpath"></param>
+            <returns>True if succeeded to load the xml file, false if not</returns>
+        </member>
+        <member name="M:PWCSharpHelper.EasyXml.CreateXml(System.String,System.String)">
+            <summary>
+            Creates a new XML File without any Elements inside.
+            </summary>
+            <param name="XmlLocation">Location to create the xml file (without xml name and extention)</param>
+            <param name="name">Element name (without extention)</param>
+        </member>
+        <member name="M:PWCSharpHelper.EasyXml.CreateXml(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Creates a new XML File with Elements inside. To match the ElementInnertexts with the ElementsNames, the indexes of the given arrays should be the same.
+            </summary>
+            <param name="Xmlpath">Location to create the xml</param>
+            <param name="name">Name of the xml (without .xml extention)</param>
+            <param name="ElementNameAndElementInnertext">Dictionary of type string and string, First element name then element innertext. If you want no innertext, input: null.</param>
+        </member>
+    </members>
+</doc>

@@ -40,9 +40,16 @@ namespace AFRMonitor
             }
             if (!File.Exists("C:\\ProgramData\\AFR Monitor" + "\\Activation.xml"))
             {
-                EasyXml.CreateXml("C:\\ProgramData\\AFR Monitor", "Activation", "Activated", "TrialDays");
-                EasyXml.Elements.SetInnerText(Helper.XmlLocation, "/Root/Activated", "50501750");
-                EasyXml.Elements.SetInnerText(Helper.XmlLocation, "/Root/TrialDays", "31");
+                var elements = new Dictionary<string, string>
+                {
+                    {
+                        "Activated", "50501750"
+                    },
+                    {
+                        "TrialDays", "31"
+                    }
+                };
+                EasyXml.CreateXml("C:\\ProgramData\\AFR Monitor", "Activation", elements);
                 File.SetAttributes(Helper.XmlLocation, FileAttributes.Hidden);
             }
             else
