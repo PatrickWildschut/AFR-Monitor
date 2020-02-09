@@ -61,21 +61,152 @@ namespace AFRMonitor
             #region Setup UI
             ChartView.ChartAreas[0].AxisY.Minimum = 10;
             ChartView.ChartAreas[0].AxisY.Maximum = 20;
-            CurValLab.Visible = false;
-            FourteenSaveLab.Visible = false;
-            FourteenLab.Visible = false;
-            ElevenSaveLab.Visible = false;
-            ElevenLab.Visible = false;
-            TenSaveLab.Visible = false;
-            TenLab.Visible = false;
-            CurLab.Visible = false;
-            RichOrLean.Visible = false;
-            Lean.Visible = false;
-            Rich.Visible = false;
+            ToggleUI(false);
+            
             ReBut_Click(null, null);
             if (ComSelector.Items.Count > 0)
             {
                 ComSelector.SelectedIndex = 0;
+            }
+            #endregion
+        }
+
+        private void ToggleUI(bool toggle)
+        {
+            #region OWO
+            if (label1.InvokeRequired)
+            {
+                label1.Invoke(new Action(() => label1.Visible = toggle));
+            }
+            else
+            {
+                label1.Visible = toggle;
+            }
+
+            if (label2.InvokeRequired)
+            {
+                label2.Invoke(new Action(() => label2.Visible = toggle));
+            }
+            else
+            {
+                label2.Visible = toggle;
+            }
+
+            if (label3.InvokeRequired)
+            {
+                label3.Invoke(new Action(() => label3.Visible = toggle));
+            }
+            else
+            {
+                label3.Visible = toggle;
+            }
+
+            if (label4.InvokeRequired)
+            {
+                label4.Invoke(new Action(() => label4.Visible = toggle));
+            }
+            else
+            {
+                label4.Visible = toggle;
+            }
+
+            if (CurValLab.InvokeRequired)
+            {
+                CurValLab.Invoke(new Action(() => CurValLab.Visible = toggle));
+            }
+            else
+            {
+                CurValLab.Visible = toggle;
+            }
+
+            if (FourteenSaveLab.InvokeRequired)
+            {
+                FourteenSaveLab.Invoke(new Action(() => FourteenSaveLab.Visible = toggle));
+            }
+            else
+            {
+                FourteenSaveLab.Visible = toggle;
+            }
+
+            if (FourteenLab.InvokeRequired)
+            {
+                FourteenLab.Invoke(new Action(() => FourteenLab.Visible = toggle));
+            }
+            else
+            {
+                FourteenLab.Visible = toggle;
+            }
+
+            if (ElevenSaveLab.InvokeRequired)
+            {
+                ElevenSaveLab.Invoke(new Action(() => ElevenSaveLab.Visible = toggle));
+            }
+            else
+            {
+                ElevenSaveLab.Visible = toggle;
+            }
+
+            if (ElevenLab.InvokeRequired)
+            {
+                ElevenLab.Invoke(new Action(() => ElevenLab.Visible = toggle));
+            }
+            else
+            {
+                ElevenLab.Visible = toggle;
+            }
+
+            if (Rich.InvokeRequired)
+            {
+                Rich.Invoke(new Action(() => Rich.Visible = toggle));
+            }
+            else
+            {
+                Rich.Visible = toggle;
+            }
+
+            if (Lean.InvokeRequired)
+            {
+                Lean.Invoke(new Action(() => Lean.Visible = toggle));
+            }
+            else
+            {
+                Lean.Visible = toggle;
+            }
+
+            if (RichOrLean.InvokeRequired)
+            {
+                RichOrLean.Invoke(new Action(() => RichOrLean.Visible = toggle));
+            }
+            else
+            {
+                RichOrLean.Visible = toggle;
+            }
+
+            if (CurLab.InvokeRequired)
+            {
+                CurLab.Invoke(new Action(() => CurLab.Visible = toggle));
+            }
+            else
+            {
+                CurLab.Visible = toggle;
+            }
+
+            if (TenLab.InvokeRequired)
+            {
+                TenLab.Invoke(new Action(() => TenLab.Visible = toggle));
+            }
+            else
+            {
+                TenLab.Visible = toggle;
+            }
+
+            if (TenSaveLab.InvokeRequired)
+            {
+                TenSaveLab.Invoke(new Action(() => TenSaveLab.Visible = toggle));
+            }
+            else
+            {
+                TenSaveLab.Visible = toggle;
             }
             #endregion
         }
@@ -103,23 +234,28 @@ namespace AFRMonitor
 
         private void StartBetween()
         {
-            if (ComSelector.Items.Count > 0)
+            if(stop)
             {
-                STFB.Enabled = true;
-                RTB.Enabled = true;
-                if (Helper.CountDown)
+                if (ComSelector.Items.Count > 0)
                 {
-                    CountDown();
+                    stop = false;
+                    STFB.Enabled = true;
+                    RTB.Enabled = true;
+                    if (Helper.CountDown)
+                    {
+                        CountDown();
+                    }
+                    else
+                    {
+                        Start();
+                    }
                 }
                 else
                 {
-                    Start();
+                    ReBut_Click(null, null);
                 }
             }
-            else
-            {
-                ReBut_Click(null, null);
-            }
+            
         }
         private void StBut_Click(object sender, EventArgs e)
         {
@@ -127,14 +263,7 @@ namespace AFRMonitor
             if (StBut.Text == "Start")
             {
                 if (ComSelector.Items.Count > 0)
-                if (Helper.CountDown)
-                {
-                    CountDown();
-                }
-                else
-                {
                     StartBetween();
-                }
             }
             else
             {
@@ -170,36 +299,24 @@ namespace AFRMonitor
 
         private void Start()
         {
-            if(stop)
+            IsSaved = false;
+            StBut.Text = "Stop";
+            SelectLab.Location = new Point(SelectLab.Location.X + 25, SelectLab.Location.Y);
+            SelectLab.Font = new Font("Arial", 15, FontStyle.Bold);
+            stop = false;
+            ComSelector.Visible = false;
+            ReBut.Visible = false;
+            ToggleUI(true);
+            try
             {
-                IsSaved = false;
-                StBut.Text = "Stop";
-                SelectLab.Location = new Point(SelectLab.Location.X + 25, SelectLab.Location.Y);
-                SelectLab.Font = new Font("Arial", 15, FontStyle.Bold);
-                stop = false;
-                ComSelector.Visible = false;
-                ReBut.Visible = false;
-                CurValLab.Visible = true;
-                FourteenSaveLab.Visible = true;
-                FourteenLab.Visible = true;
-                ElevenSaveLab.Visible = true;
-                ElevenLab.Visible = true;
-                TenSaveLab.Visible = true;
-                TenLab.Visible = true;
-                CurLab.Visible = true;
-                RichOrLean.Visible = true;
-                Lean.Visible = true;
-                Rich.Visible = true;
-                try
-                {
-                    SerialP.PortName = ComSelector.Text;
-                    SerialP.Open();
-                }
-                catch { }
-                UpdateAsync();
-                TimerAsync(100);
-                Task.Delay(15);
+                SerialP.PortName = ComSelector.Text;
+                SerialP.Open();
             }
+            catch { }
+            UpdateAsync();
+            TimerAsync(100);
+            Task.Delay(15);
+
         }
         double SampleLength = 0;
         async Task TimerAsync(int Delay)
@@ -229,17 +346,7 @@ namespace AFRMonitor
                 SelectLab.Font = new Font("Arial", 9, FontStyle.Regular);
                 ComSelector.Visible = true;
                 ReBut.Visible = true;
-                CurValLab.Visible = false;
-                FourteenSaveLab.Visible = false;
-                FourteenLab.Visible = false;
-                ElevenSaveLab.Visible = false;
-                ElevenLab.Visible = false;
-                TenSaveLab.Visible = false;
-                TenLab.Visible = false;
-                CurLab.Visible = false;
-                RichOrLean.Visible = false;
-                Lean.Visible = false;
-                Rich.Visible = false;
+                ToggleUI(false);
                 StBut.Text = "Start";
                 
             }
@@ -256,7 +363,7 @@ namespace AFRMonitor
             {
                 try
                 {
-                        string PortOutput = SerialP.ReadLine().ToString();//"14.8";
+                        string PortOutput = SerialP.ReadLine().ToString();;
                         double PortOutputDouble = Convert.ToDouble(SerialP.ReadLine().ToString());
                         if (CurLab.InvokeRequired)
                         {
@@ -287,7 +394,7 @@ namespace AFRMonitor
                         }
                         else
                         {
-                            ChartView.Series["Value"].Points.AddY((300 - (int)PortOutputDouble));
+                            ChartView.Series["Value"].Points.AddY(300 - (int)PortOutputDouble);
                         }
 
                         LowestValue(Convert.ToDouble(PortOutput) / 10);
@@ -306,8 +413,9 @@ namespace AFRMonitor
                 if(Value < Helper.LowestValue)
                 {
                     Helper.LowestValue = Value;
-                    LowValueValue.Invoke(new Action(() => LowValueValue.Text = Value.ToString()));
                 }
+
+                LowValueValue.Invoke(new Action(() => LowValueValue.Text = Helper.LowestValue.ToString()));
             });
         }
 
@@ -386,7 +494,7 @@ namespace AFRMonitor
 
         private async void CountDown()
         {
-            while(CountDownCount > 0)
+            while (CountDownCount > 0)
             {
                 CurLab.Visible = true;
                 if (CurLab.InvokeRequired)
@@ -415,6 +523,7 @@ namespace AFRMonitor
             catch { }
             Start();
 
+
         }
 
         private void AFRMonitor_SizeChanged(object sender, EventArgs e)
@@ -441,6 +550,10 @@ namespace AFRMonitor
                     ElevenSaveLab.Invoke(new Action(() => ElevenSaveLab.Visible = false));
                     FourteenLab.Invoke(new Action(() => FourteenLab.Visible = false));
                     FourteenSaveLab.Invoke(new Action(() => FourteenSaveLab.Visible = false));
+                    label1.Invoke(new Action(() => label1.Visible = false));
+                    label2.Invoke(new Action(() => label2.Visible = false));
+                    label3.Invoke(new Action(() => label3.Visible = false));
+                    label4.Invoke(new Action(() => label4.Visible = false));
                     CurValLab.Invoke(new Action(() => CurValLab.Font = new Font("Arial", 20, FontStyle.Bold)));
                     CurValLab.Invoke(new Action(() => CurValLab.Location = new Point(CurValLab.Location.X - 200, CurValLab.Location.Y)));
                     CurLab.Invoke(new Action(() => CurLab.Font = new Font("Arial", 60)));
@@ -449,6 +562,10 @@ namespace AFRMonitor
                 }
                 else
                 {
+                    label4.Invoke(new Action(() => label4.Visible = true));
+                    label3.Invoke(new Action(() => label3.Visible = true));
+                    label2.Invoke(new Action(() => label2.Visible = true));
+                    label1.Invoke(new Action(() => label1.Visible = true));
                     TenLab.Invoke(new Action(() => TenLab.Visible = true));
                     TenSaveLab.Invoke(new Action(() => TenSaveLab.Visible = true));
                     ElevenLab.Invoke(new Action(() => ElevenLab.Visible = true));

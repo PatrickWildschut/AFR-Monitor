@@ -55,6 +55,10 @@
             this.TenLab = new System.Windows.Forms.Label();
             this.LowestValueToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.Words = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ChartView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -232,7 +236,7 @@
             // FourteenLab
             // 
             this.FourteenLab.AutoSize = true;
-            this.FourteenLab.Location = new System.Drawing.Point(305, 164);
+            this.FourteenLab.Location = new System.Drawing.Point(305, 163);
             this.FourteenLab.Name = "FourteenLab";
             this.FourteenLab.Size = new System.Drawing.Size(28, 13);
             this.FourteenLab.TabIndex = 15;
@@ -251,7 +255,7 @@
             // ElevenLab
             // 
             this.ElevenLab.AutoSize = true;
-            this.ElevenLab.Location = new System.Drawing.Point(448, 164);
+            this.ElevenLab.Location = new System.Drawing.Point(450, 163);
             this.ElevenLab.Name = "ElevenLab";
             this.ElevenLab.Size = new System.Drawing.Size(28, 13);
             this.ElevenLab.TabIndex = 17;
@@ -261,7 +265,7 @@
             // 
             this.TenSaveLab.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TenSaveLab.AutoSize = true;
-            this.TenSaveLab.Location = new System.Drawing.Point(526, 177);
+            this.TenSaveLab.Location = new System.Drawing.Point(553, 177);
             this.TenSaveLab.Name = "TenSaveLab";
             this.TenSaveLab.Size = new System.Drawing.Size(9, 13);
             this.TenSaveLab.TabIndex = 18;
@@ -271,11 +275,12 @@
             // 
             this.TenLab.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TenLab.AutoSize = true;
-            this.TenLab.Location = new System.Drawing.Point(516, 164);
+            this.TenLab.Location = new System.Drawing.Point(542, 164);
             this.TenLab.Name = "TenLab";
             this.TenLab.Size = new System.Drawing.Size(28, 13);
             this.TenLab.TabIndex = 19;
-            this.TenLab.Text = "10,5";
+            this.TenLab.Text = "10,0";
+            this.TenLab.UseMnemonic = false;
             // 
             // Words
             // 
@@ -288,11 +293,53 @@
             this.Words.Text = "Configured Words: Start, Stop, Reset";
             this.Words.Visible = false;
             // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(502, 177);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(9, 13);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "|";
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(492, 163);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(28, 13);
+            this.label2.TabIndex = 22;
+            this.label2.Text = "11,0";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(48, 177);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(9, 13);
+            this.label3.TabIndex = 23;
+            this.label3.Text = "|";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(37, 163);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(28, 13);
+            this.label4.TabIndex = 24;
+            this.label4.Text = "20,0";
+            // 
             // AFRMonitor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(609, 596);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.Words);
             this.Controls.Add(this.TenLab);
             this.Controls.Add(this.TenSaveLab);
@@ -352,6 +399,10 @@
         private System.Windows.Forms.Label TenLab;
         private System.Windows.Forms.ToolTip LowestValueToolTip;
         private System.Windows.Forms.Label Words;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
 
