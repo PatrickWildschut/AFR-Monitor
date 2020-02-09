@@ -1,4 +1,4 @@
-﻿using PWCSharpHelper;
+﻿using System.PW.Xml;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +15,8 @@ namespace AFRMonitor
 {
     public partial class ActivateBox : Form
     {
+        EasyXML xml = new EasyXML(Helper.XmlLocation);
+
         public ActivateBox()
         {
             InitializeComponent();
@@ -27,7 +29,7 @@ namespace AFRMonitor
                 if (key.ToLower() == InputKey.Text.ToLower()) //if key is valid
                 {
                     File.SetAttributes(Helper.XmlLocation, FileAttributes.Normal);
-                    EasyXml.Elements.SetInnerText(Helper.XmlLocation, "/Root/Activated", "50470916");
+                    xml.Elements.SetInnerText("/Root/Activated", "50470916");
                     File.SetAttributes(Helper.XmlLocation, FileAttributes.Hidden);
                     MessageBox.Show("Successfully activated!", "Activation complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     activationkeydiscovered = true;

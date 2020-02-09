@@ -1,5 +1,5 @@
 ﻿using Microsoft.Win32;
-using PWCSharpHelper;
+using System.PW.Xml;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +16,8 @@ namespace AFRMonitor
 {
     public partial class Starter : Form
     {
+        EasyXML xml = new EasyXML(Helper.XmlLocation);
+
         OpenFileDialog ofd = new OpenFileDialog() { Multiselect = false, InitialDirectory = Application.StartupPath, Filter = "AFR File (*.afr)|*.afr" };
         public bool ActivatedIt = false;
         public Starter()
@@ -33,12 +35,12 @@ namespace AFRMonitor
                 {
                     this.Close();
                 }
-                else if (Convert.ToInt32(EasyXml.Elements.GetInnerText(Helper.XmlLocation, "/Root/TrialDays")) > 0)
+                else if (Convert.ToInt32(xml.Elements.GetInnerText("/Root/TrialDays")) > 0)
                 {
                     File.SetAttributes(Helper.XmlLocation, FileAttributes.Normal);
-                    EasyXml.Elements.SetInnerText(Helper.XmlLocation, "/Root/TrialDays", (Convert.ToInt32(EasyXml.Elements.GetInnerText(Helper.XmlLocation, "/Root/TrialDays")) - 1).ToString());
+                    xml.Elements.SetInnerText("/Root/TrialDays", (Convert.ToInt32(xml.Elements.GetInnerText("/Root/TrialDays")) - 1).ToString());
                     File.SetAttributes(Helper.XmlLocation, FileAttributes.Hidden);
-                    FreeDays.Text = "Trial times left to use: " + Convert.ToInt32(EasyXml.Elements.GetInnerText(Helper.XmlLocation, "/Root/TrialDays"));
+                    FreeDays.Text = "Trial times left to use: " + Convert.ToInt32(xml.Elements.GetInnerText("/Root/TrialDays"));
                 }
                 else
                 {

@@ -2,19 +2,12 @@
 using System.Speech.Recognition;
 using System.IO.Ports;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Threading;
-using System.Windows.Threading;
 using System.IO;
-using System.Timers;
 using System.Speech.Synthesis;
-using System.Diagnostics;
+using System.PW.Encryption;
 
 namespace AFRMonitor
 {
@@ -346,7 +339,6 @@ namespace AFRMonitor
         {
             STFB.Invoke(new Action(() => STFB.Text = "Wait"));
             string returns = "";
-            int Number = 2;
             double LastValue = 0;
             foreach (double d in Values)
             {
@@ -358,21 +350,12 @@ namespace AFRMonitor
                 LastValue = d;
                 Scans++;
             }
-        //    string[] Date = DateTime.Now.Date.ToString().Split(' ');
-        //    Date = Date[0].Split('/');
-        //   string Name = "AFR Results";/* + Date[0] + "." + Date[1] + "." + Date[2];*/
-        //Check:
-        //    if (File.Exists(Application.StartupPath + "\\" + Name + ".txt"))
-        //    {
-        //        if(File.Exists(Application.StartupPath + "\\" + Name + " " + Number + ".txt"))
-        //        {
-        //            Number++;
-        //            goto Check;
-        //        }
-        //    }
+
+            // Encrypt the data
+            string EncOutput = await EasyEncryption.EncryptStringAsync("Lowest Value: " + Helper.LowestValue + "\nScans: " + Scans.ToString() + "\nDifference 1 or more: " + DifZeroFive.ToString() + "\nTotal Runtime: " + (SampleLength / 10) + " sec" + "\n\nValues\n" + returns);
             
             // Save            
-            File.WriteAllText(sfd.FileName, "Lowest Value: " + Helper.LowestValue + "\nScans: " + Scans.ToString() + "\nDifference 1 or more: " + DifZeroFive.ToString() + "\nTotal Runtime: " + (SampleLength / 10) + " sec" + "\n\nValues\n" + returns);
+            File.WriteAllText(sfd.FileName, EncOutput);
             
             STFB.Invoke(new Action(() => STFB.Text = "Saved"));
             await Task.Delay(1000);

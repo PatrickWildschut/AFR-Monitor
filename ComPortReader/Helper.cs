@@ -1,5 +1,5 @@
 ﻿using Microsoft.Win32;
-using PWCSharpHelper;
+using System.PW.Xml;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,6 +12,9 @@ namespace AFRMonitor
 {
     class Helper
     {
+        public static string XmlLocation = "C:\\ProgramData\\AFR Monitor\\Activation.xml";
+        private static EasyXML xml = new EasyXML(XmlLocation);
+
         public static bool ForceQuit { get; private set; } = false;
 
         public static string[] ValidActivationKeys = new string[5];
@@ -25,7 +28,6 @@ namespace AFRMonitor
 
         //public static RegistryKey AFRTrialKey = Registry.CurrentConfig.OpenSubKey("Software\\AFRMonitor", true);
         //public static RegistryKey AFRRegistryKey = Registry.CurrentUser.OpenSubKey("Software\\AFRMonitor", true);
-        public static string XmlLocation = "C:\\ProgramData\\AFR Monitor\\Activation.xml";
         public static int UsageVariable = 0; // 1 = Voice Control, 2 = Button Control
         public static double LowestValue = int.MaxValue;
         public static bool CountDown = false;
@@ -34,11 +36,11 @@ namespace AFRMonitor
         public static string Pass = "DjPatrick0302";
         public static bool IsActivated()
         {
-                if (EasyXml.Elements.GetInnerText(Helper.XmlLocation, "/Root/Activated") == "50470916") // true
+                if (xml.Elements.GetInnerText("/Root/Activated") == "50470916") // true
                 {
                     return true;
                 }
-                else if (EasyXml.Elements.GetInnerText(Helper.XmlLocation, "/Root/Activated") == "50501750") // false
+                else if (xml.Elements.GetInnerText("/Root/Activated") == "50501750") // false
                 {
                     return false;
                 }

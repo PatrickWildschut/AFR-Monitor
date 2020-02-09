@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using PWCSharpHelper;
+using System.PW.Xml;
 
 namespace AFRMonitor
 {
@@ -49,12 +49,12 @@ namespace AFRMonitor
                         "TrialDays", "31"
                     }
                 };
-                EasyXml.CreateXml("C:\\ProgramData\\AFR Monitor", "Activation", elements);
+                new EasyXML(Helper.XmlLocation, elements);
                 File.SetAttributes(Helper.XmlLocation, FileAttributes.Hidden);
             }
             else
             {
-                if(!EasyXml.TryLoad("C:\\ProgramData\\AFR Monitor" + "\\Activation.xml"))
+                if(!EasyXML.TryLoad("C:\\ProgramData\\AFR Monitor" + "\\Activation.xml"))
                 {
                     File.Delete("C:\\ProgramData\\AFR Monitor" + "\\Activation.xml");
                     goto Start;

@@ -1,15 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.PW.Encryption;
+using System.Threading.Tasks;
 
 namespace AFRMonitor
 {
@@ -24,12 +20,20 @@ namespace AFRMonitor
             ChartReadView.ChartAreas[0].AxisY.Minimum = 10;
             ChartReadView.ChartAreas[0].AxisY.Maximum = 20;
             ChartReadView.ChartAreas[0].AxisY.Interval = 1;
+
+            LoadUI();
+        }
+
+        private async void LoadUI()
+        {
+            string Decrypted = string.Empty;
             #region Chart
             try
             {
                 int i = 0;
                 int Times = 0;
-                OutSepText = File.ReadAllText(Helper.ReadFileLocation).Split('s');
+                Decrypted = await EasyEncryption.DecryptStringAsync(File.ReadAllText(Helper.ReadFileLocation));
+                OutSepText = Decrypted.Split('s');
                 OutText = OutSepText[OutSepText.Length - 1];
                 OutSepText = OutText.Split('\n');
                 foreach (string d in OutSepText)
@@ -51,19 +55,19 @@ namespace AFRMonitor
                             clSave.Add(new CustomLabel(50.5 * Times - 10, 50.5 * Times + 10, (8.5 * Times).ToString(), 0, LabelMarkStyle.None, GridTickTypes.All));
                         }
                     }
-                        
+
                 }
-                
+
             }
-            catch { MessageBox.Show("Corrupted txt file.", "Corrupted", MessageBoxButtons.OK, MessageBoxIcon.Error); this.Close(); }
+            catch { MessageBox.Show("Corrupted afr file.", "Corrupted", MessageBoxButtons.OK, MessageBoxIcon.Error); this.Close(); }
             #endregion
             #region Label
-            OutSepText = File.ReadAllText(Helper.ReadFileLocation).Split(':');
+            Decrypted = await EasyEncryption.DecryptStringAsync(File.ReadAllText(Helper.ReadFileLocation));
+            OutSepText = Decrypted.Split(':');
             TTRTValue.Text = OutSepText[OutSepText.Length - 1];
             OutSepText = OutSepText[1].Split('\n');
             LowValValue.Text = OutSepText[0].Trim(' ');
             #endregion
-
         }
 
         private void ChartReadView_DoubleClick(object sender, EventArgs e)
