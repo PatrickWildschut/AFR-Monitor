@@ -16,7 +16,7 @@ namespace AFRMonitor
 {
     public partial class Starter : Form
     {
-        OpenFileDialog ofd = new OpenFileDialog() { Multiselect = false, InitialDirectory = Application.StartupPath, Filter = "Text Documents Only|*.txt" };
+        OpenFileDialog ofd = new OpenFileDialog() { Multiselect = false, InitialDirectory = Application.StartupPath, Filter = "AFR File (*.afr)|*.afr" };
         public bool ActivatedIt = false;
         public Starter()
         {
@@ -84,11 +84,11 @@ namespace AFRMonitor
         {
             if(LongScanCheck.Checked)
             {
-                Helper.LongScanMode = true;
+                Helper.CruisingMode = true;
             }
             else
             {
-                Helper.LongScanMode = false;
+                Helper.CruisingMode = false;
             }
         }
 

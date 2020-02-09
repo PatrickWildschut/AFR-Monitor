@@ -27,6 +27,10 @@ namespace AFRMonitor
 
         SpeechRecognitionEngine sre = new SpeechRecognitionEngine();
         SpeechSynthesizer synthesizer = new SpeechSynthesizer();
+        SaveFileDialog sfd = new SaveFileDialog()
+        {
+            DefaultExt = "txt", Filter = "AFR File (*.afr)|*.afr|All files (*.*)|*.*"
+        };
         int CountDownCount = 3;
         List<double> Values = new List<double>();
         bool IsSaved = true;
@@ -57,7 +61,7 @@ namespace AFRMonitor
                 Listening = true;
             }
             #endregion
-            if (Helper.LongScanMode)
+            if (Helper.CruisingMode)
             {
                 ChartView.ChartAreas[0].AxisX.Maximum = 200;
             }
@@ -161,8 +165,12 @@ namespace AFRMonitor
             {
                 if(MessageBox.Show("Are you sure you want to exit without saving?", "Save or quit", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                 {
-                    SaveToFile();
-                    IsSaved = true;
+                    if(sfd.ShowDialog() == DialogResult.OK)
+                    {
+                        SaveToFile(sfd);
+                        IsSaved = true;
+                    }
+                    
                 }
             }
         }
@@ -255,16 +263,16 @@ namespace AFRMonitor
             {
                 try
                 {
-                    string PortOutput = SerialP.ReadLine().ToString();//"14.8";
-                    double PortOutputDouble = Convert.ToDouble(SerialP.ReadLine().ToString());
-                    if (CurLab.InvokeRequired)
-                    {
-                        CurLab.Invoke(new Action(() => CurLab.Text = PortOutput));
-                    }
-                    else
-                    {
-                        CurLab.Text = PortOutput;
-                    }
+                        string PortOutput = SerialP.ReadLine().ToString();//"14.8";
+                        double PortOutputDouble = Convert.ToDouble(SerialP.ReadLine().ToString());
+                        if (CurLab.InvokeRequired)
+                        {
+                            CurLab.Invoke(new Action(() => CurLab.Text = PortOutput));
+                        }
+                        else
+                        {
+                            CurLab.Text = PortOutput;
+                        }
 
                         if (RichOrLean.InvokeRequired)
                         {
@@ -279,7 +287,7 @@ namespace AFRMonitor
                         {
                             ChartView.Invoke(new Action(() => ChartView.Series["Value"].Points.AddY(PortOutputDouble / 10)));
                             i++;
-                            if (i >= 200 & Helper.LongScanMode)
+                            if (i >= 200 & Helper.CruisingMode)
                             {
                                 ChartView.Series[0].Points.RemoveAt(0);
                             }
@@ -289,9 +297,9 @@ namespace AFRMonitor
                             ChartView.Series["Value"].Points.AddY((300 - (int)PortOutputDouble));
                         }
 
-                    LowestValue(Convert.ToDouble(PortOutput) / 10);
-                    Values.Add(Convert.ToDouble(PortOutput) / 10);
-                        
+                        LowestValue(Convert.ToDouble(PortOutput) / 10);
+                        Values.Add(Convert.ToDouble(PortOutput) / 10);
+
                     }
                     catch { }
 
@@ -322,12 +330,19 @@ namespace AFRMonitor
 
         private void STFB_Click(object sender, EventArgs e)
         {
-            SaveToFile();
-            IsSaved = true;
+            //SaveToFile();
+
+            if(sfd.ShowDialog() == DialogResult.OK)
+            {
+                SaveToFile(sfd);
+                IsSaved = true;
+            }
+
+            
         }
         public int DifZeroFive = -1;
         public int Scans = 0;
-        private async Task SaveToFile()
+        private async Task SaveToFile(SaveFileDialog sfd)
         {
             STFB.Invoke(new Action(() => STFB.Text = "Wait"));
             string returns = "";
@@ -343,27 +358,22 @@ namespace AFRMonitor
                 LastValue = d;
                 Scans++;
             }
-            string[] Date = DateTime.Now.Date.ToString().Split(' ');
-            Date = Date[0].Split('/');
-            string Name = "AFR Results";/* + Date[0] + "." + Date[1] + "." + Date[2];*/
-        Check:
-            if (File.Exists(Application.StartupPath + "\\" + Name + ".txt"))
-            {
-                if(File.Exists(Application.StartupPath + "\\" + Name + " " + Number + ".txt"))
-                {
-                    Number++;
-                    goto Check;
-                }
-            }
+        //    string[] Date = DateTime.Now.Date.ToString().Split(' ');
+        //    Date = Date[0].Split('/');
+        //   string Name = "AFR Results";/* + Date[0] + "." + Date[1] + "." + Date[2];*/
+        //Check:
+        //    if (File.Exists(Application.StartupPath + "\\" + Name + ".txt"))
+        //    {
+        //        if(File.Exists(Application.StartupPath + "\\" + Name + " " + Number + ".txt"))
+        //        {
+        //            Number++;
+        //            goto Check;
+        //        }
+        //    }
             
-            if(!File.Exists(Application.StartupPath + "\\" + Name + ".txt"))
-            {
-                File.WriteAllText(Application.StartupPath + "\\" + Name + ".txt", "Lowest Value: " + Helper.LowestValue + "\nScans: " + Scans.ToString() + "\nDifference 1 or more: " + DifZeroFive.ToString() + "\nTotal Runtime: " + (SampleLength / 10) + " sec" + "\n\nValues\n" + returns);
-            }
-            else
-            {
-                File.WriteAllText(Application.StartupPath + "\\" + Name + " " + Number + ".txt", "Lowest Value: " + Helper.LowestValue + "\nScans: " + Scans.ToString() + "\nDifference 1 or more: " + DifZeroFive.ToString() + "\nTotal Runtime: "+ (SampleLength / 10) + " sec" + "\n\nValues\n" + returns);
-            }
+            // Save            
+            File.WriteAllText(sfd.FileName, "Lowest Value: " + Helper.LowestValue + "\nScans: " + Scans.ToString() + "\nDifference 1 or more: " + DifZeroFive.ToString() + "\nTotal Runtime: " + (SampleLength / 10) + " sec" + "\n\nValues\n" + returns);
+            
             STFB.Invoke(new Action(() => STFB.Text = "Saved"));
             await Task.Delay(1000);
             STFB.Invoke(new Action(() => STFB.Text = "Save To File"));

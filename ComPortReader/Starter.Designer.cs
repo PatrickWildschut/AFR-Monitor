@@ -99,9 +99,9 @@
             this.LongScanCheck.AutoSize = true;
             this.LongScanCheck.Location = new System.Drawing.Point(231, 32);
             this.LongScanCheck.Name = "LongScanCheck";
-            this.LongScanCheck.Size = new System.Drawing.Size(108, 17);
+            this.LongScanCheck.Size = new System.Drawing.Size(93, 17);
             this.LongScanCheck.TabIndex = 3;
-            this.LongScanCheck.Text = "Long Scan Mode";
+            this.LongScanCheck.Text = "Cruising Mode";
             this.LongScanCheck.UseVisualStyleBackColor = true;
             this.LongScanCheck.CheckedChanged += new System.EventHandler(this.LongScanCheck_CheckedChanged);
             // 
@@ -240,9 +240,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(170, 168);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(221, 13);
+            this.label4.Size = new System.Drawing.Size(218, 13);
             this.label4.TabIndex = 3;
-            this.label4.Text = "Current Build Release Date: 24 October 2019";
+            this.label4.Text = "Current Build Release Date: 9 Feburary 2020";
             // 
             // label3
             // 
@@ -273,7 +273,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Version: 1.0.11";
+            this.label1.Text = "Version: 1.0.12";
             // 
             // Starter
             // 

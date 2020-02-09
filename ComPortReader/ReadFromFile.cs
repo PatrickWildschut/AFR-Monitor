@@ -76,14 +76,14 @@ namespace AFRMonitor
             string[] saver = (string[])e.Data.GetData(DataFormats.FileDrop, false);
             string[] ToHelper = (string[])e.Data.GetData(DataFormats.FileDrop, false);
             saver = saver[0].Split('.');
-            if(saver[saver.Length - 1] == "txt")
+            if(saver[saver.Length - 1] == "afr")
             {
                 Helper.ReadFileLocation = ToHelper[0];
                 new ReadFFile().Show();
             }
             else
             {
-                MessageBox.Show("Only .txt files created by this program and not modified can be used.", "Wrong file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Only .afr files created by this program and not modified can be used.", "Wrong file", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
