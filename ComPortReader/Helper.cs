@@ -12,8 +12,9 @@ namespace AFRMonitor
 {
     class Helper
     {
-        public static string XmlLocation = "C:\\ProgramData\\AFR Monitor\\Activation.xml";
-        private static EasyXML xml = new EasyXML(XmlLocation);
+        public static string ActivationXmlLocation = "C:\\ProgramData\\AFR Monitor\\Activation.xml";
+        public static string SettingsXmlLocation = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\cfg.xml";
+        private static EasyXML xml = new EasyXML(ActivationXmlLocation);
 
         public static bool ForceQuit { get; private set; } = false;
 

@@ -6,11 +6,18 @@ using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.PW.Encryption;
 using System.Threading.Tasks;
+using System.Drawing;
+using System.PW.Xml;
 
 namespace AFRMonitor
 {
     public partial class ReadFFile : Form
     {
+        // XML
+        static EasyXML Settings = new EasyXML(Helper.SettingsXmlLocation);
+        Color LineColor = ColorTranslator.FromHtml(Settings.Elements.GetInnerText("/Root/LineColor"));
+        Color WarningLineColor = ColorTranslator.FromHtml(Settings.Elements.GetInnerText("/Root/WarningLineColor"));
+
         public string OutText = "";
         public string[] OutSepText;
         public List<CustomLabel> clSave = new List<CustomLabel>();
@@ -20,6 +27,7 @@ namespace AFRMonitor
             ChartReadView.ChartAreas[0].AxisY.Minimum = 10;
             ChartReadView.ChartAreas[0].AxisY.Maximum = 20;
             ChartReadView.ChartAreas[0].AxisY.Interval = 1;
+            ChartReadView.Series[0].Color = LineColor;
 
             LoadUI();
         }
@@ -32,6 +40,7 @@ namespace AFRMonitor
             {
                 int i = 0;
                 int Times = 0;
+                double LastValue = 0.0;
                 Decrypted = await EasyEncryption.DecryptStringAsync(File.ReadAllText(Helper.ReadFileLocation));
                 OutSepText = Decrypted.Split('s');
                 OutText = OutSepText[OutSepText.Length - 1];
@@ -40,7 +49,16 @@ namespace AFRMonitor
                 {
                     if (!string.IsNullOrEmpty(d))
                     {
+                        // Add to chart
                         ChartReadView.Series[0].Points.AddY(Convert.ToDouble(d));
+
+                        if(Convert.ToDouble(d) - LastValue < -0.5 || Convert.ToDouble(d) - LastValue > 0.5)
+                        {
+                            ChartReadView.Series[0].Points[ChartReadView.Series[0].Points.Count - 1].Color = WarningLineColor;
+                        }
+
+                        LastValue = Convert.ToDouble(d);
+
                         i++;
                         if (i >= 20 && OutSepText.Length < 149)
                         {
@@ -106,6 +124,8 @@ namespace AFRMonitor
                 {
                     ChartReadView.ChartAreas[0].AxisX.CustomLabels.Add(cl);
                 }
+
+
             }
             else
             {

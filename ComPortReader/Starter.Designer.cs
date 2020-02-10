@@ -40,7 +40,10 @@
             this.ActBut = new System.Windows.Forms.Button();
             this.FreeLab = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.InfoPage = new System.Windows.Forms.TabPage();
+            this.SettingsPage = new System.Windows.Forms.TabPage();
+            this.CLWarColor = new System.Windows.Forms.Button();
+            this.CLColor = new System.Windows.Forms.Button();
+            this.AboutPage = new System.Windows.Forms.TabPage();
             this.InstagramConnect = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -50,7 +53,8 @@
             this.tabControl1.SuspendLayout();
             this.StartPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.InfoPage.SuspendLayout();
+            this.SettingsPage.SuspendLayout();
+            this.AboutPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -124,7 +128,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.StartPage);
-            this.tabControl1.Controls.Add(this.InfoPage);
+            this.tabControl1.Controls.Add(this.SettingsPage);
+            this.tabControl1.Controls.Add(this.AboutPage);
             this.tabControl1.Location = new System.Drawing.Point(12, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -193,21 +198,54 @@
             this.pictureBox2.TabIndex = 5;
             this.pictureBox2.TabStop = false;
             // 
-            // InfoPage
+            // SettingsPage
             // 
-            this.InfoPage.Controls.Add(this.InstagramConnect);
-            this.InfoPage.Controls.Add(this.pictureBox1);
-            this.InfoPage.Controls.Add(this.label4);
-            this.InfoPage.Controls.Add(this.label3);
-            this.InfoPage.Controls.Add(this.label2);
-            this.InfoPage.Controls.Add(this.label1);
-            this.InfoPage.Location = new System.Drawing.Point(4, 22);
-            this.InfoPage.Name = "InfoPage";
-            this.InfoPage.Padding = new System.Windows.Forms.Padding(3);
-            this.InfoPage.Size = new System.Drawing.Size(560, 186);
-            this.InfoPage.TabIndex = 1;
-            this.InfoPage.Text = "Info";
-            this.InfoPage.UseVisualStyleBackColor = true;
+            this.SettingsPage.Controls.Add(this.CLWarColor);
+            this.SettingsPage.Controls.Add(this.CLColor);
+            this.SettingsPage.Location = new System.Drawing.Point(4, 22);
+            this.SettingsPage.Name = "SettingsPage";
+            this.SettingsPage.Size = new System.Drawing.Size(560, 186);
+            this.SettingsPage.TabIndex = 2;
+            this.SettingsPage.Text = "Settings";
+            this.SettingsPage.UseVisualStyleBackColor = true;
+            // 
+            // CLWarColor
+            // 
+            this.CLWarColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CLWarColor.Location = new System.Drawing.Point(24, 110);
+            this.CLWarColor.Name = "CLWarColor";
+            this.CLWarColor.Size = new System.Drawing.Size(147, 59);
+            this.CLWarColor.TabIndex = 2;
+            this.CLWarColor.Text = "Set Chart Line Warning Color";
+            this.CLWarColor.UseVisualStyleBackColor = true;
+            this.CLWarColor.Click += new System.EventHandler(this.CLWarColor_Click);
+            // 
+            // CLColor
+            // 
+            this.CLColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CLColor.Location = new System.Drawing.Point(24, 18);
+            this.CLColor.Name = "CLColor";
+            this.CLColor.Size = new System.Drawing.Size(147, 59);
+            this.CLColor.TabIndex = 0;
+            this.CLColor.Text = "Set Chart Line Color";
+            this.CLColor.UseVisualStyleBackColor = true;
+            this.CLColor.Click += new System.EventHandler(this.CLColor_Click);
+            // 
+            // AboutPage
+            // 
+            this.AboutPage.Controls.Add(this.InstagramConnect);
+            this.AboutPage.Controls.Add(this.pictureBox1);
+            this.AboutPage.Controls.Add(this.label4);
+            this.AboutPage.Controls.Add(this.label3);
+            this.AboutPage.Controls.Add(this.label2);
+            this.AboutPage.Controls.Add(this.label1);
+            this.AboutPage.Location = new System.Drawing.Point(4, 22);
+            this.AboutPage.Name = "AboutPage";
+            this.AboutPage.Padding = new System.Windows.Forms.Padding(3);
+            this.AboutPage.Size = new System.Drawing.Size(560, 186);
+            this.AboutPage.TabIndex = 1;
+            this.AboutPage.Text = "About";
+            this.AboutPage.UseVisualStyleBackColor = true;
             // 
             // InstagramConnect
             // 
@@ -273,7 +311,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Version: 1.1.13";
+            this.label1.Text = "Version: 1.1.14";
             // 
             // Starter
             // 
@@ -290,8 +328,9 @@
             this.StartPage.ResumeLayout(false);
             this.StartPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.InfoPage.ResumeLayout(false);
-            this.InfoPage.PerformLayout();
+            this.SettingsPage.ResumeLayout(false);
+            this.AboutPage.ResumeLayout(false);
+            this.AboutPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -306,7 +345,7 @@
         private System.Windows.Forms.Button RFFBut;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage StartPage;
-        private System.Windows.Forms.TabPage InfoPage;
+        private System.Windows.Forms.TabPage AboutPage;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label4;
@@ -317,5 +356,8 @@
         private System.Windows.Forms.Label FreeLab;
         private System.Windows.Forms.Button ActBut;
         private System.Windows.Forms.Label FreeDays;
+        private System.Windows.Forms.TabPage SettingsPage;
+        private System.Windows.Forms.Button CLColor;
+        private System.Windows.Forms.Button CLWarColor;
     }
 }

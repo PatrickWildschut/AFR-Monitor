@@ -16,8 +16,10 @@ namespace AFRMonitor
 {
     public partial class Starter : Form
     {
-        EasyXML xml = new EasyXML(Helper.XmlLocation);
+        EasyXML Activation = new EasyXML(Helper.ActivationXmlLocation);
+        EasyXML Settings = new EasyXML(Helper.SettingsXmlLocation);
 
+        ColorDialog cd = new ColorDialog();
         OpenFileDialog ofd = new OpenFileDialog() { Multiselect = false, InitialDirectory = Application.StartupPath, Filter = "AFR File (*.afr)|*.afr" };
         public bool ActivatedIt = false;
         public Starter()
@@ -35,12 +37,12 @@ namespace AFRMonitor
                 {
                     this.Close();
                 }
-                else if (Convert.ToInt32(xml.Elements.GetInnerText("/Root/TrialDays")) > 0)
+                else if (Convert.ToInt32(Activation.Elements.GetInnerText("/Root/TrialDays")) > 0)
                 {
-                    File.SetAttributes(Helper.XmlLocation, FileAttributes.Normal);
-                    xml.Elements.SetInnerText("/Root/TrialDays", (Convert.ToInt32(xml.Elements.GetInnerText("/Root/TrialDays")) - 1).ToString());
-                    File.SetAttributes(Helper.XmlLocation, FileAttributes.Hidden);
-                    FreeDays.Text = "Trial times left to use: " + Convert.ToInt32(xml.Elements.GetInnerText("/Root/TrialDays"));
+                    File.SetAttributes(Helper.ActivationXmlLocation, FileAttributes.Normal);
+                    Activation.Elements.SetInnerText("/Root/TrialDays", (Convert.ToInt32(Activation.Elements.GetInnerText("/Root/TrialDays")) - 1).ToString());
+                    File.SetAttributes(Helper.ActivationXmlLocation, FileAttributes.Hidden);
+                    FreeDays.Text = "Trial times left to use: " + Convert.ToInt32(Activation.Elements.GetInnerText("/Root/TrialDays"));
                 }
                 else
                 {
@@ -118,6 +120,22 @@ namespace AFRMonitor
             if(ActivatedIt)
             {
                 MessageBox.Show(Helper.VoiceControlManual(), "Voice Control Manual", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void CLColor_Click(object sender, EventArgs e)
+        {
+            if(cd.ShowDialog() == DialogResult.OK)
+            {
+                Settings.Elements.SetInnerText("/Root/LineColor", "#" + cd.Color.R.ToString("X2") + cd.Color.G.ToString("X2") + cd.Color.B.ToString("X2"));
+            }
+        }
+
+        private void CLWarColor_Click(object sender, EventArgs e)
+        {
+            if (cd.ShowDialog() == DialogResult.OK)
+            {
+                Settings.Elements.SetInnerText("/Root/WarningLineColor", "#" + cd.Color.R.ToString("X2") + cd.Color.G.ToString("X2") + cd.Color.B.ToString("X2"));
             }
         }
     }

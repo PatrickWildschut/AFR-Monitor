@@ -8,13 +8,16 @@ using System.Windows.Forms;
 using System.IO;
 using System.Speech.Synthesis;
 using System.PW.Encryption;
+using System.PW.Xml;
 
 namespace AFRMonitor
 {
     public partial class AFRMonitor : Form
     {
-        //Thread ReaderThread = new Thread(Reader);
-        //BackgroundWorker bgw;
+        // XML
+        static EasyXML Settings = new EasyXML(Helper.SettingsXmlLocation);
+        Color LineColor = ColorTranslator.FromHtml(Settings.Elements.GetInnerText("/Root/LineColor"));
+        Color WarningLineColor = ColorTranslator.FromHtml(Settings.Elements.GetInnerText("/Root/WarningLineColor"));
 
         // For voice control only
 
@@ -61,6 +64,7 @@ namespace AFRMonitor
             #region Setup UI
             ChartView.ChartAreas[0].AxisY.Minimum = 10;
             ChartView.ChartAreas[0].AxisY.Maximum = 20;
+            ChartView.Series["Value"].Color = LineColor;
             ToggleUI(false);
             
             ReBut_Click(null, null);
@@ -357,6 +361,7 @@ namespace AFRMonitor
         int i = 0;
         private async Task UpdateAsync()
         {
+            double LastValue = 0.0;
             await Task.Run(() =>
             {
             while (!stop)
@@ -386,6 +391,15 @@ namespace AFRMonitor
                         if (ChartView.InvokeRequired)
                         {
                             ChartView.Invoke(new Action(() => ChartView.Series["Value"].Points.AddY(PortOutputDouble / 10)));
+
+                            if((PortOutputDouble / 10) - LastValue < -0.5 || (PortOutputDouble / 10) - LastValue > 0.5)
+                            {
+                                ChartView.Series["Value"].Points[ChartView.Series["Value"].Points.Count - 1].Color = WarningLineColor;
+                            }
+
+                            LastValue = PortOutputDouble / 10;
+
+                            // Cruising mode
                             i++;
                             if (i >= 200 & Helper.CruisingMode)
                             {

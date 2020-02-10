@@ -15,7 +15,7 @@ namespace AFRMonitor
 {
     public partial class ActivateBox : Form
     {
-        EasyXML xml = new EasyXML(Helper.XmlLocation);
+        EasyXML xml = new EasyXML(Helper.ActivationXmlLocation);
 
         public ActivateBox()
         {
@@ -28,9 +28,9 @@ namespace AFRMonitor
             {
                 if (key.ToLower() == InputKey.Text.ToLower()) //if key is valid
                 {
-                    File.SetAttributes(Helper.XmlLocation, FileAttributes.Normal);
+                    File.SetAttributes(Helper.ActivationXmlLocation, FileAttributes.Normal);
                     xml.Elements.SetInnerText("/Root/Activated", "50470916");
-                    File.SetAttributes(Helper.XmlLocation, FileAttributes.Hidden);
+                    File.SetAttributes(Helper.ActivationXmlLocation, FileAttributes.Hidden);
                     MessageBox.Show("Successfully activated!", "Activation complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     activationkeydiscovered = true;
                     Process.Start(Application.ExecutablePath);

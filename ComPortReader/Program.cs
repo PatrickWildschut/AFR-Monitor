@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.PW.Xml;
+using System.Drawing;
 
 namespace AFRMonitor
 {
@@ -34,6 +35,7 @@ namespace AFRMonitor
             //    key.Close();
             //}
             Start:
+            // Activation XML
             if(!Directory.Exists("C:\\ProgramData\\AFR Monitor"))
             {
                 Directory.CreateDirectory("C:\\ProgramData\\AFR Monitor");
@@ -49,14 +51,42 @@ namespace AFRMonitor
                         "TrialDays", "31"
                     }
                 };
-                new EasyXML(Helper.XmlLocation, elements);
-                File.SetAttributes(Helper.XmlLocation, FileAttributes.Hidden);
+                new EasyXML(Helper.ActivationXmlLocation, elements);
+                File.SetAttributes(Helper.ActivationXmlLocation, FileAttributes.Hidden);
             }
             else
             {
-                if(!EasyXML.TryLoad("C:\\ProgramData\\AFR Monitor" + "\\Activation.xml"))
+                if(!EasyXML.TryLoad(Helper.ActivationXmlLocation))
                 {
-                    File.Delete("C:\\ProgramData\\AFR Monitor" + "\\Activation.xml");
+                    File.Delete(Helper.ActivationXmlLocation);
+                    goto Start;
+                }
+            }
+
+            // Settings XML
+            if(!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor"))
+            {
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor");
+            }
+            if(!File.Exists(Helper.SettingsXmlLocation))
+            {
+                var elements = new Dictionary<string, string>
+                {
+                    {
+                        "LineColor", "#" + Color.Red.R.ToString("X2") + Color.Red.G.ToString("X2") + Color.Red.B.ToString("X2")
+                    },
+                    {
+                        "WarningLineColor", "#" + Color.Black.R.ToString("X2") + Color.Black.G.ToString("X2") + Color.Black.B.ToString("X2")
+                    }
+                };
+
+                new EasyXML(Helper.SettingsXmlLocation, elements);
+            }
+            else
+            {
+                if (!EasyXML.TryLoad(Helper.SettingsXmlLocation))
+                {
+                    File.Delete(Helper.SettingsXmlLocation);
                     goto Start;
                 }
             }
