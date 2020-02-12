@@ -58,30 +58,36 @@ namespace AFRMonitor
                 FreeLab.Font = new Font("Arial", 9, FontStyle.Regular);
                 FreeLab.Text = "If Voice Control doesn't work, \ndouble click me";
             }
+
+            // Slider
+            WarningTrack.Value = Convert.ToInt32(Settings.Elements.GetInnerText("/Root/Difference"));
         }
 
         private void BCont_Click(object sender, EventArgs e)
         {
+            Helper.WarningSlider = WarningTrack.Value;
+
+            // Save slider value to the settings xml
+            Settings.Elements.SetInnerText("/Root/Difference", Helper.WarningSlider.ToString());
+
             Helper.UsageVariable = 2;
             new AFRMonitor().ShowDialog();
         }
 
         private void VCont_Click(object sender, EventArgs e)
         {
+            Helper.WarningSlider = WarningTrack.Value;
+
+            // Save slider value to the settings xml
+            Settings.Elements.SetInnerText("/Root/Difference", Helper.WarningSlider.ToString());
+
             Helper.UsageVariable = 1;
             new AFRMonitor().ShowDialog();
         }
 
         private void CDCheck_CheckedChanged(object sender, EventArgs e)
         {
-            if(CDCheck.Checked)
-            {
-                Helper.CountDown = true;
-            }
-            else
-            {
-                Helper.CountDown = false;
-            }
+            Helper.CountDown = CDCheck.Checked;
         }
 
         private void LongScanCheck_CheckedChanged(object sender, EventArgs e)
@@ -100,6 +106,11 @@ namespace AFRMonitor
         {
             if(ofd.ShowDialog() == DialogResult.OK)
             {
+                Helper.WarningSlider = WarningTrack.Value;
+
+                // Save slider value to the settings xml
+                Settings.Elements.SetInnerText("/Root/Difference", Helper.WarningSlider.ToString());
+
                 Helper.ReadFileLocation = ofd.FileName;
                 try { new ReadFFile().ShowDialog(); } catch { }
             }

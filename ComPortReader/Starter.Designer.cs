@@ -41,6 +41,10 @@
             this.FreeLab = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.SettingsPage = new System.Windows.Forms.TabPage();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.WarningTrack = new System.Windows.Forms.TrackBar();
             this.CLWarColor = new System.Windows.Forms.Button();
             this.CLColor = new System.Windows.Forms.Button();
             this.AboutPage = new System.Windows.Forms.TabPage();
@@ -54,6 +58,7 @@
             this.StartPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SettingsPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.WarningTrack)).BeginInit();
             this.AboutPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -200,6 +205,10 @@
             // 
             // SettingsPage
             // 
+            this.SettingsPage.Controls.Add(this.label7);
+            this.SettingsPage.Controls.Add(this.label6);
+            this.SettingsPage.Controls.Add(this.label5);
+            this.SettingsPage.Controls.Add(this.WarningTrack);
             this.SettingsPage.Controls.Add(this.CLWarColor);
             this.SettingsPage.Controls.Add(this.CLColor);
             this.SettingsPage.Location = new System.Drawing.Point(4, 22);
@@ -208,6 +217,49 @@
             this.SettingsPage.TabIndex = 2;
             this.SettingsPage.Text = "Settings";
             this.SettingsPage.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(512, 80);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(15, 9);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "1.0";
+            // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(434, 80);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(15, 9);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "0.1";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(428, 13);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(102, 13);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Warning Difference:";
+            // 
+            // WarningTrack
+            // 
+            this.WarningTrack.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.WarningTrack.Location = new System.Drawing.Point(428, 32);
+            this.WarningTrack.Name = "WarningTrack";
+            this.WarningTrack.Size = new System.Drawing.Size(104, 45);
+            this.WarningTrack.TabIndex = 3;
+            this.WarningTrack.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.WarningTrack.Value = 5;
             // 
             // CLWarColor
             // 
@@ -311,7 +363,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Version: 1.1.14";
+            this.label1.Text = "Version: 1.1.15";
             // 
             // Starter
             // 
@@ -329,6 +381,8 @@
             this.StartPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.SettingsPage.ResumeLayout(false);
+            this.SettingsPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.WarningTrack)).EndInit();
             this.AboutPage.ResumeLayout(false);
             this.AboutPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -359,5 +413,9 @@
         private System.Windows.Forms.TabPage SettingsPage;
         private System.Windows.Forms.Button CLColor;
         private System.Windows.Forms.Button CLWarColor;
+        private System.Windows.Forms.TrackBar WarningTrack;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
     }
 }

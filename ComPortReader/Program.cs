@@ -36,11 +36,11 @@ namespace AFRMonitor
             //}
             Start:
             // Activation XML
-            if(!Directory.Exists("C:\\ProgramData\\AFR Monitor"))
+            if(!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\AFR Monitor"))
             {
-                Directory.CreateDirectory("C:\\ProgramData\\AFR Monitor");
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\AFR Monitor");
             }
-            if (!File.Exists("C:\\ProgramData\\AFR Monitor" + "\\Activation.xml"))
+            if (!File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\AFR Monitor\\Activation.xml"))
             {
                 var elements = new Dictionary<string, string>
                 {
@@ -51,12 +51,12 @@ namespace AFRMonitor
                         "TrialDays", "31"
                     }
                 };
-                new EasyXML(Helper.ActivationXmlLocation, elements);
-                File.SetAttributes(Helper.ActivationXmlLocation, FileAttributes.Hidden);
+                new EasyXML(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\AFR Monitor\\Activation.xml", elements);
+                File.SetAttributes(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\AFR Monitor\\Activation.xml", FileAttributes.Hidden);
             }
             else
             {
-                if(!EasyXML.TryLoad(Helper.ActivationXmlLocation))
+                if(!EasyXML.TryLoad(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\AFR Monitor\\Activation.xml"))
                 {
                     File.Delete(Helper.ActivationXmlLocation);
                     goto Start;
@@ -68,7 +68,7 @@ namespace AFRMonitor
             {
                 Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor");
             }
-            if(!File.Exists(Helper.SettingsXmlLocation))
+            if(!File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\cfg.xml"))
             {
                 var elements = new Dictionary<string, string>
                 {
@@ -77,25 +77,28 @@ namespace AFRMonitor
                     },
                     {
                         "WarningLineColor", "#" + Color.Black.R.ToString("X2") + Color.Black.G.ToString("X2") + Color.Black.B.ToString("X2")
+                    },
+                    {
+                        "Difference", "0.5"
                     }
                 };
 
-                new EasyXML(Helper.SettingsXmlLocation, elements);
+                new EasyXML(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\cfg.xml", elements);
             }
             else
             {
-                if (!EasyXML.TryLoad(Helper.SettingsXmlLocation))
+                if (!EasyXML.TryLoad(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\cfg.xml"))
                 {
-                    File.Delete(Helper.SettingsXmlLocation);
+                    File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\cfg.xml");
                     goto Start;
                 }
             }
 
-            Helper.ValidActivationKeys[0] = "p1tr99234qnw";
-            Helper.ValidActivationKeys[1] = "p2dz27273urw";
-            Helper.ValidActivationKeys[2] = "p3nh58983ftw";
-            Helper.ValidActivationKeys[3] = "p4we98043nnw";
-            Helper.ValidActivationKeys[4] = "p5io69270mow";
+            Helper.ValidActivationKeys.Add("p1tr99234qnw");
+            Helper.ValidActivationKeys.Add("p2dz27273urw");
+            Helper.ValidActivationKeys.Add("p3nh58983ftw");
+            Helper.ValidActivationKeys.Add("p4we98043nnw");
+            Helper.ValidActivationKeys.Add("p5io69270mow");
 
             /*try { */Application.Run(new Starter()); //} catch { }
         }

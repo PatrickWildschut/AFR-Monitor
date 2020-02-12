@@ -9,11 +9,14 @@ using System.IO;
 using System.Speech.Synthesis;
 using System.PW.Encryption;
 using System.PW.Xml;
+using System.Diagnostics;
 
 namespace AFRMonitor
 {
     public partial class AFRMonitor : Form
     {
+        Stopwatch stopwatch = new Stopwatch();
+
         // XML
         static EasyXML Settings = new EasyXML(Helper.SettingsXmlLocation);
         Color LineColor = ColorTranslator.FromHtml(Settings.Elements.GetInnerText("/Root/LineColor"));
@@ -74,6 +77,7 @@ namespace AFRMonitor
             }
             #endregion
         }
+        int TimerTicked = 0;
 
         private void ToggleUI(bool toggle)
         {
@@ -318,21 +322,23 @@ namespace AFRMonitor
             }
             catch { }
             UpdateAsync();
-            TimerAsync(100);
+            TimerAsync();
             Task.Delay(15);
 
         }
         double SampleLength = 0;
-        async Task TimerAsync(int Delay)
+        async Task TimerAsync()
         {
-            //Stopwatch stopwatch = Stopwatch.StartNew();
+            Stopwatch stopwatch = Stopwatch.StartNew();
             while (!stop)
             {
-                await Task.Delay(Delay);
-                SampleLength += Delay / 100;
-                SelectLab.Text = "Time elapsed:\n\t" + (SampleLength / 10) + " sec";
-                //SelectLab.Text = "Time elapsed:\n\t" + stopwatch.Elapsed.TotalSeconds;
+                await Task.Run(() =>
+                {
+                    SampleLength = stopwatch.Elapsed.TotalSeconds;
+                    SelectLab.Invoke(new Action(() => SelectLab.Text = "Time elapsed:\n\t" + SampleLength.ToString("0.0") + " sec"));
+                });
             }
+            stopwatch.Stop();
             SelectLab.Text = "Select:";
             //SelectLab.Text = "Select:";
         }
@@ -368,6 +374,22 @@ namespace AFRMonitor
             {
                 try
                 {
+                        // Fifth scan only or timer
+                        if (i == 5 || stopwatch.IsRunning)
+                        {
+                            if(stopwatch.IsRunning)
+                            {
+                                Helper.InputInterval = stopwatch.Elapsed.TotalMilliseconds;
+                                stopwatch.Stop();
+                                stopwatch.Reset();
+                            }
+                            else
+                            {
+                                stopwatch.Start();
+                            }
+                        }
+
+                        i++;
                         string PortOutput = SerialP.ReadLine().ToString();;
                         double PortOutputDouble = Convert.ToDouble(SerialP.ReadLine().ToString());
                         if (CurLab.InvokeRequired)
@@ -392,15 +414,14 @@ namespace AFRMonitor
                         {
                             ChartView.Invoke(new Action(() => ChartView.Series["Value"].Points.AddY(PortOutputDouble / 10)));
 
-                            if((PortOutputDouble / 10) - LastValue < -0.5 || (PortOutputDouble / 10) - LastValue > 0.5)
+                            if((PortOutputDouble / 10) - LastValue < -(Helper.WarningSlider / 10) || (PortOutputDouble / 10) - LastValue > (Helper.WarningSlider / 10))
                             {
-                                ChartView.Series["Value"].Points[ChartView.Series["Value"].Points.Count - 1].Color = WarningLineColor;
+                                ChartView.Invoke(new Action(() => ChartView.Series["Value"].Points[ChartView.Series["Value"].Points.Count - 1].Color = WarningLineColor));
                             }
 
                             LastValue = PortOutputDouble / 10;
 
                             // Cruising mode
-                            i++;
                             if (i >= 200 & Helper.CruisingMode)
                             {
                                 ChartView.Series[0].Points.RemoveAt(0);
@@ -455,7 +476,6 @@ namespace AFRMonitor
 
             
         }
-        public int DifZeroFive = -1;
         public int Scans = 0;
         private async Task SaveToFile(SaveFileDialog sfd)
         {
@@ -465,16 +485,11 @@ namespace AFRMonitor
             foreach (double d in Values)
             {
                 returns += d.ToString() + "\n";
-                if((LastValue - d) > 1 | (d - LastValue) > 1)
-                {
-                    DifZeroFive++;
-                }
-                LastValue = d;
                 Scans++;
             }
 
             // Encrypt the data
-            string EncOutput = await EasyEncryption.EncryptStringAsync("Lowest Value: " + Helper.LowestValue + "\nScans: " + Scans.ToString() + "\nDifference 1 or more: " + DifZeroFive.ToString() + "\nTotal Runtime: " + (SampleLength / 10) + " sec" + "\n\nValues\n" + returns);
+            string EncOutput = await EasyEncryption.Async.EncryptStringAsync("Lowest Value: " + Helper.LowestValue + "\nScans: " + Scans.ToString() + "\nTotal Runtime: " + SampleLength.ToString("0.0") + " sec" + "\nSample Interval: " + Helper.InputInterval + "\n\nValues\n" + returns);
             
             // Save            
             File.WriteAllText(sfd.FileName, EncOutput);

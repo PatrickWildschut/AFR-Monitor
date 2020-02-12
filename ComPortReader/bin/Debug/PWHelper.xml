@@ -9,28 +9,66 @@
             Class to encrypt your files.
             </summary>
         </member>
-        <member name="M:System.PW.Encryption.EasyEncryption.EncryptFileAsync(System.String)">
+        <member name="P:System.PW.Encryption.EasyEncryption.Async">
+            <summary>
+            Everything but ASynchronously
+            </summary>
+        </member>
+        <member name="M:System.PW.Encryption.EasyEncryption.EncryptFile(System.String)">
             <summary>
             Encrypts a file randomly. Gets stored as encrypted.[extention] (Can only be decrypted using the DecryptAsync method) 
             </summary>
             <param name="filepath">Complete path to file.</param>
             <returns></returns>
         </member>
-        <member name="M:System.PW.Encryption.EasyEncryption.EncryptStringAsync(System.String)">
+        <member name="M:System.PW.Encryption.EasyEncryption.EncryptString(System.String)">
             <summary>
             Encrypts a string randomly. Returns an ecrypted string. (Can only be decrypted using the DecryptAsync method) 
             </summary>
             <param name="data">input string</param>
             <returns></returns>
         </member>
-        <member name="M:System.PW.Encryption.EasyEncryption.DecryptFileAsync(System.String)">
+        <member name="M:System.PW.Encryption.EasyEncryption.DecryptFile(System.String)">
             <summary>
             Decrypts the given file from EncryptAsync only. Gets stored as decrypted.[extention]
             </summary>
             <param name="filepath">Complete path to file.</param>
             <returns></returns>
         </member>
-        <member name="M:System.PW.Encryption.EasyEncryption.DecryptStringAsync(System.String)">
+        <member name="M:System.PW.Encryption.EasyEncryption.DecryptString(System.String)">
+            <summary>
+            Decrypts the given string from EncryptAsync only. Returns the decrypted string
+            </summary>
+            <param name="data">Input string</param>
+            <returns></returns>
+        </member>
+        <member name="T:System.PW.Encryption.ASynchronous">
+            <summary>
+            Everything but asynchronously
+            </summary>
+        </member>
+        <member name="M:System.PW.Encryption.ASynchronous.EncryptFileAsync(System.String)">
+            <summary>
+            Encrypts a file randomly. Gets stored as encrypted.[extention] (Can only be decrypted using the DecryptAsync method) 
+            </summary>
+            <param name="filepath">Complete path to file.</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.PW.Encryption.ASynchronous.EncryptStringAsync(System.String)">
+            <summary>
+            Encrypts a string randomly. Returns an ecrypted string. (Can only be decrypted using the DecryptAsync method) 
+            </summary>
+            <param name="data">input string</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.PW.Encryption.ASynchronous.DecryptFileAsync(System.String)">
+            <summary>
+            Decrypts the given file from EncryptAsync only. Gets stored as decrypted.[extention]
+            </summary>
+            <param name="filepath">Complete path to file.</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.PW.Encryption.ASynchronous.DecryptStringAsync(System.String)">
             <summary>
             Decrypts the given string from EncryptAsync only. Returns the decrypted string
             </summary>

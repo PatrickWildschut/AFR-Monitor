@@ -34,7 +34,8 @@
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
-    <Reference Include="PWHelper">
+    <Reference Include="PWHelper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\PWHelper\PWHelper\bin\Debug\PWHelper.dll</HintPath>
     </Reference>
     <Reference Include="System" />

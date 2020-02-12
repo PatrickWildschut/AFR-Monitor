@@ -10,15 +10,17 @@ using System.Windows.Forms;
 
 namespace AFRMonitor
 {
-    class Helper
+    abstract class Helper
     {
-        public static string ActivationXmlLocation = "C:\\ProgramData\\AFR Monitor\\Activation.xml";
+        public static string ActivationFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\AFR Monitor";
+        public static string ActivationXmlLocation = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\AFR Monitor\\Activation.xml";
+        public static string SettingsFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor";
         public static string SettingsXmlLocation = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\cfg.xml";
         private static EasyXML xml = new EasyXML(ActivationXmlLocation);
 
         public static bool ForceQuit { get; private set; } = false;
 
-        public static string[] ValidActivationKeys = new string[5];
+        public static List<string> ValidActivationKeys = new List<string>();
 
         public static bool ToggleForceQuit(bool tof)
         {
@@ -34,6 +36,8 @@ namespace AFRMonitor
         public static bool CountDown = false;
         public static bool CruisingMode = false;
         public static string ReadFileLocation = "";
+        public static double WarningSlider = 0;
+        public static double InputInterval = 200;
         public static string Pass = "DjPatrick0302";
         public static bool IsActivated()
         {

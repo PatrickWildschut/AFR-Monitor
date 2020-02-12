@@ -75,11 +75,11 @@
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(678, 20);
+            this.label1.Location = new System.Drawing.Point(672, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(146, 13);
+            this.label1.Size = new System.Drawing.Size(152, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Double click chart to view file";
+            this.label1.Text = "Double click chart to replay file";
             // 
             // LowValLab
             // 
