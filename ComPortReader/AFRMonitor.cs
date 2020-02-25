@@ -77,7 +77,6 @@ namespace AFRMonitor
             }
             #endregion
         }
-        int TimerTicked = 0;
 
         private void ToggleUI(bool toggle)
         {
@@ -489,7 +488,7 @@ namespace AFRMonitor
             }
 
             // Encrypt the data
-            string EncOutput = await EasyEncryption.Async.EncryptStringAsync("Lowest Value: " + Helper.LowestValue + "\nScans: " + Scans.ToString() + "\nTotal Runtime: " + SampleLength.ToString("0.0") + " sec" + "\nSample Interval: " + Helper.InputInterval + "\n\nValues\n" + returns);
+            string EncOutput = await EasyEncryption.Async.EncryptStringAsync("Lowest Value: " + Helper.LowestValue + "\nScans: " + Scans.ToString() + "\nTotal Runtime: " + SampleLength.ToString("0.0") + " sec" + "\nSample Interval: " + Helper.InputInterval + "\n\nValues\n" + returns, "File encrypted by AFR Monitor, version: " + Helper.Version + " - Patrick Wildschut");
             
             // Save            
             File.WriteAllText(sfd.FileName, EncOutput);

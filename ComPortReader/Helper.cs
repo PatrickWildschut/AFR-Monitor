@@ -1,12 +1,6 @@
-﻿using Microsoft.Win32;
-using System.PW.Xml;
+﻿using System.PW.Xml;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace AFRMonitor
 {
@@ -39,6 +33,7 @@ namespace AFRMonitor
         public static double WarningSlider = 0;
         public static double InputInterval = 200;
         public static string Pass = "DjPatrick0302";
+        public static string Version = string.Empty;
         public static bool IsActivated()
         {
                 if (xml.Elements.GetInnerText("/Root/Activated") == "50470916") // true

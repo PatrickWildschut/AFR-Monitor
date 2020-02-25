@@ -1,15 +1,8 @@
-﻿using Microsoft.Win32;
-using System.PW.Xml;
+﻿using System.PW.Xml;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AFRMonitor
@@ -25,6 +18,14 @@ namespace AFRMonitor
         public Starter()
         {
             InitializeComponent();
+
+            Helper.Version = this.ProductVersion;
+            VersionLab.Text = "Version: " + this.ProductVersion;
+
+            // Setup line color view in settings
+            ChartLinePicBox.BackColor = ColorTranslator.FromHtml(Settings.Elements.GetInnerText("/Root/LineColor"));
+            WarChartLinePicBox.BackColor = ColorTranslator.FromHtml(Settings.Elements.GetInnerText("/Root/WarningLineColor"));
+
             if (!Helper.IsActivated())
             {
                 VCont.Enabled = false;
@@ -139,6 +140,9 @@ namespace AFRMonitor
             if(cd.ShowDialog() == DialogResult.OK)
             {
                 Settings.Elements.SetInnerText("/Root/LineColor", "#" + cd.Color.R.ToString("X2") + cd.Color.G.ToString("X2") + cd.Color.B.ToString("X2"));
+
+                // Update view
+                ChartLinePicBox.BackColor = cd.Color;
             }
         }
 
@@ -147,6 +151,9 @@ namespace AFRMonitor
             if (cd.ShowDialog() == DialogResult.OK)
             {
                 Settings.Elements.SetInnerText("/Root/WarningLineColor", "#" + cd.Color.R.ToString("X2") + cd.Color.G.ToString("X2") + cd.Color.B.ToString("X2"));
+
+                // Update view
+                WarChartLinePicBox.BackColor = cd.Color;
             }
         }
     }

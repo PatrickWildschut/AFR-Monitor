@@ -1,12 +1,10 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.PW.Xml;
 using System.Drawing;
+using System.Reflection;
 
 namespace AFRMonitor
 {
@@ -79,7 +77,7 @@ namespace AFRMonitor
                         "WarningLineColor", "#" + Color.Black.R.ToString("X2") + Color.Black.G.ToString("X2") + Color.Black.B.ToString("X2")
                     },
                     {
-                        "Difference", "0.5"
+                        "Difference", "5"
                     }
                 };
 

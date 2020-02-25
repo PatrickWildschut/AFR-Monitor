@@ -14,18 +14,20 @@
             Everything but ASynchronously
             </summary>
         </member>
-        <member name="M:System.PW.Encryption.EasyEncryption.EncryptFile(System.String)">
+        <member name="M:System.PW.Encryption.EasyEncryption.EncryptFile(System.String,System.String)">
             <summary>
             Encrypts a file randomly. Gets stored as encrypted.[extention] (Can only be decrypted using the DecryptAsync method) 
             </summary>
             <param name="filepath">Complete path to file.</param>
+            <param name="Information">This message will be displayed inside the output file before anything else</param>
             <returns></returns>
         </member>
-        <member name="M:System.PW.Encryption.EasyEncryption.EncryptString(System.String)">
+        <member name="M:System.PW.Encryption.EasyEncryption.EncryptString(System.String,System.String)">
             <summary>
             Encrypts a string randomly. Returns an ecrypted string. (Can only be decrypted using the DecryptAsync method) 
             </summary>
             <param name="data">input string</param>
+            <param name="Information">This message will be displayed inside the output file before anything else</param>
             <returns></returns>
         </member>
         <member name="M:System.PW.Encryption.EasyEncryption.DecryptFile(System.String)">
@@ -47,18 +49,20 @@
             Everything but asynchronously
             </summary>
         </member>
-        <member name="M:System.PW.Encryption.ASynchronous.EncryptFileAsync(System.String)">
+        <member name="M:System.PW.Encryption.ASynchronous.EncryptFileAsync(System.String,System.String)">
             <summary>
             Encrypts a file randomly. Gets stored as encrypted.[extention] (Can only be decrypted using the DecryptAsync method) 
             </summary>
             <param name="filepath">Complete path to file.</param>
+            <param name="Information">This message will be displayed inside the output file before anything else</param>
             <returns></returns>
         </member>
-        <member name="M:System.PW.Encryption.ASynchronous.EncryptStringAsync(System.String)">
+        <member name="M:System.PW.Encryption.ASynchronous.EncryptStringAsync(System.String,System.String)">
             <summary>
             Encrypts a string randomly. Returns an ecrypted string. (Can only be decrypted using the DecryptAsync method) 
             </summary>
             <param name="data">input string</param>
+            <param name="Information">This message will be displayed inside the output file before anything else</param>
             <returns></returns>
         </member>
         <member name="M:System.PW.Encryption.ASynchronous.DecryptFileAsync(System.String)">

@@ -50,10 +50,12 @@
             this.AboutPage = new System.Windows.Forms.TabPage();
             this.InstagramConnect = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.ReleaseDateLab = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.VersionLab = new System.Windows.Forms.Label();
+            this.ChartLinePicBox = new System.Windows.Forms.PictureBox();
+            this.WarChartLinePicBox = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.StartPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -61,6 +63,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.WarningTrack)).BeginInit();
             this.AboutPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ChartLinePicBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WarChartLinePicBox)).BeginInit();
             this.SuspendLayout();
             // 
             // VCont
@@ -205,6 +209,8 @@
             // 
             // SettingsPage
             // 
+            this.SettingsPage.Controls.Add(this.WarChartLinePicBox);
+            this.SettingsPage.Controls.Add(this.ChartLinePicBox);
             this.SettingsPage.Controls.Add(this.label7);
             this.SettingsPage.Controls.Add(this.label6);
             this.SettingsPage.Controls.Add(this.label5);
@@ -287,10 +293,10 @@
             // 
             this.AboutPage.Controls.Add(this.InstagramConnect);
             this.AboutPage.Controls.Add(this.pictureBox1);
-            this.AboutPage.Controls.Add(this.label4);
+            this.AboutPage.Controls.Add(this.ReleaseDateLab);
             this.AboutPage.Controls.Add(this.label3);
             this.AboutPage.Controls.Add(this.label2);
-            this.AboutPage.Controls.Add(this.label1);
+            this.AboutPage.Controls.Add(this.VersionLab);
             this.AboutPage.Location = new System.Drawing.Point(4, 22);
             this.AboutPage.Name = "AboutPage";
             this.AboutPage.Padding = new System.Windows.Forms.Padding(3);
@@ -324,15 +330,15 @@
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             // 
-            // label4
+            // ReleaseDateLab
             // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(170, 168);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(218, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Current Build Release Date: 9 Feburary 2020";
+            this.ReleaseDateLab.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.ReleaseDateLab.AutoSize = true;
+            this.ReleaseDateLab.Location = new System.Drawing.Point(170, 168);
+            this.ReleaseDateLab.Name = "ReleaseDateLab";
+            this.ReleaseDateLab.Size = new System.Drawing.Size(224, 13);
+            this.ReleaseDateLab.TabIndex = 3;
+            this.ReleaseDateLab.Text = "Current Build Release Date: 25 Feburary 2020";
             // 
             // label3
             // 
@@ -355,15 +361,33 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Air Fuel Ratio Monitor";
             // 
-            // label1
+            // VersionLab
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(476, 168);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Version: 1.1.15";
+            this.VersionLab.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.VersionLab.AutoSize = true;
+            this.VersionLab.Location = new System.Drawing.Point(476, 168);
+            this.VersionLab.Name = "VersionLab";
+            this.VersionLab.Size = new System.Drawing.Size(66, 13);
+            this.VersionLab.TabIndex = 0;
+            this.VersionLab.Text = "Version: ------";
+            // 
+            // ChartLinePicBox
+            // 
+            this.ChartLinePicBox.BackColor = System.Drawing.Color.Black;
+            this.ChartLinePicBox.Location = new System.Drawing.Point(178, 18);
+            this.ChartLinePicBox.Name = "ChartLinePicBox";
+            this.ChartLinePicBox.Size = new System.Drawing.Size(100, 59);
+            this.ChartLinePicBox.TabIndex = 7;
+            this.ChartLinePicBox.TabStop = false;
+            // 
+            // WarChartLinePicBox
+            // 
+            this.WarChartLinePicBox.BackColor = System.Drawing.Color.Black;
+            this.WarChartLinePicBox.Location = new System.Drawing.Point(178, 110);
+            this.WarChartLinePicBox.Name = "WarChartLinePicBox";
+            this.WarChartLinePicBox.Size = new System.Drawing.Size(100, 59);
+            this.WarChartLinePicBox.TabIndex = 8;
+            this.WarChartLinePicBox.TabStop = false;
             // 
             // Starter
             // 
@@ -386,6 +410,8 @@
             this.AboutPage.ResumeLayout(false);
             this.AboutPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ChartLinePicBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WarChartLinePicBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -401,8 +427,8 @@
         private System.Windows.Forms.TabPage StartPage;
         private System.Windows.Forms.TabPage AboutPage;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label VersionLab;
+        private System.Windows.Forms.Label ReleaseDateLab;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button InstagramConnect;
@@ -417,5 +443,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.PictureBox WarChartLinePicBox;
+        private System.Windows.Forms.PictureBox ChartLinePicBox;
     }
 }
