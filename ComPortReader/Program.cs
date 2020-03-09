@@ -62,11 +62,31 @@ namespace AFRMonitor
             }
 
             // Settings XML
-            if(!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor"))
+            // Create directories
+            if(!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\data"))
             {
-                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor");
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\data");
             }
-            if(!File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\cfg.xml"))
+            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\config"))
+            {
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\config");
+            }
+
+            //if(!Directory.Exists(Path.GetTempPath() + "\\AFR Monitor"))
+            //{
+            //    Directory.CreateDirectory(Path.GetTempPath() + "\\AFR Monitor");
+            //}
+            //// Directory does exist
+            //else
+            //{
+            //    foreach(string file in Directory.GetFiles(Path.GetTempPath() + "\\AFR Monitor"))
+            //    {
+            //        File.Delete(file);
+            //    }
+            //}
+
+            // Create XML's
+            if (!File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\config\\cfg.xml"))
             {
                 var elements = new Dictionary<string, string>
                 {
@@ -78,16 +98,19 @@ namespace AFRMonitor
                     },
                     {
                         "Difference", "5"
+                    },
+                    {
+                        "SaveLocation", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\data"
                     }
                 };
 
-                new EasyXML(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\cfg.xml", elements);
+                new EasyXML(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\config\\cfg.xml", elements);
             }
             else
             {
-                if (!EasyXML.TryLoad(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\cfg.xml"))
+                if (!EasyXML.TryLoad(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\config\\cfg.xml"))
                 {
-                    File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\cfg.xml");
+                    File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\config\\cfg.xml");
                     goto Start;
                 }
             }

@@ -13,14 +13,16 @@ namespace AFRMonitor
         EasyXML Settings = new EasyXML(Helper.SettingsXmlLocation);
 
         ColorDialog cd = new ColorDialog();
-        OpenFileDialog ofd = new OpenFileDialog() { Multiselect = false, InitialDirectory = Application.StartupPath, Filter = "AFR File (*.afr)|*.afr" };
+        OpenFileDialog ofd;
+        FolderBrowserDialog fbd = new FolderBrowserDialog();
         public bool ActivatedIt = false;
         public Starter()
         {
             InitializeComponent();
-
             Helper.Version = this.ProductVersion;
             VersionLab.Text = "Version: " + this.ProductVersion;
+
+            ofd = new OpenFileDialog() { Multiselect = false, InitialDirectory = Settings.Elements.GetInnerText("/Root/SaveLocation"), Filter = "AFR File (*.afr)|*.afr" };
 
             // Setup line color view in settings
             ChartLinePicBox.BackColor = ColorTranslator.FromHtml(Settings.Elements.GetInnerText("/Root/LineColor"));
@@ -31,7 +33,7 @@ namespace AFRMonitor
                 VCont.Enabled = false;
                 ActivatedIt = false;
                 RFFBut.Enabled = false;
-                LongScanCheck.Enabled = false;
+                UnlimitedCheck.Enabled = false;
                 ActBut.Visible = true;
                 FreeDays.Visible = true;
                 if (Helper.Restart)
@@ -93,13 +95,13 @@ namespace AFRMonitor
 
         private void LongScanCheck_CheckedChanged(object sender, EventArgs e)
         {
-            if(LongScanCheck.Checked)
+            if(UnlimitedCheck.Checked)
             {
-                Helper.CruisingMode = true;
+                Helper.UnlimitedMode = true;
             }
             else
             {
-                Helper.CruisingMode = false;
+                Helper.UnlimitedMode = false;
             }
         }
 
@@ -154,6 +156,22 @@ namespace AFRMonitor
 
                 // Update view
                 WarChartLinePicBox.BackColor = cd.Color;
+            }
+        }
+
+        private void FileSaveBut_Click(object sender, EventArgs e)
+        {
+            if(fbd.ShowDialog() == DialogResult.OK)
+            {
+                Settings.Elements.SetInnerText("/Root/SaveLocation", fbd.SelectedPath);
+            }
+        }
+
+        private void Starter_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (!Helper.IsActivated())
+            {
+                MessageBox.Show("Thank you for using my software. To buy the full version, DM me at https://www.instagram.com/patrick_wildschut \nTrial times left: " + (Convert.ToInt32(Activation.Elements.GetInnerText("/Root/TrialDays")) - 1).ToString(), "Thanks!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

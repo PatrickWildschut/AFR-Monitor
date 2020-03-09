@@ -32,7 +32,7 @@
             this.VCont = new System.Windows.Forms.Button();
             this.BCont = new System.Windows.Forms.Button();
             this.CDCheck = new System.Windows.Forms.CheckBox();
-            this.LongScanCheck = new System.Windows.Forms.CheckBox();
+            this.UnlimitedCheck = new System.Windows.Forms.CheckBox();
             this.RFFBut = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.StartPage = new System.Windows.Forms.TabPage();
@@ -41,6 +41,9 @@
             this.FreeLab = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.SettingsPage = new System.Windows.Forms.TabPage();
+            this.FileSaveBut = new System.Windows.Forms.Button();
+            this.WarChartLinePicBox = new System.Windows.Forms.PictureBox();
+            this.ChartLinePicBox = new System.Windows.Forms.PictureBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -54,17 +57,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.VersionLab = new System.Windows.Forms.Label();
-            this.ChartLinePicBox = new System.Windows.Forms.PictureBox();
-            this.WarChartLinePicBox = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.StartPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SettingsPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.WarChartLinePicBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ChartLinePicBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WarningTrack)).BeginInit();
             this.AboutPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ChartLinePicBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WarChartLinePicBox)).BeginInit();
             this.SuspendLayout();
             // 
             // VCont
@@ -106,17 +107,17 @@
             this.CDCheck.UseVisualStyleBackColor = true;
             this.CDCheck.CheckedChanged += new System.EventHandler(this.CDCheck_CheckedChanged);
             // 
-            // LongScanCheck
+            // UnlimitedCheck
             // 
-            this.LongScanCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LongScanCheck.AutoSize = true;
-            this.LongScanCheck.Location = new System.Drawing.Point(231, 32);
-            this.LongScanCheck.Name = "LongScanCheck";
-            this.LongScanCheck.Size = new System.Drawing.Size(93, 17);
-            this.LongScanCheck.TabIndex = 3;
-            this.LongScanCheck.Text = "Cruising Mode";
-            this.LongScanCheck.UseVisualStyleBackColor = true;
-            this.LongScanCheck.CheckedChanged += new System.EventHandler(this.LongScanCheck_CheckedChanged);
+            this.UnlimitedCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.UnlimitedCheck.AutoSize = true;
+            this.UnlimitedCheck.Location = new System.Drawing.Point(231, 32);
+            this.UnlimitedCheck.Name = "UnlimitedCheck";
+            this.UnlimitedCheck.Size = new System.Drawing.Size(99, 17);
+            this.UnlimitedCheck.TabIndex = 3;
+            this.UnlimitedCheck.Text = "Unlimited Mode";
+            this.UnlimitedCheck.UseVisualStyleBackColor = true;
+            this.UnlimitedCheck.CheckedChanged += new System.EventHandler(this.LongScanCheck_CheckedChanged);
             // 
             // RFFBut
             // 
@@ -153,7 +154,7 @@
             this.StartPage.Controls.Add(this.pictureBox2);
             this.StartPage.Controls.Add(this.VCont);
             this.StartPage.Controls.Add(this.CDCheck);
-            this.StartPage.Controls.Add(this.LongScanCheck);
+            this.StartPage.Controls.Add(this.UnlimitedCheck);
             this.StartPage.Controls.Add(this.BCont);
             this.StartPage.Controls.Add(this.RFFBut);
             this.StartPage.Location = new System.Drawing.Point(4, 22);
@@ -209,6 +210,7 @@
             // 
             // SettingsPage
             // 
+            this.SettingsPage.Controls.Add(this.FileSaveBut);
             this.SettingsPage.Controls.Add(this.WarChartLinePicBox);
             this.SettingsPage.Controls.Add(this.ChartLinePicBox);
             this.SettingsPage.Controls.Add(this.label7);
@@ -223,6 +225,35 @@
             this.SettingsPage.TabIndex = 2;
             this.SettingsPage.Text = "Settings";
             this.SettingsPage.UseVisualStyleBackColor = true;
+            // 
+            // FileSaveBut
+            // 
+            this.FileSaveBut.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FileSaveBut.Location = new System.Drawing.Point(385, 110);
+            this.FileSaveBut.Name = "FileSaveBut";
+            this.FileSaveBut.Size = new System.Drawing.Size(147, 59);
+            this.FileSaveBut.TabIndex = 9;
+            this.FileSaveBut.Text = "AFR file save location";
+            this.FileSaveBut.UseVisualStyleBackColor = true;
+            this.FileSaveBut.Click += new System.EventHandler(this.FileSaveBut_Click);
+            // 
+            // WarChartLinePicBox
+            // 
+            this.WarChartLinePicBox.BackColor = System.Drawing.Color.Black;
+            this.WarChartLinePicBox.Location = new System.Drawing.Point(178, 110);
+            this.WarChartLinePicBox.Name = "WarChartLinePicBox";
+            this.WarChartLinePicBox.Size = new System.Drawing.Size(100, 59);
+            this.WarChartLinePicBox.TabIndex = 8;
+            this.WarChartLinePicBox.TabStop = false;
+            // 
+            // ChartLinePicBox
+            // 
+            this.ChartLinePicBox.BackColor = System.Drawing.Color.Black;
+            this.ChartLinePicBox.Location = new System.Drawing.Point(178, 18);
+            this.ChartLinePicBox.Name = "ChartLinePicBox";
+            this.ChartLinePicBox.Size = new System.Drawing.Size(100, 59);
+            this.ChartLinePicBox.TabIndex = 7;
+            this.ChartLinePicBox.TabStop = false;
             // 
             // label7
             // 
@@ -334,11 +365,11 @@
             // 
             this.ReleaseDateLab.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.ReleaseDateLab.AutoSize = true;
-            this.ReleaseDateLab.Location = new System.Drawing.Point(170, 168);
+            this.ReleaseDateLab.Location = new System.Drawing.Point(177, 168);
             this.ReleaseDateLab.Name = "ReleaseDateLab";
-            this.ReleaseDateLab.Size = new System.Drawing.Size(224, 13);
+            this.ReleaseDateLab.Size = new System.Drawing.Size(207, 13);
             this.ReleaseDateLab.TabIndex = 3;
-            this.ReleaseDateLab.Text = "Current Build Release Date: 25 Feburary 2020";
+            this.ReleaseDateLab.Text = "Current Build Release Date: 9 March 2020";
             // 
             // label3
             // 
@@ -371,24 +402,6 @@
             this.VersionLab.TabIndex = 0;
             this.VersionLab.Text = "Version: ------";
             // 
-            // ChartLinePicBox
-            // 
-            this.ChartLinePicBox.BackColor = System.Drawing.Color.Black;
-            this.ChartLinePicBox.Location = new System.Drawing.Point(178, 18);
-            this.ChartLinePicBox.Name = "ChartLinePicBox";
-            this.ChartLinePicBox.Size = new System.Drawing.Size(100, 59);
-            this.ChartLinePicBox.TabIndex = 7;
-            this.ChartLinePicBox.TabStop = false;
-            // 
-            // WarChartLinePicBox
-            // 
-            this.WarChartLinePicBox.BackColor = System.Drawing.Color.Black;
-            this.WarChartLinePicBox.Location = new System.Drawing.Point(178, 110);
-            this.WarChartLinePicBox.Name = "WarChartLinePicBox";
-            this.WarChartLinePicBox.Size = new System.Drawing.Size(100, 59);
-            this.WarChartLinePicBox.TabIndex = 8;
-            this.WarChartLinePicBox.TabStop = false;
-            // 
             // Starter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -400,18 +413,19 @@
             this.Name = "Starter";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Text = "Starter";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Starter_FormClosed);
             this.tabControl1.ResumeLayout(false);
             this.StartPage.ResumeLayout(false);
             this.StartPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.SettingsPage.ResumeLayout(false);
             this.SettingsPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.WarChartLinePicBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ChartLinePicBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.WarningTrack)).EndInit();
             this.AboutPage.ResumeLayout(false);
             this.AboutPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ChartLinePicBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WarChartLinePicBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -421,7 +435,7 @@
         private System.Windows.Forms.Button VCont;
         private System.Windows.Forms.Button BCont;
         private System.Windows.Forms.CheckBox CDCheck;
-        private System.Windows.Forms.CheckBox LongScanCheck;
+        private System.Windows.Forms.CheckBox UnlimitedCheck;
         private System.Windows.Forms.Button RFFBut;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage StartPage;
@@ -445,5 +459,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.PictureBox WarChartLinePicBox;
         private System.Windows.Forms.PictureBox ChartLinePicBox;
+        private System.Windows.Forms.Button FileSaveBut;
     }
 }

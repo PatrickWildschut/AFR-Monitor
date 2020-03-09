@@ -60,10 +60,6 @@ namespace AFRMonitor
                 Listening = true;
             }
             #endregion
-            if (Helper.CruisingMode)
-            {
-                ChartView.ChartAreas[0].AxisX.Maximum = 200;
-            }
             #region Setup UI
             ChartView.ChartAreas[0].AxisY.Minimum = 10;
             ChartView.ChartAreas[0].AxisY.Maximum = 20;
@@ -294,11 +290,11 @@ namespace AFRMonitor
             {
                 if(MessageBox.Show("Are you sure you want to exit without saving?", "Save or quit", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                 {
-                    if(sfd.ShowDialog() == DialogResult.OK)
-                    {
-                        SaveToFile(sfd);
+                    //if(sfd.ShowDialog() == DialogResult.OK)
+                    //{
+                        SaveToFile();
                         IsSaved = true;
-                    }
+                    //}
                     
                 }
             }
@@ -326,20 +322,20 @@ namespace AFRMonitor
 
         }
         double SampleLength = 0;
+        Stopwatch TotalTimer = new Stopwatch();
         async Task TimerAsync()
         {
-            Stopwatch stopwatch = Stopwatch.StartNew();
+            TotalTimer.Start();
             while (!stop)
             {
                 await Task.Run(() =>
                 {
-                    SampleLength = stopwatch.Elapsed.TotalSeconds;
+                    SampleLength = TotalTimer.Elapsed.TotalSeconds;
                     SelectLab.Invoke(new Action(() => SelectLab.Text = "Time elapsed:\n\t" + SampleLength.ToString("0.0") + " sec"));
                 });
             }
-            stopwatch.Stop();
+            TotalTimer.Stop();
             SelectLab.Text = "Select:";
-            //SelectLab.Text = "Select:";
         }
 
 
@@ -363,7 +359,6 @@ namespace AFRMonitor
         }
 
         bool stop = true;
-        int i = 0;
         private async Task UpdateAsync()
         {
             double LastValue = 0.0;
@@ -374,7 +369,7 @@ namespace AFRMonitor
                 try
                 {
                         // Fifth scan only or timer
-                        if (i == 5 || stopwatch.IsRunning)
+                        if (Values.Count == 5 || stopwatch.IsRunning)
                         {
                             if(stopwatch.IsRunning)
                             {
@@ -388,9 +383,12 @@ namespace AFRMonitor
                             }
                         }
 
-                        i++;
                         string PortOutput = SerialP.ReadLine().ToString();;
                         double PortOutputDouble = Convert.ToDouble(SerialP.ReadLine().ToString());
+
+                        LowestValue(Convert.ToDouble(PortOutput) / 10);
+                        Values.Add(Convert.ToDouble(PortOutput) / 10);
+
                         if (CurLab.InvokeRequired)
                         {
                             CurLab.Invoke(new Action(() => CurLab.Text = PortOutput));
@@ -420,8 +418,8 @@ namespace AFRMonitor
 
                             LastValue = PortOutputDouble / 10;
 
-                            // Cruising mode
-                            if (i >= 200 & Helper.CruisingMode)
+                            // Limited mode
+                            if (Values.Count >= 200 & !Helper.UnlimitedMode)
                             {
                                 ChartView.Series[0].Points.RemoveAt(0);
                             }
@@ -430,10 +428,6 @@ namespace AFRMonitor
                         {
                             ChartView.Series["Value"].Points.AddY(300 - (int)PortOutputDouble);
                         }
-
-                        LowestValue(Convert.ToDouble(PortOutput) / 10);
-                        Values.Add(Convert.ToDouble(PortOutput) / 10);
-
                     }
                     catch { }
 
@@ -467,20 +461,29 @@ namespace AFRMonitor
         {
             //SaveToFile();
 
-            if(sfd.ShowDialog() == DialogResult.OK)
-            {
-                SaveToFile(sfd);
+            //if(sfd.ShowDialog() == DialogResult.OK)
+            //{
+                SaveToFile();
                 IsSaved = true;
-            }
+            //}
 
             
         }
         public int Scans = 0;
-        private async Task SaveToFile(SaveFileDialog sfd)
+        private async Task SaveToFile(/*List<double> values, bool isAutomatic*/)
         {
-            STFB.Invoke(new Action(() => STFB.Text = "Wait"));
             string returns = "";
-            double LastValue = 0;
+            STFB.Invoke(new Action(() => STFB.Text = "Wait"));
+            DirectoryInfo di = Directory.CreateDirectory(Settings.Elements.GetInnerText("/Root/SaveLocation") + "\\AFRResults " + (Directory.GetDirectories(Settings.Elements.GetInnerText("/Root/SaveLocation")).Length + 1));
+
+            //if (Directory.GetFiles(Helper.TempFolder).Length > 0)
+            //{
+            //    foreach (string file in Directory.GetFiles(Helper.TempFolder))
+            //    {
+            //        File.Move(file, di.FullName + "\\" + Path.GetFileName(file));
+            //    }
+            //}
+
             foreach (double d in Values)
             {
                 returns += d.ToString() + "\n";
@@ -489,13 +492,16 @@ namespace AFRMonitor
 
             // Encrypt the data
             string EncOutput = await EasyEncryption.Async.EncryptStringAsync("Lowest Value: " + Helper.LowestValue + "\nScans: " + Scans.ToString() + "\nTotal Runtime: " + SampleLength.ToString("0.0") + " sec" + "\nSample Interval: " + Helper.InputInterval + "\n\nValues\n" + returns, "File encrypted by AFR Monitor, version: " + Helper.Version + " - Patrick Wildschut");
-            
+
             // Save            
-            File.WriteAllText(sfd.FileName, EncOutput);
-            
+            File.WriteAllText(di.FullName + "\\AFRResult " + (Directory.GetFiles(di.FullName).Length + 1) + ".afr", EncOutput);
+
             STFB.Invoke(new Action(() => STFB.Text = "Saved"));
             await Task.Delay(1000);
             STFB.Invoke(new Action(() => STFB.Text = "Save To File"));
+
+
+
         }
 
         private void RTB_Click(object sender, EventArgs e)
@@ -515,7 +521,16 @@ namespace AFRMonitor
             Helper.LowestValue = int.MaxValue;
             LowValueValue.Text = "--,-";
             SampleLength = 0;
-            i = 0;
+            
+            if(TotalTimer.IsRunning)
+            {
+                TotalTimer.Restart();
+            }
+            else
+            {
+                TotalTimer.Reset();
+            }
+
             GC.Collect();
             GC.WaitForPendingFinalizers();
         }

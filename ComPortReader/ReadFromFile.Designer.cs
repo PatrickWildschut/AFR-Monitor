@@ -68,7 +68,7 @@
             this.ChartReadView.Text = "chart1";
             this.ChartReadView.DragDrop += new System.Windows.Forms.DragEventHandler(this.ChartReadView_DragDrop);
             this.ChartReadView.DragEnter += new System.Windows.Forms.DragEventHandler(this.ChartReadView_DragEnter);
-            this.ChartReadView.DoubleClick += new System.EventHandler(this.ChartReadView_DoubleClick);
+            this.ChartReadView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ChartReadView_DoubleClick);
             // 
             // label1
             // 

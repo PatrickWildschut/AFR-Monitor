@@ -29,6 +29,9 @@ namespace AFRMonitor
             InitializeComponent();
             LineColor = ColorTranslator.FromHtml(Settings.Elements.GetInnerText("/Root/LineColor"));
             WarningLineColor = ColorTranslator.FromHtml(Settings.Elements.GetInnerText("/Root/WarningLineColor"));
+            ChartReadView.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
+            ChartReadView.ChartAreas[0].CursorX.AutoScroll = true;
+            ChartReadView.ChartAreas[0].CursorX.IsUserSelectionEnabled = true;
             ChartReadView.ChartAreas[0].AxisY.Minimum = 10;
             ChartReadView.ChartAreas[0].AxisY.Maximum = 20;
             ChartReadView.ChartAreas[0].AxisY.Interval = 1;
@@ -77,7 +80,7 @@ namespace AFRMonitor
                         {
                             Times++;
                             i = 0;
-                            clSave.Add(new CustomLabel(5 * Times - 5, 5 * Times + 5, Convert.ToInt32((Convert.ToDouble(InputInterval) / 1000 * 5 * Times)).ToString(), 0, LabelMarkStyle.None, GridTickTypes.All)); ;
+                            clSave.Add(new CustomLabel(5 * Times - 5, 5 * Times + 5, Convert.ToDouble((Convert.ToDouble(InputInterval) / 1000 * 5 * Times)).ToString("0.0"), 0, LabelMarkStyle.None, GridTickTypes.All)); ;
                         }
                         else
                         {
@@ -86,14 +89,14 @@ namespace AFRMonitor
                                 Times++;
                                 i = 0;
                                 //clSave.Add(new CustomLabel(20.7 * Times - 5, 20.7 * Times + 5, (3.5 * Times).ToString(), 0, LabelMarkStyle.None, GridTickTypes.All));
-                                clSave.Add(new CustomLabel(20 * Times - 5, 20 * Times + 5, Convert.ToInt32((Convert.ToDouble(InputInterval) / 1000 * 20 * Times)).ToString(), 0, LabelMarkStyle.None, GridTickTypes.All));
+                                clSave.Add(new CustomLabel(20 * Times - 5, 20 * Times + 5, Convert.ToDouble((Convert.ToDouble(InputInterval) / 1000 * 20 * Times)).ToString("0.0"), 0, LabelMarkStyle.None, GridTickTypes.All));
                             }
                             else if (i >= 50)
                             {
                                 Times++;
                                 i = 0;
                                 //clSave.Add(new CustomLabel(50.5 * Times - 10, 50.5 * Times + 10, (8.5 * Times).ToString(), 0, LabelMarkStyle.None, GridTickTypes.All));
-                                clSave.Add(new CustomLabel(50 * Times - 10, 50 * Times + 10, Convert.ToInt32((Convert.ToDouble(InputInterval) / 1000 * 50 * Times)).ToString(), 0, LabelMarkStyle.None, GridTickTypes.All));
+                                clSave.Add(new CustomLabel(50 * Times - 10, 50 * Times + 10, Convert.ToDouble((Convert.ToDouble(InputInterval) / 1000 * 50 * Times)).ToString("0.0"), 0, LabelMarkStyle.None, GridTickTypes.All));
                             }
                         }
                     }
@@ -139,12 +142,14 @@ namespace AFRMonitor
             });
         }
         Task RunningPlaybackChart;
-        private void ChartReadView_DoubleClick(object sender, EventArgs e)
+        private void ChartReadView_DoubleClick(object sender, MouseEventArgs e)
         {
-            if(RunningPlaybackChart == null || RunningPlaybackChart.IsCompleted)
+            if (RunningPlaybackChart == null || RunningPlaybackChart.IsCompleted)
             {
                 RunningPlaybackChart = PlaybackChart();
             }
+            //MessageBox.Show(ChartReadView.ChartAreas[0].AxisX.PixelPositionToValue(e.X).ToString());
+
         }
 
         private void ChartReadView_DragDrop(object sender, DragEventArgs e)
@@ -178,8 +183,6 @@ namespace AFRMonitor
                 {
                     ChartReadView.ChartAreas[0].AxisX.CustomLabels.Add(cl);
                 }
-
-
             }
             else
             {

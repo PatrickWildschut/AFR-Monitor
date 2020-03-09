@@ -1,6 +1,7 @@
 ﻿using System.PW.Xml;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace AFRMonitor
 {
@@ -9,7 +10,8 @@ namespace AFRMonitor
         public static string ActivationFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\AFR Monitor";
         public static string ActivationXmlLocation = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\AFR Monitor\\Activation.xml";
         public static string SettingsFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor";
-        public static string SettingsXmlLocation = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\cfg.xml";
+        public static string SettingsXmlLocation = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\config\\cfg.xml";
+        //public static string TempFolder = Path.GetTempPath() + "\\AFR Monitor";
         private static EasyXML xml = new EasyXML(ActivationXmlLocation);
 
         public static bool ForceQuit { get; private set; } = false;
@@ -28,7 +30,7 @@ namespace AFRMonitor
         public static int UsageVariable = 0; // 1 = Voice Control, 2 = Button Control
         public static double LowestValue = int.MaxValue;
         public static bool CountDown = false;
-        public static bool CruisingMode = false;
+        public static bool UnlimitedMode = false;
         public static string ReadFileLocation = "";
         public static double WarningSlider = 0;
         public static double InputInterval = 200;
