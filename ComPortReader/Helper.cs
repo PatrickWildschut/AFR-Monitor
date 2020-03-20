@@ -31,7 +31,7 @@ namespace AFRMonitor
         public static double LowestValue = int.MaxValue;
         public static bool CountDown = false;
         public static bool UnlimitedMode = false;
-        public static string ReadFileLocation = "";
+        public static string ReadFileLocation = string.Empty;
         public static double WarningSlider = 0;
         public static double InputInterval = 200;
         public static string Pass = "DjPatrick0302";

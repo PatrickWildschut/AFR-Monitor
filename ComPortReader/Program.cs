@@ -14,27 +14,14 @@ namespace AFRMonitor
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //if(Registry.CurrentConfig.OpenSubKey("Software\\AFRMonitor") == null)
-            //{
-            //    RegistryKey key = Registry.CurrentConfig.CreateSubKey("Software\\AFRMonitor");
-            //    key.SetValue("TrialOpen", 31);
-            //    key.Close();
-            //}
 
-            //if(Registry.CurrentUser.OpenSubKey("Software\\AFRMonitor") == null)
-            //{
-            //    RegistryKey key = Registry.CurrentUser.CreateSubKey("Software\\AFRMonitor");
-            //    key.SetValue("Activation", 0x03029876);
-            //    key.SetValue("LastKnownTime", 31);
-            //    key.Close();
-            //}
             Start:
             // Activation XML
-            if(!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\AFR Monitor"))
+            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\AFR Monitor"))
             {
                 Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\AFR Monitor");
             }
@@ -54,7 +41,7 @@ namespace AFRMonitor
             }
             else
             {
-                if(!EasyXML.TryLoad(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\AFR Monitor\\Activation.xml"))
+                if (!EasyXML.TryLoad(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\AFR Monitor\\Activation.xml"))
                 {
                     File.Delete(Helper.ActivationXmlLocation);
                     goto Start;
@@ -63,7 +50,7 @@ namespace AFRMonitor
 
             // Settings XML
             // Create directories
-            if(!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\data"))
+            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\data"))
             {
                 Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\data");
             }
@@ -71,19 +58,6 @@ namespace AFRMonitor
             {
                 Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\config");
             }
-
-            //if(!Directory.Exists(Path.GetTempPath() + "\\AFR Monitor"))
-            //{
-            //    Directory.CreateDirectory(Path.GetTempPath() + "\\AFR Monitor");
-            //}
-            //// Directory does exist
-            //else
-            //{
-            //    foreach(string file in Directory.GetFiles(Path.GetTempPath() + "\\AFR Monitor"))
-            //    {
-            //        File.Delete(file);
-            //    }
-            //}
 
             // Create XML's
             if (!File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\config\\cfg.xml"))
@@ -121,7 +95,20 @@ namespace AFRMonitor
             Helper.ValidActivationKeys.Add("p4we98043nnw");
             Helper.ValidActivationKeys.Add("p5io69270mow");
 
-            /*try { */Application.Run(new Starter()); //} catch { }
+            // If we have arguments, in other words, if this program has been opened using a afr file. 
+            if (args.Length > 0)
+            {
+                Helper.ReadFileLocation = args[0];
+                Application.Run(new ReadFFile());
+            }
+            // Not opened using afr file. Start program normally
+            else
+            {
+                /*try { */
+                Application.Run(new Starter()); //} catch { }
+            }
+            
+            
         }
     }
 }
