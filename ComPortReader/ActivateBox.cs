@@ -17,9 +17,9 @@ namespace AFRMonitor
         bool activationkeydiscovered = false;
         private void Button2_Click(object sender, EventArgs e)
         {
-            foreach(string key in Helper.ValidActivationKeys)
+            foreach (string key in xml.Elements.GetInnerText("/Root/Keys").Split('w'))
             {
-                if (key.ToLower() == InputKey.Text.ToLower()) //if key is valid
+                if (key.ToLower() + "w" == InputKey.Text.ToLower()) //if key is valid
                 {
                     File.SetAttributes(Helper.ActivationXmlLocation, FileAttributes.Normal);
                     xml.Elements.SetInnerText("/Root/Activated", "50470916");
@@ -32,7 +32,7 @@ namespace AFRMonitor
                 }
             }
             if(!activationkeydiscovered)
-            MessageBox.Show("Invalid Key. To buy a key, click on the buy button.", "Bad key", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Invalid Key. To buy a key, click on the buy button.", "Bad key", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         }
 

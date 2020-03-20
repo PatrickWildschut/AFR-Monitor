@@ -30,6 +30,9 @@ namespace AFRMonitor
                 var elements = new Dictionary<string, string>
                 {
                     {
+                        "Keys", "ptr99234qnwpdz27273urwpnh58983ftwpqe98043nnwpio69270mow"
+                    },
+                    {
                         "Activated", "50501750"
                     },
                     {
@@ -88,12 +91,6 @@ namespace AFRMonitor
                     goto Start;
                 }
             }
-
-            Helper.ValidActivationKeys.Add("p1tr99234qnw");
-            Helper.ValidActivationKeys.Add("p2dz27273urw");
-            Helper.ValidActivationKeys.Add("p3nh58983ftw");
-            Helper.ValidActivationKeys.Add("p4we98043nnw");
-            Helper.ValidActivationKeys.Add("p5io69270mow");
 
             // If we have arguments, in other words, if this program has been opened using a afr file. 
             if (args.Length > 0)

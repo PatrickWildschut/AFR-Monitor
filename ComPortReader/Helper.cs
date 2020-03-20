@@ -16,8 +16,6 @@ namespace AFRMonitor
 
         public static bool ForceQuit { get; private set; } = false;
 
-        public static List<string> ValidActivationKeys = new List<string>();
-
         public static bool ToggleForceQuit(bool tof)
         {
             return ForceQuit = tof;
