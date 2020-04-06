@@ -78,6 +78,12 @@ namespace AFRMonitor
                     },
                     {
                         "SaveLocation", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\data"
+                    },
+                    {
+                        "LowBoostBHP", "0"
+                    },
+                    {
+                        "HighBoostBHP", "0"
                     }
                 };
 

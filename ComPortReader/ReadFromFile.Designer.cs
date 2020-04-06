@@ -42,6 +42,7 @@
             this.SamplesLab = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tCheck = new System.Windows.Forms.CheckBox();
+            this.BoostLAB = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ChartReadView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -170,12 +171,24 @@
             this.tCheck.UseVisualStyleBackColor = true;
             this.tCheck.CheckedChanged += new System.EventHandler(this.TCheck_CheckedChanged);
             // 
+            // BoostLAB
+            // 
+            this.BoostLAB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.BoostLAB.AutoSize = true;
+            this.BoostLAB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BoostLAB.Location = new System.Drawing.Point(352, 20);
+            this.BoostLAB.Name = "BoostLAB";
+            this.BoostLAB.Size = new System.Drawing.Size(131, 13);
+            this.BoostLAB.TabIndex = 10;
+            this.BoostLAB.Text = "High Boost (383 BHP)";
+            // 
             // ReadFFile
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(836, 429);
+            this.Controls.Add(this.BoostLAB);
             this.Controls.Add(this.tCheck);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.SamplesLab);
@@ -207,5 +220,6 @@
         private System.Windows.Forms.Label SamplesLab;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox tCheck;
+        private System.Windows.Forms.Label BoostLAB;
     }
 }

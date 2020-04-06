@@ -31,6 +31,8 @@ namespace AFRMonitor
         public static bool UnlimitedMode = false;
         public static string ReadFileLocation = string.Empty;
         public static double WarningSlider = 0;
+        public static int LowBoostBHP = 0;
+        public static int HighBoostBHP = 0;
         public static double InputInterval = 200;
         public static string Pass = "DjPatrick0302";
         public static string Version = string.Empty;

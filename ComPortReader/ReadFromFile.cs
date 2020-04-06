@@ -46,11 +46,21 @@ namespace AFRMonitor
             #region Chart
             try
             {
-                #region Label
+                #region Labels
                 Decrypted = await EasyEncryption.Async.DecryptStringAsync(File.ReadAllText(Helper.ReadFileLocation));
                 OutLabText = Decrypted.Split(':');
                 TTRTValue.Text = OutLabText[3].Split('\n')[0].Trim(' ');
                 LowValValue.Text = OutLabText[1].Split('\n')[0].Trim(' ');
+
+                if (OutLabText[2].Split('\n')[0].Trim(' ') == "True")
+                {
+                    BoostLAB.Text = "High Boost (" + Settings.Elements.GetInnerText("/Root/HighBoostBHP") + " BHP)";
+                }
+                else
+                {
+                    BoostLAB.Text = "Low Boost (" + Settings.Elements.GetInnerText("/Root/LowBoostBHP") + " BHP)";
+                }
+
                 #endregion
 
                 int i = 0;
@@ -76,11 +86,11 @@ namespace AFRMonitor
                         LastValue = Convert.ToDouble(d);
 
                         i++;
-                        if(i >= 5 && OutSepText.Length <= 40)
+                        if (i >= 5 && OutSepText.Length <= 40)
                         {
                             Times++;
                             i = 0;
-                            clSave.Add(new CustomLabel(5 * Times - 5, 5 * Times + 5, Convert.ToDouble((Convert.ToDouble(InputInterval) / 1000 * 5 * Times)).ToString("0.0"), 0, LabelMarkStyle.None, GridTickTypes.All)); ;
+                            clSave.Add(new CustomLabel(5 * Times - 5, 5 * Times + 5, Convert.ToDouble((Convert.ToDouble(InputInterval) / 1000 * 5 * Times)).ToString("0.0"), 0, LabelMarkStyle.None, GridTickTypes.All));
                         }
                         else
                         {
@@ -107,7 +117,7 @@ namespace AFRMonitor
             
                 #endregion
             }
-            catch { MessageBox.Show("Corrupted afr file.", "Corrupted", MessageBoxButtons.OK, MessageBoxIcon.Error); this.Close(); }
+            catch { MessageBox.Show("Corrupted .afr file.", "Corrupted", MessageBoxButtons.OK, MessageBoxIcon.Error); this.Close(); }
         }
 
         private async Task PlaybackChart()

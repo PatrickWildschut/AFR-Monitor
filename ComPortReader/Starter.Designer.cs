@@ -41,6 +41,10 @@
             this.FreeLab = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.SettingsPage = new System.Windows.Forms.TabPage();
+            this.LBSTLAB = new System.Windows.Forms.Label();
+            this.HBSTLAB = new System.Windows.Forms.Label();
+            this.LowBSTNUM = new System.Windows.Forms.NumericUpDown();
+            this.HighBSTNUM = new System.Windows.Forms.NumericUpDown();
             this.FileSaveBut = new System.Windows.Forms.Button();
             this.WarChartLinePicBox = new System.Windows.Forms.PictureBox();
             this.ChartLinePicBox = new System.Windows.Forms.PictureBox();
@@ -61,6 +65,8 @@
             this.StartPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SettingsPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LowBSTNUM)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HighBSTNUM)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WarChartLinePicBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ChartLinePicBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WarningTrack)).BeginInit();
@@ -210,6 +216,10 @@
             // 
             // SettingsPage
             // 
+            this.SettingsPage.Controls.Add(this.LBSTLAB);
+            this.SettingsPage.Controls.Add(this.HBSTLAB);
+            this.SettingsPage.Controls.Add(this.LowBSTNUM);
+            this.SettingsPage.Controls.Add(this.HighBSTNUM);
             this.SettingsPage.Controls.Add(this.FileSaveBut);
             this.SettingsPage.Controls.Add(this.WarChartLinePicBox);
             this.SettingsPage.Controls.Add(this.ChartLinePicBox);
@@ -226,12 +236,54 @@
             this.SettingsPage.Text = "Settings";
             this.SettingsPage.UseVisualStyleBackColor = true;
             // 
+            // LBSTLAB
+            // 
+            this.LBSTLAB.AutoSize = true;
+            this.LBSTLAB.Location = new System.Drawing.Point(316, 133);
+            this.LBSTLAB.Name = "LBSTLAB";
+            this.LBSTLAB.Size = new System.Drawing.Size(82, 13);
+            this.LBSTLAB.TabIndex = 13;
+            this.LBSTLAB.Text = "Low Boost BHP";
+            // 
+            // HBSTLAB
+            // 
+            this.HBSTLAB.AutoSize = true;
+            this.HBSTLAB.Location = new System.Drawing.Point(315, 41);
+            this.HBSTLAB.Name = "HBSTLAB";
+            this.HBSTLAB.Size = new System.Drawing.Size(84, 13);
+            this.HBSTLAB.TabIndex = 12;
+            this.HBSTLAB.Text = "High Boost BHP";
+            // 
+            // LowBSTNUM
+            // 
+            this.LowBSTNUM.Location = new System.Drawing.Point(323, 149);
+            this.LowBSTNUM.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.LowBSTNUM.Name = "LowBSTNUM";
+            this.LowBSTNUM.Size = new System.Drawing.Size(67, 20);
+            this.LowBSTNUM.TabIndex = 11;
+            // 
+            // HighBSTNUM
+            // 
+            this.HighBSTNUM.Location = new System.Drawing.Point(323, 57);
+            this.HighBSTNUM.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.HighBSTNUM.Name = "HighBSTNUM";
+            this.HighBSTNUM.Size = new System.Drawing.Size(67, 20);
+            this.HighBSTNUM.TabIndex = 10;
+            // 
             // FileSaveBut
             // 
             this.FileSaveBut.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FileSaveBut.Location = new System.Drawing.Point(385, 110);
+            this.FileSaveBut.Location = new System.Drawing.Point(428, 110);
             this.FileSaveBut.Name = "FileSaveBut";
-            this.FileSaveBut.Size = new System.Drawing.Size(147, 59);
+            this.FileSaveBut.Size = new System.Drawing.Size(104, 59);
             this.FileSaveBut.TabIndex = 9;
             this.FileSaveBut.Text = "AFR file save location";
             this.FileSaveBut.UseVisualStyleBackColor = true;
@@ -367,9 +419,9 @@
             this.ReleaseDateLab.AutoSize = true;
             this.ReleaseDateLab.Location = new System.Drawing.Point(177, 168);
             this.ReleaseDateLab.Name = "ReleaseDateLab";
-            this.ReleaseDateLab.Size = new System.Drawing.Size(213, 13);
+            this.ReleaseDateLab.Size = new System.Drawing.Size(197, 13);
             this.ReleaseDateLab.TabIndex = 3;
-            this.ReleaseDateLab.Text = "Current Build Release Date: 20 March 2020";
+            this.ReleaseDateLab.Text = "Current Build Release Date: 6 April 2020";
             // 
             // label3
             // 
@@ -420,6 +472,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.SettingsPage.ResumeLayout(false);
             this.SettingsPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LowBSTNUM)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HighBSTNUM)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.WarChartLinePicBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ChartLinePicBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.WarningTrack)).EndInit();
@@ -460,5 +514,9 @@
         private System.Windows.Forms.PictureBox WarChartLinePicBox;
         private System.Windows.Forms.PictureBox ChartLinePicBox;
         private System.Windows.Forms.Button FileSaveBut;
+        private System.Windows.Forms.Label LBSTLAB;
+        private System.Windows.Forms.Label HBSTLAB;
+        private System.Windows.Forms.NumericUpDown LowBSTNUM;
+        private System.Windows.Forms.NumericUpDown HighBSTNUM;
     }
 }

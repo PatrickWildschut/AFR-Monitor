@@ -45,7 +45,7 @@
             this.ChartView = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.LowValLab = new System.Windows.Forms.Label();
             this.LowValueValue = new System.Windows.Forms.Label();
-            this.STFB = new System.Windows.Forms.Button();
+            this.STFLB = new System.Windows.Forms.Button();
             this.RTB = new System.Windows.Forms.Button();
             this.FourteenSaveLab = new System.Windows.Forms.Label();
             this.FourteenLab = new System.Windows.Forms.Label();
@@ -59,6 +59,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.STFHB = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ChartView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -83,9 +84,9 @@
             // StBut
             // 
             this.StBut.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StBut.Location = new System.Drawing.Point(237, 9);
+            this.StBut.Location = new System.Drawing.Point(233, 9);
             this.StBut.Name = "StBut";
-            this.StBut.Size = new System.Drawing.Size(127, 44);
+            this.StBut.Size = new System.Drawing.Size(174, 44);
             this.StBut.TabIndex = 2;
             this.StBut.Text = "Start";
             this.StBut.UseVisualStyleBackColor = true;
@@ -200,23 +201,23 @@
             this.LowValueValue.TabIndex = 11;
             this.LowValueValue.Text = "--,-";
             // 
-            // STFB
+            // STFLB
             // 
-            this.STFB.Enabled = false;
-            this.STFB.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.STFB.Location = new System.Drawing.Point(280, 75);
-            this.STFB.Name = "STFB";
-            this.STFB.Size = new System.Drawing.Size(84, 44);
-            this.STFB.TabIndex = 12;
-            this.STFB.Text = "Save To File";
-            this.STFB.UseVisualStyleBackColor = true;
-            this.STFB.Click += new System.EventHandler(this.STFB_Click);
+            this.STFLB.Enabled = false;
+            this.STFLB.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.STFLB.Location = new System.Drawing.Point(233, 75);
+            this.STFLB.Name = "STFLB";
+            this.STFLB.Size = new System.Drawing.Size(84, 44);
+            this.STFLB.TabIndex = 12;
+            this.STFLB.Text = "Save Low Boost";
+            this.STFLB.UseVisualStyleBackColor = true;
+            this.STFLB.Click += new System.EventHandler(this.STFB_Click);
             // 
             // RTB
             // 
             this.RTB.Enabled = false;
             this.RTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RTB.Location = new System.Drawing.Point(190, 75);
+            this.RTB.Location = new System.Drawing.Point(143, 75);
             this.RTB.Name = "RTB";
             this.RTB.Size = new System.Drawing.Size(84, 44);
             this.RTB.TabIndex = 13;
@@ -331,11 +332,24 @@
             this.label4.TabIndex = 24;
             this.label4.Text = "20,0";
             // 
+            // STFHB
+            // 
+            this.STFHB.Enabled = false;
+            this.STFHB.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.STFHB.Location = new System.Drawing.Point(323, 75);
+            this.STFHB.Name = "STFHB";
+            this.STFHB.Size = new System.Drawing.Size(84, 44);
+            this.STFHB.TabIndex = 25;
+            this.STFHB.Text = "Save High Boost";
+            this.STFHB.UseVisualStyleBackColor = true;
+            this.STFHB.Click += new System.EventHandler(this.STFHB_Click);
+            // 
             // AFRMonitor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(609, 596);
+            this.Controls.Add(this.STFHB);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -348,7 +362,7 @@
             this.Controls.Add(this.FourteenLab);
             this.Controls.Add(this.FourteenSaveLab);
             this.Controls.Add(this.RTB);
-            this.Controls.Add(this.STFB);
+            this.Controls.Add(this.STFLB);
             this.Controls.Add(this.LowValueValue);
             this.Controls.Add(this.LowValLab);
             this.Controls.Add(this.ChartView);
@@ -389,7 +403,7 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart ChartView;
         private System.Windows.Forms.Label LowValLab;
         private System.Windows.Forms.Label LowValueValue;
-        private System.Windows.Forms.Button STFB;
+        private System.Windows.Forms.Button STFLB;
         private System.Windows.Forms.Button RTB;
         private System.Windows.Forms.Label FourteenSaveLab;
         private System.Windows.Forms.Label FourteenLab;
@@ -403,6 +417,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button STFHB;
     }
 }
 

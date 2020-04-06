@@ -23,12 +23,11 @@ namespace AFRMonitor
         Color WarningLineColor = ColorTranslator.FromHtml(Settings.Elements.GetInnerText("/Root/WarningLineColor"));
 
         // For voice control only
-
         SpeechRecognitionEngine sre = new SpeechRecognitionEngine();
         SpeechSynthesizer synthesizer = new SpeechSynthesizer();
         SaveFileDialog sfd = new SaveFileDialog()
         {
-            DefaultExt = "txt", Filter = "AFR File (*.afr)|*.afr|All files (*.*)|*.*"
+            DefaultExt = "txt", Filter = "Air Fuel Ratio File (*.afr)|*.afr|All files (*.*)|*.*"
         };
         int CountDownCount = 3;
         List<double> Values = new List<double>();
@@ -241,9 +240,6 @@ namespace AFRMonitor
             {
                 if (ComSelector.Items.Count > 0)
                 {
-                    stop = false;
-                    STFB.Enabled = true;
-                    RTB.Enabled = true;
                     if (Helper.CountDown)
                     {
                         CountDown();
@@ -290,18 +286,18 @@ namespace AFRMonitor
             {
                 if(MessageBox.Show("Are you sure you want to exit without saving?", "Save or quit", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                 {
-                    //if(sfd.ShowDialog() == DialogResult.OK)
-                    //{
-                        SaveToFile();
-                        IsSaved = true;
-                    //}
-                    
+                    e.Cancel = true;
                 }
             }
         }
 
         private void Start()
         {
+            RTB.Enabled = true;
+            STFLB.Text = "Save Low Boost";
+            STFHB.Text = "Save High Boost";
+            STFLB.Enabled = true;
+            STFHB.Enabled = true;
             IsSaved = false;
             StBut.Text = "Stop";
             SelectLab.Location = new Point(SelectLab.Location.X + 25, SelectLab.Location.Y);
@@ -457,65 +453,93 @@ namespace AFRMonitor
             }
         }
 
+        // Low boost save click
         private void STFB_Click(object sender, EventArgs e)
         {
-            //SaveToFile();
-
-            //if(sfd.ShowDialog() == DialogResult.OK)
-            //{
-                SaveToFile();
-                IsSaved = true;
-            //}
-
-            
+            SaveToFile(false);
+            IsSaved = true;
         }
-        public int Scans = 0;
-        private async Task SaveToFile(/*List<double> values, bool isAutomatic*/)
+
+
+        // High boost save click
+        private void STFHB_Click(object sender, EventArgs e)
+        {
+            SaveToFile(true);
+            IsSaved = true;
+        }
+
+        private async Task SaveToFile(bool HighBoost, int ShowSavedTime = 5000)
         {
             string returns = "";
-            STFB.Invoke(new Action(() => STFB.Text = "Wait"));
-            DirectoryInfo di = Directory.CreateDirectory(Settings.Elements.GetInnerText("/Root/SaveLocation") + "\\AFRResults " + (Directory.GetDirectories(Settings.Elements.GetInnerText("/Root/SaveLocation")).Length + 1));
 
-            //if (Directory.GetFiles(Helper.TempFolder).Length > 0)
-            //{
-            //    foreach (string file in Directory.GetFiles(Helper.TempFolder))
-            //    {
-            //        File.Move(file, di.FullName + "\\" + Path.GetFileName(file));
-            //    }
-            //}
+            // Save depending on highboost or lowboost
+            if (HighBoost)
+            {
+                STFHB.Invoke(new Action(() => STFHB.Text = "Wait"));
+                STFLB.Enabled = false;
+
+                // Create directory if it doesn't exist
+                if (!Directory.Exists(Settings.Elements.GetInnerText("/Root/SaveLocation") + "\\HighBoostResults"))
+                {
+                    Directory.CreateDirectory(Settings.Elements.GetInnerText("/Root/SaveLocation") + "\\HighBoostResults");
+                }
+            }
+            else
+            {
+                STFLB.Invoke(new Action(() => STFLB.Text = "Wait"));
+                STFHB.Enabled = false;
+
+                // Create directory if it doesn't exist
+                if(!Directory.Exists(Settings.Elements.GetInnerText("/Root/SaveLocation") + "\\LowBoostResults"))
+                {
+                    Directory.CreateDirectory(Settings.Elements.GetInnerText("/Root/SaveLocation") + "\\LowBoostResults");
+                }
+            }
 
             foreach (double d in Values)
             {
                 returns += d.ToString() + "\n";
-                Scans++;
             }
 
             // Encrypt the data
-            string EncOutput = await EasyEncryption.Async.EncryptStringAsync("Lowest Value: " + Helper.LowestValue + "\nScans: " + Scans.ToString() + "\nTotal Runtime: " + SampleLength.ToString("0.0") + " sec" + "\nSample Interval: " + Helper.InputInterval + "\n\nValues\n" + returns, "File encrypted by AFR Monitor, version: " + Helper.Version + " - Patrick Wildschut");
-
-            // Save            
-            File.WriteAllText(di.FullName + "\\AFRResult " + (Directory.GetFiles(di.FullName).Length + 1) + ".afr", EncOutput);
-
-            STFB.Invoke(new Action(() => STFB.Text = "Saved"));
-            await Task.Delay(1000);
-            STFB.Invoke(new Action(() => STFB.Text = "Save To File"));
+            string EncOutput = await EasyEncryption.Async.EncryptStringAsync("Lowest Value: " + Helper.LowestValue + "\nHigh Boost: " + HighBoost.ToString() + "\nTotal Runtime: " + SampleLength.ToString("0.0") + " sec" + "\nSample Interval: " + Helper.InputInterval + "\n\nValues\n" + returns, "File encrypted by AFR Monitor, version: " + Helper.Version + " - Patrick Wildschut");
 
 
+            // Save
+            if(HighBoost)
+            {
+                File.WriteAllText(Settings.Elements.GetInnerText("/Root/SaveLocation") + "\\HighBoostResults" + "\\" + (Directory.GetFiles(Settings.Elements.GetInnerText("/Root/SaveLocation") + "\\HighBoostResults").Length + 1) + ".afr", EncOutput);
 
+                STFHB.Invoke(new Action(() => STFHB.Text = "Saved"));
+                //await Task.Delay(ShowSavedTime);
+                //STFLB.Invoke(new Action(() => STFLB.Text = "Save To File"));
+            }
+            else
+            {
+                File.WriteAllText(Settings.Elements.GetInnerText("/Root/SaveLocation") + "\\LowBoostResults" + "\\" + (Directory.GetFiles(Settings.Elements.GetInnerText("/Root/SaveLocation") + "\\LowBoostResults").Length + 1) + ".afr", EncOutput);
+                
+                STFLB.Invoke(new Action(() => STFLB.Text = "Saved"));
+                //await Task.Delay(ShowSavedTime);
+                //STFLB.Invoke(new Action(() => STFLB.Text = "Save To File"));
+            }
         }
 
         private void RTB_Click(object sender, EventArgs e)
         {
             if(!stop)
             {
-                STFB.Enabled = true;
+                STFLB.Enabled = true;
+                STFHB.Enabled = true;
                 RTB.Enabled = true;
             }
             else
             {
-                STFB.Enabled = false;
+                STFLB.Enabled = false;
+                STFHB.Enabled = false;
                 RTB.Enabled = false;
             }
+            STFLB.Text = "Save Low Boost";
+            STFHB.Text = "Save High Boost";
             Values.Clear();
             ChartView.Series["Value"].Points.Clear();
             Helper.LowestValue = int.MaxValue;
@@ -537,6 +561,7 @@ namespace AFRMonitor
 
         private async void CountDown()
         {
+            StBut.Text = "Stop";
             while (CountDownCount > 0)
             {
                 CurLab.Visible = true;

@@ -22,7 +22,11 @@ namespace AFRMonitor
             Helper.Version = this.ProductVersion;
             VersionLab.Text = "Version: " + this.ProductVersion;
 
-            ofd = new OpenFileDialog() { Multiselect = false, InitialDirectory = Settings.Elements.GetInnerText("/Root/SaveLocation"), Filter = "AFR File (*.afr)|*.afr" };
+            // Setup BHP setters
+            LowBSTNUM.Value = Convert.ToInt32(Settings.Elements.GetInnerText("/Root/LowBoostBHP"));
+            HighBSTNUM.Value = Convert.ToInt32(Settings.Elements.GetInnerText("/Root/HighBoostBHP"));
+
+            ofd = new OpenFileDialog() { Multiselect = false, InitialDirectory = Settings.Elements.GetInnerText("/Root/SaveLocation"), Filter = "Air Fuel Ratio File (*.afr)|*.afr" };
 
             // Setup line color view in settings
             ChartLinePicBox.BackColor = ColorTranslator.FromHtml(Settings.Elements.GetInnerText("/Root/LineColor"));
@@ -32,8 +36,7 @@ namespace AFRMonitor
             {
                 VCont.Enabled = false;
                 ActivatedIt = false;
-                RFFBut.Enabled = false;
-                UnlimitedCheck.Enabled = false;
+                CDCheck.Enabled = false;
                 ActBut.Visible = true;
                 FreeDays.Visible = true;
                 if (Helper.Restart)
@@ -66,26 +69,46 @@ namespace AFRMonitor
             WarningTrack.Value = Convert.ToInt32(Settings.Elements.GetInnerText("/Root/Difference"));
         }
 
+        // Button control button clicked
         private void BCont_Click(object sender, EventArgs e)
         {
-            Helper.WarningSlider = WarningTrack.Value;
-
-            // Save slider value to the settings xml
-            Settings.Elements.SetInnerText("/Root/Difference", Helper.WarningSlider.ToString());
+            SaveValues();
 
             Helper.UsageVariable = 2;
             new AFRMonitor().ShowDialog();
         }
 
+        // Voice control button clicked
         private void VCont_Click(object sender, EventArgs e)
         {
-            Helper.WarningSlider = WarningTrack.Value;
-
-            // Save slider value to the settings xml
-            Settings.Elements.SetInnerText("/Root/Difference", Helper.WarningSlider.ToString());
+            SaveValues();
 
             Helper.UsageVariable = 1;
             new AFRMonitor().ShowDialog();
+        }
+
+        // Read from file button clicked
+        private void RFFBut_Click(object sender, EventArgs e)
+        {
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                SaveValues();
+
+                Helper.ReadFileLocation = ofd.FileName;
+                try { new ReadFFile().ShowDialog(); } catch { }
+            }
+        }
+
+        private void SaveValues()
+        {
+            Helper.WarningSlider = WarningTrack.Value;
+            Helper.LowBoostBHP = Decimal.ToInt32(LowBSTNUM.Value);
+            Helper.HighBoostBHP = Decimal.ToInt32(HighBSTNUM.Value);
+
+            // Save values to the settings xml
+            Settings.Elements.SetInnerText("/Root/Difference", Helper.WarningSlider.ToString());
+            Settings.Elements.SetInnerText("/Root/LowBoostBHP", Helper.LowBoostBHP.ToString());
+            Settings.Elements.SetInnerText("/Root/HighBoostBHP", Helper.HighBoostBHP.ToString());
         }
 
         private void CDCheck_CheckedChanged(object sender, EventArgs e)
@@ -102,20 +125,6 @@ namespace AFRMonitor
             else
             {
                 Helper.UnlimitedMode = false;
-            }
-        }
-
-        private void RFFBut_Click(object sender, EventArgs e)
-        {
-            if(ofd.ShowDialog() == DialogResult.OK)
-            {
-                Helper.WarningSlider = WarningTrack.Value;
-
-                // Save slider value to the settings xml
-                Settings.Elements.SetInnerText("/Root/Difference", Helper.WarningSlider.ToString());
-
-                Helper.ReadFileLocation = ofd.FileName;
-                try { new ReadFFile().ShowDialog(); } catch { }
             }
         }
 
