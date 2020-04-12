@@ -5,6 +5,8 @@ using System.Windows.Forms;
 using System.PW.Xml;
 using System.Drawing;
 using System.Reflection;
+using System.Threading;
+using Tulpep.NotificationWindow;
 
 namespace AFRMonitor
 {
@@ -19,14 +21,18 @@ namespace AFRMonitor
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            bool HasToCreate = false;
+
             Start:
             // Activation XML
             if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\AFR Monitor"))
             {
                 Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\AFR Monitor");
+                HasToCreate = true;
             }
             if (!File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\AFR Monitor\\Activation.xml"))
             {
+                HasToCreate = true;
                 var elements = new Dictionary<string, string>
                 {
                     {
@@ -36,7 +42,16 @@ namespace AFRMonitor
                         "Activated", "50501750"
                     },
                     {
+                        "LicenseFullName", "NULL"
+                    },
+                    {
                         "TrialDays", "31"
+                    },
+                    {
+                        "BrandType", "NULL"
+                    },
+                    {
+                        "LicensePlate", "NULL"
                     }
                 };
                 new EasyXML(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\AFR Monitor\\Activation.xml", elements);
@@ -47,6 +62,7 @@ namespace AFRMonitor
                 if (!EasyXML.TryLoad(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\AFR Monitor\\Activation.xml"))
                 {
                     File.Delete(Helper.ActivationXmlLocation);
+                    HasToCreate = true;
                     goto Start;
                 }
             }
@@ -56,15 +72,18 @@ namespace AFRMonitor
             if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\data"))
             {
                 Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\data");
+                HasToCreate = true;
             }
             if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\config"))
             {
                 Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\config");
+                HasToCreate = true;
             }
 
             // Create XML's
             if (!File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\config\\cfg.xml"))
             {
+                HasToCreate = true;
                 var elements = new Dictionary<string, string>
                 {
                     {
@@ -94,9 +113,18 @@ namespace AFRMonitor
                 if (!EasyXML.TryLoad(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\config\\cfg.xml"))
                 {
                     File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\config\\cfg.xml");
+                    HasToCreate = true;
                     goto Start;
                 }
             }
+            
+            //if(HasToCreate)
+            //{
+            //    PopupNotifier popup = new PopupNotifier();
+            //    popup.TitleText = "AFR Monitor";
+            //    popup.ContentText = "Settings everything up, please be patient. If it takes too long, restart the program.";
+            //    popup.Popup();
+            //}
 
             // If we have arguments, in other words, if this program has been opened using a afr file. 
             if (args.Length > 0)
@@ -105,10 +133,13 @@ namespace AFRMonitor
                 Application.Run(new ReadFFile());
             }
             // Not opened using afr file. Start program normally
+            else if(!Helper.IsActivated())
+            {
+                Application.Run(new Login());
+            }
             else
             {
-                /*try { */
-                Application.Run(new Starter()); //} catch { }
+                Application.Run(new Starter());
             }
             
             

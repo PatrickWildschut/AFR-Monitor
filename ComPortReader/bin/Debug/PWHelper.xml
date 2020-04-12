@@ -72,6 +72,18 @@
             <param name="data">Input string</param>
             <returns></returns>
         </member>
+        <member name="T:System.PW.Encryption.OneLine">
+            <summary>
+            Class for encryption that only requires one line
+            </summary>
+        </member>
+        <member name="M:System.PW.Encryption.OneLine.EncryptString(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
         <member name="T:System.PW.Math.EasyMath">
             <summary>
             Main class for easy math.

@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Threading.Tasks;
+using System.Data;
 
 namespace AFRMonitor
 {
@@ -19,54 +21,43 @@ namespace AFRMonitor
         public Starter()
         {
             InitializeComponent();
-            Helper.Version = this.ProductVersion;
-            VersionLab.Text = "Version: " + this.ProductVersion;
 
-            // Setup BHP setters
-            LowBSTNUM.Value = Convert.ToInt32(Settings.Elements.GetInnerText("/Root/LowBoostBHP"));
-            HighBSTNUM.Value = Convert.ToInt32(Settings.Elements.GetInnerText("/Root/HighBoostBHP"));
-
-            ofd = new OpenFileDialog() { Multiselect = false, InitialDirectory = Settings.Elements.GetInnerText("/Root/SaveLocation"), Filter = "Air Fuel Ratio File (*.afr)|*.afr" };
-
-            // Setup line color view in settings
-            ChartLinePicBox.BackColor = ColorTranslator.FromHtml(Settings.Elements.GetInnerText("/Root/LineColor"));
-            WarChartLinePicBox.BackColor = ColorTranslator.FromHtml(Settings.Elements.GetInnerText("/Root/WarningLineColor"));
+            SetupUI();
 
             if (!Helper.IsActivated())
             {
-                VCont.Enabled = false;
-                ActivatedIt = false;
-                CDCheck.Enabled = false;
-                ActBut.Visible = true;
-                FreeDays.Visible = true;
-                if (Helper.Restart)
-                {
-                    this.Close();
-                }
-                else if (Convert.ToInt32(Activation.Elements.GetInnerText("/Root/TrialDays")) > 0)
-                {
-                    File.SetAttributes(Helper.ActivationXmlLocation, FileAttributes.Normal);
-                    Activation.Elements.SetInnerText("/Root/TrialDays", (Convert.ToInt32(Activation.Elements.GetInnerText("/Root/TrialDays")) - 1).ToString());
-                    File.SetAttributes(Helper.ActivationXmlLocation, FileAttributes.Hidden);
-                    FreeDays.Text = "Trial times left to use: " + Convert.ToInt32(Activation.Elements.GetInnerText("/Root/TrialDays"));
-                }
-                else
-                {
-                    FreeDays.Text = "Out of trial times...";
-                    BCont.Enabled = false;
-                    CDCheck.Enabled = false;
-                }
+                MessageBox.Show("Not activated, login before opening this.", "AFR Monitor Not Activated", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
             }
             else
             {
                 ActivatedIt = true;
-                FreeLab.Location = new Point(FreeLab.Location.X, FreeLab.Location.Y + 32);
-                FreeLab.Font = new Font("Arial", 9, FontStyle.Regular);
-                FreeLab.Text = "If Voice Control doesn't work, \ndouble click me";
             }
+        }
 
-            // Slider
-            WarningTrack.Value = Convert.ToInt32(Settings.Elements.GetInnerText("/Root/Difference"));
+        public async Task SetupUI()
+        {
+            await Task.Run(() => 
+            {
+                Helper.Version = this.ProductVersion;
+                VersionLab.Invoke(new Action(() => VersionLab.Text = "Version: " + this.ProductVersion));
+
+                // Setup License plate
+                LicenseLAB.Invoke(new Action(() => LicenseLAB.Text = Activation.Elements.GetInnerText("/Root/BrandType")));
+
+                // Setup BHP setters
+                LowBSTNUM.Invoke(new Action(() => LowBSTNUM.Value = Convert.ToInt32(Settings.Elements.GetInnerText("/Root/LowBoostBHP"))));
+                HighBSTNUM.Invoke(new Action(() => HighBSTNUM.Value = Convert.ToInt32(Settings.Elements.GetInnerText("/Root/HighBoostBHP"))));
+
+                ofd = new OpenFileDialog() { Multiselect = false, InitialDirectory = Settings.Elements.GetInnerText("/Root/SaveLocation"), Filter = "Air Fuel Ratio File (*.afr)|*.afr" };
+
+                // Setup line color view in settings
+                ChartLinePicBox.Invoke(new Action(() => ChartLinePicBox.BackColor = ColorTranslator.FromHtml(Settings.Elements.GetInnerText("/Root/LineColor"))));
+                WarChartLinePicBox.Invoke(new Action(() => WarChartLinePicBox.BackColor = ColorTranslator.FromHtml(Settings.Elements.GetInnerText("/Root/WarningLineColor"))));
+
+                // Slider
+                WarningTrack.Invoke(new Action(() => WarningTrack.Value = Convert.ToInt32(Settings.Elements.GetInnerText("/Root/Difference"))));
+            });
         }
 
         // Button control button clicked
@@ -133,11 +124,6 @@ namespace AFRMonitor
             Process.Start("https://www.instagram.com/patrick_wildschut/");
         }
 
-        private void ActBut_Click(object sender, EventArgs e)
-        {
-            new ActivateBox().ShowDialog();
-        }
-
         private void FreeLab_DoubleClick(object sender, EventArgs e)
         {
             if(ActivatedIt)
@@ -176,11 +162,35 @@ namespace AFRMonitor
             }
         }
 
-        private void Starter_FormClosed(object sender, FormClosedEventArgs e)
+        bool IsBrand = true;
+
+        private async void LicenseLAB_Click(object sender, EventArgs e)
         {
-            if (!Helper.IsActivated())
+            await Task.Run(() => 
             {
-                MessageBox.Show("Thank you for using my software. To buy the full version, DM me at https://www.instagram.com/patrick_wildschut \nTrial times left: " + (Convert.ToInt32(Activation.Elements.GetInnerText("/Root/TrialDays")) - 1).ToString(), "Thanks!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if(!IsBrand)
+                {
+                    LicenseLAB.Invoke(new Action(() => LicenseLAB.Text = Activation.Elements.GetInnerText("/Root/BrandType")));
+                    IsBrand = true;
+                }
+                else
+                {
+                    LicenseLAB.Invoke(new Action(() => LicenseLAB.Text = Activation.Elements.GetInnerText("/Root/LicensePlate")));
+                    IsBrand = false;
+                }
+                
+            });
+        }
+
+        private void LogOutBut_Click(object sender, EventArgs e)
+        {
+            if(MessageBox.Show("Are you sure you want to logout? You'll have to login again to use this program.\nThis program will restart.", "AFR Monitor Logout", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                File.SetAttributes(Helper.ActivationXmlLocation, FileAttributes.Normal);
+                Helper.UpdateActivation(false);
+                File.SetAttributes(Helper.ActivationXmlLocation, FileAttributes.Hidden);
+                Process.Start(Application.ExecutablePath);
+                Application.Exit();
             }
         }
     }

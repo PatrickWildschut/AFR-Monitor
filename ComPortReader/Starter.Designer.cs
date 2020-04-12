@@ -36,9 +36,7 @@
             this.RFFBut = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.StartPage = new System.Windows.Forms.TabPage();
-            this.FreeDays = new System.Windows.Forms.Label();
-            this.ActBut = new System.Windows.Forms.Button();
-            this.FreeLab = new System.Windows.Forms.Label();
+            this.LicenseLAB = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.SettingsPage = new System.Windows.Forms.TabPage();
             this.LBSTLAB = new System.Windows.Forms.Label();
@@ -61,6 +59,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.VersionLab = new System.Windows.Forms.Label();
+            this.LogOutBut = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.StartPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -154,9 +153,7 @@
             // 
             // StartPage
             // 
-            this.StartPage.Controls.Add(this.FreeDays);
-            this.StartPage.Controls.Add(this.ActBut);
-            this.StartPage.Controls.Add(this.FreeLab);
+            this.StartPage.Controls.Add(this.LicenseLAB);
             this.StartPage.Controls.Add(this.pictureBox2);
             this.StartPage.Controls.Add(this.VCont);
             this.StartPage.Controls.Add(this.CDCheck);
@@ -171,39 +168,17 @@
             this.StartPage.Text = "Start";
             this.StartPage.UseVisualStyleBackColor = true;
             // 
-            // FreeDays
+            // LicenseLAB
             // 
-            this.FreeDays.AutoSize = true;
-            this.FreeDays.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FreeDays.Location = new System.Drawing.Point(353, 163);
-            this.FreeDays.Name = "FreeDays";
-            this.FreeDays.Size = new System.Drawing.Size(91, 20);
-            this.FreeDays.TabIndex = 8;
-            this.FreeDays.Text = "Trial Open";
-            this.FreeDays.Visible = false;
-            // 
-            // ActBut
-            // 
-            this.ActBut.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ActBut.Location = new System.Drawing.Point(464, 6);
-            this.ActBut.Name = "ActBut";
-            this.ActBut.Size = new System.Drawing.Size(90, 29);
-            this.ActBut.TabIndex = 7;
-            this.ActBut.Text = "Activate";
-            this.ActBut.UseVisualStyleBackColor = true;
-            this.ActBut.Visible = false;
-            this.ActBut.Click += new System.EventHandler(this.ActBut_Click);
-            // 
-            // FreeLab
-            // 
-            this.FreeLab.AutoSize = true;
-            this.FreeLab.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FreeLab.Location = new System.Drawing.Point(3, 3);
-            this.FreeLab.Name = "FreeLab";
-            this.FreeLab.Size = new System.Drawing.Size(197, 20);
-            this.FreeLab.TabIndex = 6;
-            this.FreeLab.Text = "Trial/Restricted Version";
-            this.FreeLab.DoubleClick += new System.EventHandler(this.FreeLab_DoubleClick);
+            this.LicenseLAB.AutoSize = true;
+            this.LicenseLAB.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LicenseLAB.Location = new System.Drawing.Point(6, 3);
+            this.LicenseLAB.Name = "LicenseLAB";
+            this.LicenseLAB.Size = new System.Drawing.Size(92, 24);
+            this.LicenseLAB.TabIndex = 6;
+            this.LicenseLAB.Text = "44-RS-RP";
+            this.LicenseLAB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LicenseLAB.Click += new System.EventHandler(this.LicenseLAB_Click);
             // 
             // pictureBox2
             // 
@@ -374,6 +349,7 @@
             // 
             // AboutPage
             // 
+            this.AboutPage.Controls.Add(this.LogOutBut);
             this.AboutPage.Controls.Add(this.InstagramConnect);
             this.AboutPage.Controls.Add(this.pictureBox1);
             this.AboutPage.Controls.Add(this.ReleaseDateLab);
@@ -419,9 +395,9 @@
             this.ReleaseDateLab.AutoSize = true;
             this.ReleaseDateLab.Location = new System.Drawing.Point(177, 168);
             this.ReleaseDateLab.Name = "ReleaseDateLab";
-            this.ReleaseDateLab.Size = new System.Drawing.Size(197, 13);
+            this.ReleaseDateLab.Size = new System.Drawing.Size(203, 13);
             this.ReleaseDateLab.TabIndex = 3;
-            this.ReleaseDateLab.Text = "Current Build Release Date: 6 April 2020";
+            this.ReleaseDateLab.Text = "Current Build Release Date: 12 April 2020";
             // 
             // label3
             // 
@@ -454,6 +430,18 @@
             this.VersionLab.TabIndex = 0;
             this.VersionLab.Text = "Version: ------";
             // 
+            // LogOutBut
+            // 
+            this.LogOutBut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LogOutBut.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LogOutBut.Location = new System.Drawing.Point(20, 31);
+            this.LogOutBut.Name = "LogOutBut";
+            this.LogOutBut.Size = new System.Drawing.Size(91, 53);
+            this.LogOutBut.TabIndex = 6;
+            this.LogOutBut.Text = "Logout";
+            this.LogOutBut.UseVisualStyleBackColor = true;
+            this.LogOutBut.Click += new System.EventHandler(this.LogOutBut_Click);
+            // 
             // Starter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -465,7 +453,6 @@
             this.Name = "Starter";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Text = "Starter";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Starter_FormClosed);
             this.tabControl1.ResumeLayout(false);
             this.StartPage.ResumeLayout(false);
             this.StartPage.PerformLayout();
@@ -501,9 +488,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button InstagramConnect;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Label FreeLab;
-        private System.Windows.Forms.Button ActBut;
-        private System.Windows.Forms.Label FreeDays;
         private System.Windows.Forms.TabPage SettingsPage;
         private System.Windows.Forms.Button CLColor;
         private System.Windows.Forms.Button CLWarColor;
@@ -518,5 +502,7 @@
         private System.Windows.Forms.Label HBSTLAB;
         private System.Windows.Forms.NumericUpDown LowBSTNUM;
         private System.Windows.Forms.NumericUpDown HighBSTNUM;
+        private System.Windows.Forms.Label LicenseLAB;
+        private System.Windows.Forms.Button LogOutBut;
     }
 }

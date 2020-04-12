@@ -2,6 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Data;
+using MySql.Data.MySqlClient;
+using System.Windows.Forms;
 
 namespace AFRMonitor
 {
@@ -61,19 +64,43 @@ namespace AFRMonitor
                 "Right click on the speaker in the taskbar\nClick on Open sound settings\n(Open fullscreen) On the right click on Sound control panel\n(This opens up a sound control panel)\n" +
                  "At the top click on Recording\nAnd set your microphone that you're using as the default microphone.\nRestart AFR Monitor";
         }
-            //public static void UpdateActivation(bool ToTrue)
-            //{
-            //    if(ToTrue)
-            //    {
-            //        Helper.AFRRegistryKey.SetValue("Activation", 0x03022004);
-            //        Helper.AFRRegistryKey.Close();
-            //    }
-            //    else
-            //    {
-            //        Helper.AFRRegistryKey.SetValue("Activation", 0x03029876);
-            //        Helper.AFRRegistryKey.Close();
-            //    }
-            //}
+        public static void UpdateActivation(bool ToTrue)
+        {
+            if (ToTrue)
+            {
+                xml.Elements.SetInnerText("/Root/Activated", (0x03022004).ToString());
+            }
+            else
+            {
+                xml.Elements.SetInnerText("/Root/Activated", (0x03029876).ToString());
+            }
+        }
+
+        public static DataSet GetDatabase(string SelectCommand = "SELECT * FROM UJWcEHlQGQ.RegisteredCars", string connStr = "datasource=remotemysql.com;port=3306;username=UJWcEHlQGQ;password=aEezih2fOn")
+        {
+            MySqlConnection connection = new MySqlConnection(connStr);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(SelectCommand, connection);
+            connection.Open();
+
+            DataSet ds = new DataSet();
+            adapter.Fill(ds, "RegisteredCars");
+
+            connection.Close();
+
+            return ds;
+        }
+
+        public static bool SetDatabase(string InsertCommand, string connStr = "datasource=remotemysql.com;port=3306;username=UJWcEHlQGQ;password=aEezih2fOn")
+        {
+            try
+            {
+                MySqlConnection connection = new MySqlConnection(connStr);
+                connection.Open();
+                new MySqlCommand(InsertCommand, connection).ExecuteNonQuery();
+                return true;
+            }
+            catch { return false; }
+        }
 
         //public static string GetTrialDaysLeft()
         //{
@@ -105,5 +132,5 @@ namespace AFRMonitor
          * Code 2: Voice Control No Default Audio Device
          * Code 3: Registry not working properly
          */
-        }
+    }
 }
