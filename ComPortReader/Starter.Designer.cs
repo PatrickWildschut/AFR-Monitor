@@ -53,13 +53,13 @@
             this.CLWarColor = new System.Windows.Forms.Button();
             this.CLColor = new System.Windows.Forms.Button();
             this.AboutPage = new System.Windows.Forms.TabPage();
+            this.LogOutBut = new System.Windows.Forms.Button();
             this.InstagramConnect = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.ReleaseDateLab = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.VersionLab = new System.Windows.Forms.Label();
-            this.LogOutBut = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.StartPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -364,6 +364,18 @@
             this.AboutPage.Text = "About";
             this.AboutPage.UseVisualStyleBackColor = true;
             // 
+            // LogOutBut
+            // 
+            this.LogOutBut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LogOutBut.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LogOutBut.Location = new System.Drawing.Point(20, 31);
+            this.LogOutBut.Name = "LogOutBut";
+            this.LogOutBut.Size = new System.Drawing.Size(91, 53);
+            this.LogOutBut.TabIndex = 6;
+            this.LogOutBut.Text = "Logout";
+            this.LogOutBut.UseVisualStyleBackColor = true;
+            this.LogOutBut.Click += new System.EventHandler(this.LogOutBut_Click);
+            // 
             // InstagramConnect
             // 
             this.InstagramConnect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -397,7 +409,7 @@
             this.ReleaseDateLab.Name = "ReleaseDateLab";
             this.ReleaseDateLab.Size = new System.Drawing.Size(203, 13);
             this.ReleaseDateLab.TabIndex = 3;
-            this.ReleaseDateLab.Text = "Current Build Release Date: 12 April 2020";
+            this.ReleaseDateLab.Text = "Current Build Release Date: 13 April 2020";
             // 
             // label3
             // 
@@ -429,18 +441,6 @@
             this.VersionLab.Size = new System.Drawing.Size(66, 13);
             this.VersionLab.TabIndex = 0;
             this.VersionLab.Text = "Version: ------";
-            // 
-            // LogOutBut
-            // 
-            this.LogOutBut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LogOutBut.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LogOutBut.Location = new System.Drawing.Point(20, 31);
-            this.LogOutBut.Name = "LogOutBut";
-            this.LogOutBut.Size = new System.Drawing.Size(91, 53);
-            this.LogOutBut.TabIndex = 6;
-            this.LogOutBut.Text = "Logout";
-            this.LogOutBut.UseVisualStyleBackColor = true;
-            this.LogOutBut.Click += new System.EventHandler(this.LogOutBut_Click);
             // 
             // Starter
             // 

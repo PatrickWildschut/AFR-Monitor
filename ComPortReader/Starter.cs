@@ -22,7 +22,24 @@ namespace AFRMonitor
         {
             InitializeComponent();
 
-            SetupUI();
+            Helper.Version = this.ProductVersion;
+            VersionLab.Text = "Version: " + this.ProductVersion;
+
+            // Setup License plate
+            LicenseLAB.Text = Activation.Elements.GetInnerText("/Root/BrandType");
+
+            // Setup BHP setters
+            LowBSTNUM.Value = Convert.ToInt32(Settings.Elements.GetInnerText("/Root/LowBoostBHP"));
+            HighBSTNUM.Value = Convert.ToInt32(Settings.Elements.GetInnerText("/Root/HighBoostBHP"));
+
+            ofd = new OpenFileDialog() { Multiselect = false, InitialDirectory = Settings.Elements.GetInnerText("/Root/SaveLocation"), Filter = "Air Fuel Ratio File (*.afr)|*.afr" };
+
+            // Setup line color view in settings
+            ChartLinePicBox.BackColor = ColorTranslator.FromHtml(Settings.Elements.GetInnerText("/Root/LineColor"));
+            WarChartLinePicBox.BackColor = ColorTranslator.FromHtml(Settings.Elements.GetInnerText("/Root/WarningLineColor"));
+
+            // Slider
+            WarningTrack.Value = Convert.ToInt32(Settings.Elements.GetInnerText("/Root/Difference"));
 
             if (!Helper.IsActivated())
             {
@@ -34,31 +51,7 @@ namespace AFRMonitor
                 ActivatedIt = true;
             }
         }
-
-        public async Task SetupUI()
-        {
-            await Task.Run(() => 
-            {
-                Helper.Version = this.ProductVersion;
-                VersionLab.Invoke(new Action(() => VersionLab.Text = "Version: " + this.ProductVersion));
-
-                // Setup License plate
-                LicenseLAB.Invoke(new Action(() => LicenseLAB.Text = Activation.Elements.GetInnerText("/Root/BrandType")));
-
-                // Setup BHP setters
-                LowBSTNUM.Invoke(new Action(() => LowBSTNUM.Value = Convert.ToInt32(Settings.Elements.GetInnerText("/Root/LowBoostBHP"))));
-                HighBSTNUM.Invoke(new Action(() => HighBSTNUM.Value = Convert.ToInt32(Settings.Elements.GetInnerText("/Root/HighBoostBHP"))));
-
-                ofd = new OpenFileDialog() { Multiselect = false, InitialDirectory = Settings.Elements.GetInnerText("/Root/SaveLocation"), Filter = "Air Fuel Ratio File (*.afr)|*.afr" };
-
-                // Setup line color view in settings
-                ChartLinePicBox.Invoke(new Action(() => ChartLinePicBox.BackColor = ColorTranslator.FromHtml(Settings.Elements.GetInnerText("/Root/LineColor"))));
-                WarChartLinePicBox.Invoke(new Action(() => WarChartLinePicBox.BackColor = ColorTranslator.FromHtml(Settings.Elements.GetInnerText("/Root/WarningLineColor"))));
-
-                // Slider
-                WarningTrack.Invoke(new Action(() => WarningTrack.Value = Convert.ToInt32(Settings.Elements.GetInnerText("/Root/Difference"))));
-            });
-        }
+                
 
         // Button control button clicked
         private void BCont_Click(object sender, EventArgs e)

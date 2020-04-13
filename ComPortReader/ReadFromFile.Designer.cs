@@ -28,11 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReadFFile));
             this.ChartReadView = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.ReadFromFileRightClick = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toggleValuesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.replayFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.LowValLab = new System.Windows.Forms.Label();
             this.LowValValue = new System.Windows.Forms.Label();
@@ -44,6 +48,7 @@
             this.tCheck = new System.Windows.Forms.CheckBox();
             this.BoostLAB = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ChartReadView)).BeginInit();
+            this.ReadFromFileRightClick.SuspendLayout();
             this.SuspendLayout();
             // 
             // ChartReadView
@@ -54,6 +59,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             chartArea1.Name = "ChartArea1";
             this.ChartReadView.ChartAreas.Add(chartArea1);
+            this.ChartReadView.ContextMenuStrip = this.ReadFromFileRightClick;
             legend1.Name = "Legend1";
             this.ChartReadView.Legends.Add(legend1);
             this.ChartReadView.Location = new System.Drawing.Point(12, 36);
@@ -69,7 +75,28 @@
             this.ChartReadView.Text = "chart1";
             this.ChartReadView.DragDrop += new System.Windows.Forms.DragEventHandler(this.ChartReadView_DragDrop);
             this.ChartReadView.DragEnter += new System.Windows.Forms.DragEventHandler(this.ChartReadView_DragEnter);
-            this.ChartReadView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ChartReadView_DoubleClick);
+            // 
+            // ReadFromFileRightClick
+            // 
+            this.ReadFromFileRightClick.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toggleValuesToolStripMenuItem,
+            this.replayFileToolStripMenuItem});
+            this.ReadFromFileRightClick.Name = "ReadFromFileRightClick";
+            this.ReadFromFileRightClick.Size = new System.Drawing.Size(146, 48);
+            // 
+            // toggleValuesToolStripMenuItem
+            // 
+            this.toggleValuesToolStripMenuItem.Name = "toggleValuesToolStripMenuItem";
+            this.toggleValuesToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.toggleValuesToolStripMenuItem.Text = "Toggle Values";
+            this.toggleValuesToolStripMenuItem.Click += new System.EventHandler(this.toggleValuesToolStripMenuItem_Click);
+            // 
+            // replayFileToolStripMenuItem
+            // 
+            this.replayFileToolStripMenuItem.Name = "replayFileToolStripMenuItem";
+            this.replayFileToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.replayFileToolStripMenuItem.Text = "Replay File";
+            this.replayFileToolStripMenuItem.Click += new System.EventHandler(this.replayFileToolStripMenuItem_Click);
             // 
             // label1
             // 
@@ -78,9 +105,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(672, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(152, 13);
+            this.label1.Size = new System.Drawing.Size(150, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Double click chart to replay file";
+            this.label1.Text = "Right click chart for extra tools";
             // 
             // LowValLab
             // 
@@ -203,6 +230,7 @@
             this.Name = "ReadFFile";
             this.Text = "Read From File - Patrick Wildschut";
             ((System.ComponentModel.ISupportInitialize)(this.ChartReadView)).EndInit();
+            this.ReadFromFileRightClick.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -221,5 +249,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox tCheck;
         private System.Windows.Forms.Label BoostLAB;
+        private System.Windows.Forms.ContextMenuStrip ReadFromFileRightClick;
+        private System.Windows.Forms.ToolStripMenuItem toggleValuesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem replayFileToolStripMenuItem;
     }
 }

@@ -151,16 +151,6 @@ namespace AFRMonitor
                 }
             });
         }
-        Task RunningPlaybackChart;
-        private void ChartReadView_DoubleClick(object sender, MouseEventArgs e)
-        {
-            if (RunningPlaybackChart == null || RunningPlaybackChart.IsCompleted)
-            {
-                RunningPlaybackChart = PlaybackChart();
-            }
-            //MessageBox.Show(ChartReadView.ChartAreas[0].AxisX.PixelPositionToValue(e.X).ToString());
-
-        }
 
         private void ChartReadView_DragDrop(object sender, DragEventArgs e)
         {
@@ -200,6 +190,22 @@ namespace AFRMonitor
                 GC.Collect();
                 SamplesLab.Text = "Samples";
             }
+        }
+
+        // Right Click methods
+        private void toggleValuesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChartReadView.Series[0].IsValueShownAsLabel = !ChartReadView.Series[0].IsValueShownAsLabel;
+        }
+
+        Task RunningPlaybackChart;
+        private void replayFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (RunningPlaybackChart == null || RunningPlaybackChart.IsCompleted)
+            {
+                RunningPlaybackChart = PlaybackChart();
+            }
+            //MessageBox.Show(ChartReadView.ChartAreas[0].AxisX.PixelPositionToValue(e.X).ToString());
         }
     }
 }
