@@ -1,0 +1,51 @@
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\obj\Debug\AFRMonitor.AFRMonitor.resources
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\obj\Debug\AFRMonitor.BuyForm.resources
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\obj\Debug\AFRMonitor.Properties.Resources.resources
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\obj\Debug\AFRMonitor.ReadFFile.resources
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\obj\Debug\AFRMonitor.Starter.resources
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\obj\Debug\AFR Monitor.csproj.GenerateResource.cache
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\bin\Debug\AFRMonitor.exe.config
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\bin\Debug\AFRMonitor.exe
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\bin\Debug\AFRMonitor.pdb
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\bin\Debug\PWHelper.dll
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\bin\Debug\PWHelper.pdb
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\bin\Debug\PWHelper.xml
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\obj\Debug\AFR Monitor.csproj.CopyComplete
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\obj\Debug\AFRMonitor.exe
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\obj\Debug\AFRMonitor.pdb
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\obj\Debug\AFRMonitor.Login.resources
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\bin\Debug\MySql.Data.dll
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\bin\Debug\Google.Protobuf.dll
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\bin\Debug\Ubiety.Dns.Core.dll
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\bin\Debug\Renci.SshNet.dll
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\bin\Debug\MySql.Data.xml
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\obj\Debug\AFRMonitor.Register.resources
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\obj\Debug\AFR Monitor.csproj.CoreCompileInputs.cache
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\bin\Debug\Tulpep.NotificationWindow.dll
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\obj\Debug\AFR Monitor.csprojAssemblyReference.cache
+C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\bin\Debug\AFRMonitor.exe.config
+C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\bin\Debug\AFRMonitor.exe
+C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\bin\Debug\AFRMonitor.pdb
+C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\bin\Debug\MySql.Data.dll
+C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\bin\Debug\PWHelper.dll
+C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\bin\Debug\Tulpep.NotificationWindow.dll
+C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\bin\Debug\Google.Protobuf.dll
+C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\bin\Debug\Ubiety.Dns.Core.dll
+C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\bin\Debug\Renci.SshNet.dll
+C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\bin\Debug\MySql.Data.xml
+C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\bin\Debug\PWHelper.pdb
+C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\bin\Debug\PWHelper.xml
+C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\obj\Debug\AFRMonitor.AFRMonitor.resources
+C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\obj\Debug\AFRMonitor.BuyForm.resources
+C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\obj\Debug\AFRMonitor.Login.resources
+C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\obj\Debug\AFRMonitor.Properties.Resources.resources
+C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\obj\Debug\AFRMonitor.ReadFFile.resources
+C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\obj\Debug\AFRMonitor.Register.resources
+C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\obj\Debug\AFRMonitor.Starter.resources
+C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\obj\Debug\AFR Monitor.csproj.GenerateResource.cache
+C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\obj\Debug\AFR Monitor.csproj.CoreCompileInputs.cache
+C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\obj\Debug\AFR Monitor.csproj.CopyComplete
+C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\obj\Debug\AFRMonitor.exe
+C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\obj\Debug\AFRMonitor.pdb

@@ -279,7 +279,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0EA187D07A9A40439A36D301B6A07C3C"
             {
-            "SourcePath" = "8:..\\ComPortReader\\PW Logo Small icon version.ico"
+            "SourcePath" = "8:..\\AFR_Monitor\\PW Logo Small icon version.ico"
             "TargetName" = "8:PW Logo Small icon version.ico"
             "Tag" = "8:"
             "Folder" = "8:_7F7EF535029A4A6985403FB9E739A305"
@@ -593,15 +593,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:AFR Monitor"
-        "ProductCode" = "8:{36636674-3567-46F3-BB90-BAC840EB4A1D}"
-        "PackageCode" = "8:{4C9BF606-6F85-4C47-AFE5-2FB359C686EE}"
+        "ProductCode" = "8:{15F53463-BDA2-406A-93DA-85030B2379CB}"
+        "PackageCode" = "8:{67D05A1A-DAAC-4B63-98CD-503015DFC5D4}"
         "UpgradeCode" = "8:{4E662220-B7FF-4D38-ADF3-361309DC6A7B}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.2.1"
+        "ProductVersion" = "8:1.2.2"
         "Manufacturer" = "8:PW"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -1143,7 +1143,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_951943FC5DE64347A2A57ED765F10CEA"
             {
-            "SourcePath" = "8:..\\ComPortReader\\obj\\Debug\\AFRMonitor.exe"
+            "SourcePath" = "8:..\\AFR_Monitor\\obj\\Debug\\AFRMonitor.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_7F7EF535029A4A6985403FB9E739A305"

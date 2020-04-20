@@ -1,0 +1,17 @@
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\bin\Release\AFRMonitor.exe.config
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\bin\Release\AFRMonitor.exe
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\bin\Release\AFRMonitor.pdb
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\bin\Release\PWHelper.dll
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\bin\Release\PWHelper.pdb
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\bin\Release\PWHelper.xml
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\obj\Release\AFR Monitor.csprojAssemblyReference.cache
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\obj\Release\AFRMonitor.ActivateBox.resources
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\obj\Release\AFRMonitor.AFRMonitor.resources
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\obj\Release\AFRMonitor.BuyForm.resources
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\obj\Release\AFRMonitor.Properties.Resources.resources
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\obj\Release\AFRMonitor.ReadFFile.resources
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\obj\Release\AFRMonitor.Starter.resources
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\obj\Release\AFR Monitor.csproj.GenerateResource.cache
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\obj\Release\AFR Monitor.csproj.CopyComplete
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\obj\Release\AFRMonitor.exe
+C:\Users\patri\Documents\AFR-Monitor\ComPortReader\obj\Release\AFRMonitor.pdb

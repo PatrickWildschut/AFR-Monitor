@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AFR Monitor", "ComPortReader\AFR Monitor.csproj", "{3C465599-7287-41EA-BF1E-562B337D35FD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AFR Monitor", "AFR_Monitor\AFR Monitor.csproj", "{3C465599-7287-41EA-BF1E-562B337D35FD}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Install AFRMonitor", "Install AFRMonitor\Install AFRMonitor.vdproj", "{74CBF60D-1AF6-4B75-92AC-BD77B498AED0}"
 EndProject
