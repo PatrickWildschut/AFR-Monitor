@@ -101,30 +101,6 @@ namespace AFRMonitor
             catch { return false; }
         }
 
-        //public static string GetTrialDaysLeft()
-        //{
-        //    return AFRTrialKey.GetValue("TrialOpen").ToString();
-        //}
-
-        //public static string GetSaveTrialDaysLeft()
-        //{
-        //    return AFRRegistryKey.GetValue("LastKnownTime").ToString();
-        //}
-
-        //public static void SubtractTrialDays(int value)
-        //{
-        //    int newValue = Convert.ToInt32(AFRTrialKey.GetValue("TrialOpen")) - value;
-
-        //    AFRTrialKey.SetValue("TrialOpen", newValue);
-        //    AFRRegistryKey.SetValue("LastKnownTime", newValue);
-        //}
-
-        //public static void SetTrialDaysLeft(int value)
-        //{
-        //    AFRTrialKey.SetValue("TrialOpen", value);
-        //    AFRRegistryKey.SetValue("LastKnownTime", value);
-        //}
-
         /* Errors
          *
          * Code 1: Voice Control Recognized unrecognizable word

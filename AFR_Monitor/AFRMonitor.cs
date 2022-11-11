@@ -347,20 +347,6 @@ namespace AFRMonitor
             {
                 try
                 {
-                        //// Fifth scan only or timer
-                        //if (Values.Count == 5 || stopwatch.IsRunning)
-                        //{
-                        //    if(stopwatch.IsRunning)
-                        //    {
-                        //        Helper.InputInterval = stopwatch.Elapsed.TotalMilliseconds;
-                        //        stopwatch.Stop();
-                        //        stopwatch.Reset();
-                        //    }
-                        //    else
-                        //    {
-                        //        stopwatch.Start();
-                        //    }
-                        //}
 
                         string PortOutput = SerialP.ReadLine().ToString();;
                         double PortOutputDouble = Convert.ToDouble(SerialP.ReadLine().ToString());
@@ -516,6 +502,7 @@ namespace AFRMonitor
             Helper.LowestValue = int.MaxValue;
             LowValueValue.Text = "--,-";
             SampleLength = 0;
+            IsSaved = true;
             
             if(TotalTimer.IsRunning)
             {

@@ -27,8 +27,6 @@ C:\Users\patri\Documents\AFR-Monitor\ComPortReader\obj\Debug\AFR Monitor.csprojA
 C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\bin\Debug\AFRMonitor.exe.config
 C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\bin\Debug\AFRMonitor.exe
 C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\bin\Debug\AFRMonitor.pdb
-C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\bin\Debug\MySql.Data.dll
-C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\bin\Debug\PWHelper.dll
 C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\bin\Debug\Tulpep.NotificationWindow.dll
 C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\bin\Debug\Google.Protobuf.dll
 C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\bin\Debug\BouncyCastle.Crypto.dll
@@ -49,3 +47,4 @@ C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\obj\Debug\AFR Monitor.csproj.Co
 C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\obj\Debug\AFR Monitor.csproj.CopyComplete
 C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\obj\Debug\AFRMonitor.exe
 C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\obj\Debug\AFRMonitor.pdb
+C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\obj\Debug\AFR Monitor.csprojAssemblyReference.cache

@@ -407,9 +407,10 @@
             this.ReleaseDateLab.AutoSize = true;
             this.ReleaseDateLab.Location = new System.Drawing.Point(177, 168);
             this.ReleaseDateLab.Name = "ReleaseDateLab";
-            this.ReleaseDateLab.Size = new System.Drawing.Size(203, 13);
+            this.ReleaseDateLab.Size = new System.Drawing.Size(232, 13);
             this.ReleaseDateLab.TabIndex = 3;
-            this.ReleaseDateLab.Text = "Current Build Release Date: 20 April 2020";
+            this.ReleaseDateLab.Text = "Current Build Release Date: 11 November 2022";
+            this.ReleaseDateLab.Click += new System.EventHandler(this.ReleaseDateLab_Click);
             // 
             // label3
             // 

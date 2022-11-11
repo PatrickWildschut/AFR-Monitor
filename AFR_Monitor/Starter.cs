@@ -100,14 +100,7 @@ namespace AFRMonitor
 
         private void LongScanCheck_CheckedChanged(object sender, EventArgs e)
         {
-            if(UnlimitedCheck.Checked)
-            {
-                Helper.UnlimitedMode = true;
-            }
-            else
-            {
-                Helper.UnlimitedMode = false;
-            }
+            Helper.UnlimitedMode = UnlimitedCheck.Checked;
         }
 
         private void InstagramConnect_Click(object sender, EventArgs e)
@@ -183,6 +176,11 @@ namespace AFRMonitor
                 Process.Start(Application.ExecutablePath);
                 Application.Exit();
             }
+        }
+
+        private void ReleaseDateLab_Click(object sender, EventArgs e)
+        {
+            ReleaseDateLab.Text = "2 Years no see... I'm back baby!!! :D";
         }
     }
 }
