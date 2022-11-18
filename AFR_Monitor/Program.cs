@@ -39,6 +39,10 @@ namespace AFRMonitor
                         "Keys", "ptr99234qnwpdz27273urwpnh58983ftwpqe98043nnwpio69270mow"
                     },
                     {
+                        "LoggedIn", "false"
+                    },
+                    {
+                        //"Activated", "50470916"
                         "Activated", "50501750"
                     },
                     {
@@ -48,7 +52,7 @@ namespace AFRMonitor
                         "TrialDays", "31"
                     },
                     {
-                        "BrandType", "NULL"
+                        "CarName", "NULL"
                     },
                     {
                         "LicensePlate", "NULL"
@@ -117,14 +121,6 @@ namespace AFRMonitor
                     goto Start;
                 }
             }
-            
-            //if(HasToCreate)
-            //{
-            //    PopupNotifier popup = new PopupNotifier();
-            //    popup.TitleText = "AFR Monitor";
-            //    popup.ContentText = "Settings everything up, please be patient. If it takes too long, restart the program.";
-            //    popup.Popup();
-            //}
 
             // If we have arguments, in other words, if this program has been opened using a afr file. 
             if (args.Length > 0)
@@ -133,9 +129,10 @@ namespace AFRMonitor
                 Application.Run(new ReadFFile());
             }
             // Not opened using afr file. Start program normally
-            else if(!Helper.IsActivated())
+            else if(!Helper.IsLoggedIn())
             {
-                Application.Run(new Login());
+                //Application.Run(new Login());
+                Application.Run(new Setup());
             }
             else
             {

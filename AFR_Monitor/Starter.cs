@@ -16,7 +16,6 @@ namespace AFRMonitor
         ColorDialog cd = new ColorDialog();
         OpenFileDialog ofd;
         FolderBrowserDialog fbd = new FolderBrowserDialog();
-        public bool ActivatedIt = false;
         public Starter()
         {
             InitializeComponent();
@@ -25,7 +24,7 @@ namespace AFRMonitor
             VersionLab.Text = "Version: " + this.ProductVersion;
 
             // Setup License plate
-            LicenseLAB.Text = Activation.Elements.GetInnerText("/Root/BrandType");
+            LicenseLAB.Text = Activation.Elements.GetInnerText("/Root/CarName");
 
             // Setup BHP setters
             LowBSTNUM.Value = Convert.ToInt32(Settings.Elements.GetInnerText("/Root/LowBoostBHP"));
@@ -40,14 +39,18 @@ namespace AFRMonitor
             // Slider
             WarningTrack.Value = Convert.ToInt32(Settings.Elements.GetInnerText("/Root/Difference"));
 
-            if (!Helper.IsActivated())
+            if (!Helper.IsLoggedIn())
             {
-                MessageBox.Show("Not activated, login before opening this.", "AFR Monitor Not Activated", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Not logged in! Please login before opening this.", "AFR Monitor Not Activated", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
             }
-            else
+
+            if(!Helper.IsActivated())
             {
-                ActivatedIt = true;
+                // Not activated, disable parts
+                VCont.Enabled = false;
+                RFFBut.Enabled = false;
+                ActBut.Visible = true;
             }
         }
 
@@ -110,10 +113,7 @@ namespace AFRMonitor
 
         private void FreeLab_DoubleClick(object sender, EventArgs e)
         {
-            if(ActivatedIt)
-            {
-                MessageBox.Show(Helper.VoiceControlManual(), "Voice Control Manual", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            MessageBox.Show(Helper.VoiceControlManual(), "Voice Control Manual", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void CLColor_Click(object sender, EventArgs e)
@@ -154,7 +154,7 @@ namespace AFRMonitor
             {
                 if(!IsBrand)
                 {
-                    LicenseLAB.Invoke(new Action(() => LicenseLAB.Text = Activation.Elements.GetInnerText("/Root/BrandType")));
+                    LicenseLAB.Invoke(new Action(() => LicenseLAB.Text = Activation.Elements.GetInnerText("/Root/CarName")));
                     IsBrand = true;
                 }
                 else
@@ -172,6 +172,7 @@ namespace AFRMonitor
             {
                 File.SetAttributes(Helper.ActivationXmlLocation, FileAttributes.Normal);
                 Helper.UpdateActivation(false);
+                Helper.UpdateLoggedIn(false);
                 File.SetAttributes(Helper.ActivationXmlLocation, FileAttributes.Hidden);
                 Process.Start(Application.ExecutablePath);
                 Application.Exit();
@@ -181,6 +182,11 @@ namespace AFRMonitor
         private void ReleaseDateLab_Click(object sender, EventArgs e)
         {
             ReleaseDateLab.Text = "2 Years no see... I'm back baby!!! :D";
+        }
+
+        private void ActBut_Click(object sender, EventArgs e)
+        {
+            new Activate().ShowDialog();
         }
     }
 }

@@ -15,7 +15,6 @@ namespace AFRMonitor
         public static string SettingsFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor";
         public static string SettingsXmlLocation = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AFR Monitor\\config\\cfg.xml";
         //public static string TempFolder = Path.GetTempPath() + "\\AFR Monitor";
-        private static EasyXML xml = new EasyXML(ActivationXmlLocation);
 
         public static bool ForceQuit { get; private set; } = false;
 
@@ -36,23 +35,44 @@ namespace AFRMonitor
         public static double WarningSlider = 0;
         public static int LowBoostBHP = 0;
         public static int HighBoostBHP = 0;
-        public static string Pass = "DjPatrick0302";
         public static string Version = string.Empty;
         public static bool IsActivated()
         {
-                if (xml.Elements.GetInnerText("/Root/Activated") == "50470916") // true
-                {
-                    return true;
-                }
-                else if (xml.Elements.GetInnerText("/Root/Activated") == "50501750") // false
-                {
-                    return false;
-                }
-                else
-                {
-                    // Error 3, xml not working properly
-                    return false;
-                }
+            EasyXML xml = new EasyXML(ActivationXmlLocation);
+
+            if (xml.Elements.GetInnerText("/Root/Activated") == "50470916") // true
+            {
+                return true;
+            }
+            else if (xml.Elements.GetInnerText("/Root/Activated") == "50501750") // false
+            {
+                return false;
+            }
+            else
+            {
+                // Error 3, xml not working properly
+                return false;
+            }
+
+        }
+
+        public static bool IsLoggedIn()
+        {
+            EasyXML xml = new EasyXML(ActivationXmlLocation);
+
+            if (xml.Elements.GetInnerText("/Root/LoggedIn") == "true") // true
+            {
+                return true;
+            }
+            else if (xml.Elements.GetInnerText("/Root/LoggedIn") == "false") // false
+            {
+                return false;
+            }
+            else
+            {
+                MessageBox.Show("Error 3, xml not working properly", "AFR Monitor XML error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
 
         }
 
@@ -65,6 +85,9 @@ namespace AFRMonitor
         }
         public static void UpdateActivation(bool ToTrue)
         {
+            File.SetAttributes(Helper.ActivationXmlLocation, FileAttributes.Normal);
+
+            EasyXML xml = new EasyXML(ActivationXmlLocation);
             if (ToTrue)
             {
                 xml.Elements.SetInnerText("/Root/Activated", (0x03022004).ToString());
@@ -73,6 +96,25 @@ namespace AFRMonitor
             {
                 xml.Elements.SetInnerText("/Root/Activated", (0x03029876).ToString());
             }
+
+            File.SetAttributes(Helper.ActivationXmlLocation, FileAttributes.Hidden);
+        }
+
+        public static void UpdateLoggedIn(bool ToTrue)
+        {
+            File.SetAttributes(Helper.ActivationXmlLocation, FileAttributes.Normal);
+
+            EasyXML xml = new EasyXML(ActivationXmlLocation);
+            if (ToTrue)
+            {
+                xml.Elements.SetInnerText("/Root/LoggedIn", "true");
+            }
+            else
+            {
+                xml.Elements.SetInnerText("/Root/LoggedIn", "false");
+            }
+
+            File.SetAttributes(Helper.ActivationXmlLocation, FileAttributes.Hidden);
         }
 
         public static DataSet GetDatabase(string SelectCommand = "SELECT * FROM UJWcEHlQGQ.RegisteredCars", string connStr = "datasource=remotemysql.com;port=3306;username=UJWcEHlQGQ;password=aEezih2fOn")

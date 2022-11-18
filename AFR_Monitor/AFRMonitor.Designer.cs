@@ -129,14 +129,14 @@
             this.RichOrLean.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.RichOrLean.Location = new System.Drawing.Point(51, 193);
-            this.RichOrLean.Maximum = 200;
-            this.RichOrLean.Minimum = 80;
+            this.RichOrLean.Maximum = 220;
+            this.RichOrLean.Minimum = 100;
             this.RichOrLean.Name = "RichOrLean";
             this.RichOrLean.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.RichOrLean.Size = new System.Drawing.Size(507, 52);
             this.RichOrLean.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.RichOrLean.TabIndex = 6;
-            this.RichOrLean.Value = 153;
+            this.RichOrLean.Value = 192;
             // 
             // Lean
             // 
@@ -227,7 +227,7 @@
             // FourteenSaveLab
             // 
             this.FourteenSaveLab.AutoSize = true;
-            this.FourteenSaveLab.Location = new System.Drawing.Point(354, 177);
+            this.FourteenSaveLab.Location = new System.Drawing.Point(270, 177);
             this.FourteenSaveLab.Name = "FourteenSaveLab";
             this.FourteenSaveLab.Size = new System.Drawing.Size(9, 13);
             this.FourteenSaveLab.TabIndex = 14;
@@ -236,7 +236,7 @@
             // FourteenLab
             // 
             this.FourteenLab.AutoSize = true;
-            this.FourteenLab.Location = new System.Drawing.Point(343, 163);
+            this.FourteenLab.Location = new System.Drawing.Point(258, 163);
             this.FourteenLab.Name = "FourteenLab";
             this.FourteenLab.Size = new System.Drawing.Size(28, 13);
             this.FourteenLab.TabIndex = 15;
@@ -246,7 +246,7 @@
             // 
             this.ElevenSaveLab.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ElevenSaveLab.AutoSize = true;
-            this.ElevenSaveLab.Location = new System.Drawing.Point(477, 177);
+            this.ElevenSaveLab.Location = new System.Drawing.Point(435, 177);
             this.ElevenSaveLab.Name = "ElevenSaveLab";
             this.ElevenSaveLab.Size = new System.Drawing.Size(9, 13);
             this.ElevenSaveLab.TabIndex = 16;
@@ -255,7 +255,7 @@
             // ElevenLab
             // 
             this.ElevenLab.AutoSize = true;
-            this.ElevenLab.Location = new System.Drawing.Point(466, 163);
+            this.ElevenLab.Location = new System.Drawing.Point(424, 163);
             this.ElevenLab.Name = "ElevenLab";
             this.ElevenLab.Size = new System.Drawing.Size(28, 13);
             this.ElevenLab.TabIndex = 17;

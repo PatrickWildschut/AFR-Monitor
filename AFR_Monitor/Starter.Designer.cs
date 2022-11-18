@@ -60,6 +60,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.VersionLab = new System.Windows.Forms.Label();
+            this.ActBut = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.StartPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -104,6 +105,7 @@
             this.CDCheck.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CDCheck.AutoSize = true;
+            this.CDCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CDCheck.Location = new System.Drawing.Point(231, 55);
             this.CDCheck.Name = "CDCheck";
             this.CDCheck.Size = new System.Drawing.Size(104, 17);
@@ -116,7 +118,8 @@
             // 
             this.UnlimitedCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.UnlimitedCheck.AutoSize = true;
-            this.UnlimitedCheck.Location = new System.Drawing.Point(231, 32);
+            this.UnlimitedCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UnlimitedCheck.Location = new System.Drawing.Point(232, 32);
             this.UnlimitedCheck.Name = "UnlimitedCheck";
             this.UnlimitedCheck.Size = new System.Drawing.Size(99, 17);
             this.UnlimitedCheck.TabIndex = 3;
@@ -153,6 +156,7 @@
             // 
             // StartPage
             // 
+            this.StartPage.Controls.Add(this.ActBut);
             this.StartPage.Controls.Add(this.LicenseLAB);
             this.StartPage.Controls.Add(this.pictureBox2);
             this.StartPage.Controls.Add(this.VCont);
@@ -160,6 +164,7 @@
             this.StartPage.Controls.Add(this.UnlimitedCheck);
             this.StartPage.Controls.Add(this.BCont);
             this.StartPage.Controls.Add(this.RFFBut);
+            this.StartPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StartPage.Location = new System.Drawing.Point(4, 22);
             this.StartPage.Name = "StartPage";
             this.StartPage.Padding = new System.Windows.Forms.Padding(3);
@@ -182,6 +187,7 @@
             // 
             // pictureBox2
             // 
+            this.pictureBox2.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.InitialImage")));
             this.pictureBox2.Location = new System.Drawing.Point(231, 70);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(100, 50);
@@ -443,6 +449,17 @@
             this.VersionLab.TabIndex = 0;
             this.VersionLab.Text = "Version: ------";
             // 
+            // ActBut
+            // 
+            this.ActBut.Location = new System.Drawing.Point(479, 3);
+            this.ActBut.Name = "ActBut";
+            this.ActBut.Size = new System.Drawing.Size(75, 23);
+            this.ActBut.TabIndex = 7;
+            this.ActBut.Text = "Activate";
+            this.ActBut.UseVisualStyleBackColor = true;
+            this.ActBut.Visible = false;
+            this.ActBut.Click += new System.EventHandler(this.ActBut_Click);
+            // 
             // Starter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -505,5 +522,6 @@
         private System.Windows.Forms.NumericUpDown HighBSTNUM;
         private System.Windows.Forms.Label LicenseLAB;
         private System.Windows.Forms.Button LogOutBut;
+        private System.Windows.Forms.Button ActBut;
     }
 }

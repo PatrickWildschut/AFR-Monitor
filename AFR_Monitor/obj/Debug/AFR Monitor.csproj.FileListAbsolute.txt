@@ -36,7 +36,6 @@ C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\bin\Debug\MySql.Data.xml
 C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\bin\Debug\PWHelper.pdb
 C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\bin\Debug\PWHelper.xml
 C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\obj\Debug\AFRMonitor.AFRMonitor.resources
-C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\obj\Debug\AFRMonitor.BuyForm.resources
 C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\obj\Debug\AFRMonitor.Login.resources
 C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\obj\Debug\AFRMonitor.Properties.Resources.resources
 C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\obj\Debug\AFRMonitor.ReadFFile.resources
@@ -48,3 +47,5 @@ C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\obj\Debug\AFR Monitor.csproj.Co
 C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\obj\Debug\AFRMonitor.exe
 C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\obj\Debug\AFRMonitor.pdb
 C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\obj\Debug\AFR Monitor.csprojAssemblyReference.cache
+C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\obj\Debug\AFRMonitor.Setup.resources
+C:\Users\patri\Documents\AFR-Monitor\AFR_Monitor\obj\Debug\AFRMonitor.Activate.resources

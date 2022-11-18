@@ -24,7 +24,7 @@ namespace AFRMonitor
             InitializeComponent();
         }
         // "INSERT INTO UJWcEHlQGQ.RegisteredCars(Mail_Address,Password,License_Plate) VALUES('" + MailTB.Text + "','" + PassTB.Text + "','" + LicenseTB.Text + "')"
-        private async void LogBut_Click(object sender, EventArgs e)
+        private async void LogBut_ClickFORMYSQLUNUSED(object sender, EventArgs e)
         {
             if(LogBut.Text == "Login")
             {
@@ -91,6 +91,11 @@ namespace AFRMonitor
                 // Logged in not activated
                 
             }
+        }
+
+        private async void LogBut_Click(object sender, EventArgs e)
+        {
+            //Helper.
         }
 
         private void RegBut_Click(object sender, EventArgs e)
