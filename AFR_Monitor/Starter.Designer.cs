@@ -415,7 +415,7 @@
             this.ReleaseDateLab.Name = "ReleaseDateLab";
             this.ReleaseDateLab.Size = new System.Drawing.Size(232, 13);
             this.ReleaseDateLab.TabIndex = 3;
-            this.ReleaseDateLab.Text = "Current Build Release Date: 11 November 2022";
+            this.ReleaseDateLab.Text = "Current Build Release Date: 18 November 2022";
             this.ReleaseDateLab.Click += new System.EventHandler(this.ReleaseDateLab_Click);
             // 
             // label3
