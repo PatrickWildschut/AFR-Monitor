@@ -36,6 +36,7 @@
             this.RFFBut = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.StartPage = new System.Windows.Forms.TabPage();
+            this.ActBut = new System.Windows.Forms.Button();
             this.LicenseLAB = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.SettingsPage = new System.Windows.Forms.TabPage();
@@ -60,7 +61,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.VersionLab = new System.Windows.Forms.Label();
-            this.ActBut = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.StartPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -172,6 +172,17 @@
             this.StartPage.TabIndex = 0;
             this.StartPage.Text = "Start";
             this.StartPage.UseVisualStyleBackColor = true;
+            // 
+            // ActBut
+            // 
+            this.ActBut.Location = new System.Drawing.Point(479, 3);
+            this.ActBut.Name = "ActBut";
+            this.ActBut.Size = new System.Drawing.Size(75, 23);
+            this.ActBut.TabIndex = 7;
+            this.ActBut.Text = "Activate";
+            this.ActBut.UseVisualStyleBackColor = true;
+            this.ActBut.Visible = false;
+            this.ActBut.Click += new System.EventHandler(this.ActBut_Click);
             // 
             // LicenseLAB
             // 
@@ -416,6 +427,7 @@
             this.ReleaseDateLab.Size = new System.Drawing.Size(232, 13);
             this.ReleaseDateLab.TabIndex = 3;
             this.ReleaseDateLab.Text = "Current Build Release Date: 18 November 2022";
+            this.ReleaseDateLab.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.ReleaseDateLab.Click += new System.EventHandler(this.ReleaseDateLab_Click);
             // 
             // label3
@@ -448,17 +460,6 @@
             this.VersionLab.Size = new System.Drawing.Size(66, 13);
             this.VersionLab.TabIndex = 0;
             this.VersionLab.Text = "Version: ------";
-            // 
-            // ActBut
-            // 
-            this.ActBut.Location = new System.Drawing.Point(479, 3);
-            this.ActBut.Name = "ActBut";
-            this.ActBut.Size = new System.Drawing.Size(75, 23);
-            this.ActBut.TabIndex = 7;
-            this.ActBut.Text = "Activate";
-            this.ActBut.UseVisualStyleBackColor = true;
-            this.ActBut.Visible = false;
-            this.ActBut.Click += new System.EventHandler(this.ActBut_Click);
             // 
             // Starter
             // 
