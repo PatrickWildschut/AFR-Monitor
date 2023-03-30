@@ -1,6 +1,0 @@
-Lowest Value: 2147483647
-Scans: 0
-Difference 1 or more: -1
-Total Runtime: 0 sec
-
-Values

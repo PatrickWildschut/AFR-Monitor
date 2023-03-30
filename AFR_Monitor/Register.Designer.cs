@@ -65,7 +65,6 @@
             this.ReqBut.TabIndex = 4;
             this.ReqBut.Text = "Request License";
             this.ReqBut.UseVisualStyleBackColor = true;
-            this.ReqBut.Click += new System.EventHandler(this.ReqBut_Click);
             // 
             // MailTB
             // 

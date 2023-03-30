@@ -351,30 +351,34 @@ namespace AFRMonitor
                         string PortOutput = SerialP.ReadLine().ToString();;
                         double PortOutputDouble = Convert.ToDouble(SerialP.ReadLine().ToString());
 
-                        LowestValue(PortOutputDouble / 10);
-                        Values.Add(PortOutputDouble / 10);
+                        if (PortOutputDouble > 100)
+                        {
+                            PortOutputDouble /= 10;
+                        }
+
+                        LowestValue(PortOutputDouble);
+                        Values.Add(PortOutputDouble);
 
                         CurLab.Invoke(new Action(() => CurLab.Text = PortOutput));
 
-                        if(PortOutputDouble > 200)
+                        if(PortOutputDouble > 20)
                         {
-                            PortOutputDouble = 200;
+                            PortOutputDouble = 20;
                         }
-                        else if(PortOutputDouble < 80)
+                        else if(PortOutputDouble < 8)
                         {
-                            PortOutputDouble = 80;
+                            PortOutputDouble = 8;
                         }
 
-                        RichOrLean.Invoke(new Action(() => RichOrLean.Value = 300 - (int)PortOutputDouble));
-
-                        ChartView.Invoke(new Action(() => ChartView.Series["Value"].Points.AddY(PortOutputDouble / 10)));
+                        RichOrLean.Invoke(new Action(() => RichOrLean.Value = 300 - (int)(PortOutputDouble * 10)));
+                        ChartView.Invoke(new Action(() => ChartView.Series["Value"].Points.AddY(PortOutputDouble)));
                         
-                        if((PortOutputDouble / 10) - LastValue < -(Helper.WarningSlider / 10) || (PortOutputDouble / 10) - LastValue > (Helper.WarningSlider / 10))
+                        if((PortOutputDouble) - LastValue < -(Helper.WarningSlider) || (PortOutputDouble) - LastValue > (Helper.WarningSlider))
                         {
                             ChartView.Invoke(new Action(() => ChartView.Series["Value"].Points[ChartView.Series["Value"].Points.Count - 1].Color = WarningLineColor));
                         }
 
-                        LastValue = PortOutputDouble / 10;
+                        LastValue = PortOutputDouble;
 
                         // Limited mode
                         if (Values.Count >= 200 & !Helper.UnlimitedMode)

@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Data;
-using MySql.Data.MySqlClient;
 using System.Windows.Forms;
 
 namespace AFRMonitor
@@ -117,31 +116,31 @@ namespace AFRMonitor
             File.SetAttributes(Helper.ActivationXmlLocation, FileAttributes.Hidden);
         }
 
-        public static DataSet GetDatabase(string SelectCommand = "SELECT * FROM UJWcEHlQGQ.RegisteredCars", string connStr = "datasource=remotemysql.com;port=3306;username=UJWcEHlQGQ;password=aEezih2fOn")
-        {
-            MySqlConnection connection = new MySqlConnection(connStr);
-            MySqlDataAdapter adapter = new MySqlDataAdapter(SelectCommand, connection);
-            connection.Open();
+        //public static DataSet GetDatabase(string SelectCommand = "SELECT * FROM UJWcEHlQGQ.RegisteredCars", string connStr = "datasource=remotemysql.com;port=3306;username=UJWcEHlQGQ;password=aEezih2fOn")
+        //{
+        //    MySqlConnection connection = new MySqlConnection(connStr);
+        //    MySqlDataAdapter adapter = new MySqlDataAdapter(SelectCommand, connection);
+        //    connection.Open();
 
-            DataSet ds = new DataSet();
-            adapter.Fill(ds, "RegisteredCars");
+        //    DataSet ds = new DataSet();
+        //    adapter.Fill(ds, "RegisteredCars");
 
-            connection.Close();
+        //    connection.Close();
 
-            return ds;
-        }
+        //    return ds;
+        //}
 
-        public static bool SetDatabase(string InsertCommand, string connStr = "datasource=remotemysql.com;port=3306;username=UJWcEHlQGQ;password=aEezih2fOn")
-        {
-            try
-            {
-                MySqlConnection connection = new MySqlConnection(connStr);
-                connection.Open();
-                new MySqlCommand(InsertCommand, connection).ExecuteNonQuery();
-                return true;
-            }
-            catch { return false; }
-        }
+        //public static bool SetDatabase(string InsertCommand, string connStr = "datasource=remotemysql.com;port=3306;username=UJWcEHlQGQ;password=aEezih2fOn")
+        //{
+        //    try
+        //    {
+        //        MySqlConnection connection = new MySqlConnection(connStr);
+        //        connection.Open();
+        //        new MySqlCommand(InsertCommand, connection).ExecuteNonQuery();
+        //        return true;
+        //    }
+        //    catch { return false; }
+        //}
 
         /* Errors
          *

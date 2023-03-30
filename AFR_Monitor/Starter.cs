@@ -181,7 +181,7 @@ namespace AFRMonitor
 
         private void ReleaseDateLab_Click(object sender, EventArgs e)
         {
-            ReleaseDateLab.Text = "First Official Release.";
+            //ReleaseDateLab.Text = "First Official Release.";
         }
 
         private void ActBut_Click(object sender, EventArgs e)

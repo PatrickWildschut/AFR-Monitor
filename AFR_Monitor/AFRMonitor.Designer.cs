@@ -136,7 +136,7 @@
             this.RichOrLean.Size = new System.Drawing.Size(507, 52);
             this.RichOrLean.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.RichOrLean.TabIndex = 6;
-            this.RichOrLean.Value = 192;
+            this.RichOrLean.Value = 182;
             // 
             // Lean
             // 
@@ -246,7 +246,7 @@
             // 
             this.ElevenSaveLab.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ElevenSaveLab.AutoSize = true;
-            this.ElevenSaveLab.Location = new System.Drawing.Point(435, 177);
+            this.ElevenSaveLab.Location = new System.Drawing.Point(392, 177);
             this.ElevenSaveLab.Name = "ElevenSaveLab";
             this.ElevenSaveLab.Size = new System.Drawing.Size(9, 13);
             this.ElevenSaveLab.TabIndex = 16;
@@ -255,7 +255,7 @@
             // ElevenLab
             // 
             this.ElevenLab.AutoSize = true;
-            this.ElevenLab.Location = new System.Drawing.Point(424, 163);
+            this.ElevenLab.Location = new System.Drawing.Point(382, 163);
             this.ElevenLab.Name = "ElevenLab";
             this.ElevenLab.Size = new System.Drawing.Size(28, 13);
             this.ElevenLab.TabIndex = 17;
