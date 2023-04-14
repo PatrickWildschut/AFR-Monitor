@@ -20,7 +20,11 @@ namespace AFRMonitor
         Color WarningLineColor;
 
         public string OutText = "";
-        public string[] OutSepText;
+        public string[] Values;
+
+        VerticalLineAnnotation VLA = new VerticalLineAnnotation();
+        public string[] Marks;
+
         public string[] OutLabText;
         public string InputInterval;
         public string DateAndTime;
@@ -68,53 +72,81 @@ namespace AFRMonitor
                 int i = 0;
                 int Times = 0;
                 double LastValue = 0.0;
-                OutSepText = Decrypted.Split('s');
-                OutText = OutSepText[OutSepText.Length - 1];
-                OutSepText = OutText.Split('\n');
+                string[] DecryptedSplit = Decrypted.Split('s');
+
+                OutText = DecryptedSplit[DecryptedSplit.Length - 2];
+                Values = OutText.Split('\n');
+                OutText = DecryptedSplit[DecryptedSplit.Length - 1];
+                Marks = OutText.Split('\n');
                 InputInterval = OutLabText[4].Split('\n')[0].Trim(' ');
                 DateAndTime = OutLabText[5] + ":" + OutLabText[6] + ":" + OutLabText[7].Split('\n')[0];
 
-                foreach (string d in OutSepText)
+                // Values
+                foreach (string d in Values)
                 {
-                    if (!string.IsNullOrEmpty(d))
+                    if (string.IsNullOrEmpty(d))
+                    {
+                        continue;
+                    }
+
+                    try
                     {
                         // Add to chart
                         ChartReadView.Series[0].Points.AddY(Convert.ToDouble(d));
+                    }
+                    catch
+                    {
+                        // Not a number, skip
+                        continue;
+                    }
 
-                        if (Convert.ToDouble(d) - LastValue < -(Helper.WarningSlider / 10) || Convert.ToDouble(d) - LastValue > (Helper.WarningSlider / 10))
-                        {
-                            ChartReadView.Series[0].Points[ChartReadView.Series[0].Points.Count - 1].Color = WarningLineColor;
-                        }
+                    if (Convert.ToDouble(d) - LastValue < -(Helper.WarningSlider / 10) || Convert.ToDouble(d) - LastValue > (Helper.WarningSlider / 10))
+                    {
+                        ChartReadView.Series[0].Points[ChartReadView.Series[0].Points.Count - 1].Color = WarningLineColor;
+                    }
 
-                        LastValue = Convert.ToDouble(d);
+                    LastValue = Convert.ToDouble(d);
 
-                        i++;
-                        if (i >= 5 && OutSepText.Length <= 40)
+                    i++;
+                    if (i >= 5 && Values.Length <= 40)
+                    {
+                        Times++;
+                        i = 0;
+                        clSave.Add(new CustomLabel(5 * Times - 5, 5 * Times + 5, Convert.ToDouble((Convert.ToDouble(InputInterval) / 1000 * 5 * Times)).ToString("0.0"), 0, LabelMarkStyle.None, GridTickTypes.All));
+                    }
+                    else
+                    {
+                        if (i >= 20 && Values.Length <= 150)
                         {
                             Times++;
                             i = 0;
-                            clSave.Add(new CustomLabel(5 * Times - 5, 5 * Times + 5, Convert.ToDouble((Convert.ToDouble(InputInterval) / 1000 * 5 * Times)).ToString("0.0"), 0, LabelMarkStyle.None, GridTickTypes.All));
+                            //clSave.Add(new CustomLabel(20.7 * Times - 5, 20.7 * Times + 5, (3.5 * Times).ToString(), 0, LabelMarkStyle.None, GridTickTypes.All));
+                            clSave.Add(new CustomLabel(20 * Times - 5, 20 * Times + 5, Convert.ToDouble((Convert.ToDouble(InputInterval) / 1000 * 20 * Times)).ToString("0.0"), 0, LabelMarkStyle.None, GridTickTypes.All));
                         }
-                        else
+                        else if (i >= 50)
                         {
-                            if (i >= 20 && OutSepText.Length <= 150)
-                            {
-                                Times++;
-                                i = 0;
-                                //clSave.Add(new CustomLabel(20.7 * Times - 5, 20.7 * Times + 5, (3.5 * Times).ToString(), 0, LabelMarkStyle.None, GridTickTypes.All));
-                                clSave.Add(new CustomLabel(20 * Times - 5, 20 * Times + 5, Convert.ToDouble((Convert.ToDouble(InputInterval) / 1000 * 20 * Times)).ToString("0.0"), 0, LabelMarkStyle.None, GridTickTypes.All));
-                            }
-                            else if (i >= 50)
-                            {
-                                Times++;
-                                i = 0;
-                                //clSave.Add(new CustomLabel(50.5 * Times - 10, 50.5 * Times + 10, (8.5 * Times).ToString(), 0, LabelMarkStyle.None, GridTickTypes.All));
-                                clSave.Add(new CustomLabel(50 * Times - 10, 50 * Times + 10, Convert.ToDouble((Convert.ToDouble(InputInterval) / 1000 * 50 * Times)).ToString("0.0"), 0, LabelMarkStyle.None, GridTickTypes.All));
-                            }
+                            Times++;
+                            i = 0;
+                            //clSave.Add(new CustomLabel(50.5 * Times - 10, 50.5 * Times + 10, (8.5 * Times).ToString(), 0, LabelMarkStyle.None, GridTickTypes.All));
+                            clSave.Add(new CustomLabel(50 * Times - 10, 50 * Times + 10, Convert.ToDouble((Convert.ToDouble(InputInterval) / 1000 * 50 * Times)).ToString("0.0"), 0, LabelMarkStyle.None, GridTickTypes.All));
                         }
                     }
-
                 }
+
+                // Marks
+                foreach (string m in Marks)
+                {
+                    if(string.IsNullOrEmpty(m))
+                    {
+                        continue;
+                    }
+
+                    setupVLA();
+                    VLA.X = Convert.ToInt32(m);
+
+                    ChartReadView.Annotations.Add(VLA);
+                }
+                
 
                 foreach (CustomLabel cl in clSave)
                 {
@@ -145,30 +177,44 @@ namespace AFRMonitor
                 ChartReadView.Invoke(new Action(() => ChartReadView.ChartAreas[0].AxisX.Maximum = PointCount));
                 ChartReadView.Invoke(new Action(() => ChartReadView.Series[0].Points.Clear()));
 
-                foreach (string d in OutSepText)
+                foreach (string d in Values)
                 {
                     try
                     {
-                        if (!string.IsNullOrEmpty(d))
+                        if (string.IsNullOrEmpty(d))
                         {
-                            // Add to chart
+                            continue;
+                        }
+
+
+                        // Add to chart
+                        try
+                        {
+                            Convert.ToDouble(d);
+
                             Thread.Sleep(Convert.ToInt32(Convert.ToDouble(InputInterval)));
                             ChartReadView.Invoke(new Action(() => ChartReadView.Series[0].Points.AddY(Convert.ToDouble(d))));
-
-                            if (Convert.ToDouble(d) - LastValue < -(Helper.WarningSlider / 10) || Convert.ToDouble(d) - LastValue > (Helper.WarningSlider / 10))
-                            {
-                                ChartReadView.Invoke(new Action(() => ChartReadView.Series[0].Points[ChartReadView.Series[0].Points.Count - 1].Color = WarningLineColor));
-                            }
-
-                            if(ChartReadView.Series[0].Points.Count >= ValueSecCount * TimesThrough)
-                            {
-                                DateTimeLAB.Invoke(new Action(() => DateTimeLAB.Text = DateTime.Parse(DateTimeLAB.Text).AddSeconds(1).ToString()));
-
-                                TimesThrough++;
-                            }
-
-                            LastValue = Convert.ToDouble(d);
                         }
+                        catch
+                        {
+                            // Not a number, skip
+                            continue;
+                        }
+                        
+
+                        if (Convert.ToDouble(d) - LastValue < -(Helper.WarningSlider / 10) || Convert.ToDouble(d) - LastValue > (Helper.WarningSlider / 10))
+                        {
+                            ChartReadView.Invoke(new Action(() => ChartReadView.Series[0].Points[ChartReadView.Series[0].Points.Count - 1].Color = WarningLineColor));
+                        }
+
+                        if(ChartReadView.Series[0].Points.Count >= ValueSecCount * TimesThrough)
+                        {
+                            DateTimeLAB.Invoke(new Action(() => DateTimeLAB.Text = DateTime.Parse(DateTimeLAB.Text).AddSeconds(1).ToString()));
+
+                            TimesThrough++;
+                        }
+
+                        LastValue = Convert.ToDouble(d);
                     }
                     catch { }
                 }
@@ -239,6 +285,20 @@ namespace AFRMonitor
 
                 ShowingSamples = true;
             }
+        }
+        private int VLACount = 0;
+        private void setupVLA()
+        {
+            VLA = new VerticalLineAnnotation();
+
+            VLA.AxisX = ChartReadView.ChartAreas[0].AxisX;
+            VLA.IsInfinitive = true;
+            VLA.LineWidth = 2;
+            VLA.ClipToChartArea = ChartReadView.ChartAreas[0].Name;
+            VLA.LineColor = Color.Red;
+
+            VLACount++;
+            VLA.Name = "Mark" + VLACount.ToString();
         }
     }
 }

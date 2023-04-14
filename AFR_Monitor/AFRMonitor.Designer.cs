@@ -175,6 +175,7 @@
             series1.ChartArea = "ChartValue";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series1.Color = System.Drawing.Color.Red;
+            series1.Legend = "Legend1";
             series1.Name = "Value";
             this.ChartView.Series.Add(series1);
             this.ChartView.Size = new System.Drawing.Size(507, 300);
@@ -355,10 +356,12 @@
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "AFRMonitor";
             this.Text = "Air Fuel Ratio Monitor - Patrick Wildschut";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_FormClosing);
             this.SizeChanged += new System.EventHandler(this.AFRMonitor_SizeChanged);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AFRMonitor_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.ChartView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

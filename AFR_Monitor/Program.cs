@@ -91,10 +91,10 @@ namespace AFRMonitor
                 var elements = new Dictionary<string, string>
                 {
                     {
-                        "LineColor", "#" + Color.Red.R.ToString("X2") + Color.Red.G.ToString("X2") + Color.Red.B.ToString("X2")
+                        "LineColor", "#" + Color.Blue.R.ToString("X2") + Color.Blue.G.ToString("X2") + Color.Blue.B.ToString("X2")
                     },
                     {
-                        "WarningLineColor", "#" + Color.Black.R.ToString("X2") + Color.Black.G.ToString("X2") + Color.Black.B.ToString("X2")
+                        "WarningLineColor", "#" + Color.Red.R.ToString("X2") + Color.Red.G.ToString("X2") + Color.Red.B.ToString("X2")
                     },
                     {
                         "Difference", "5"
@@ -107,6 +107,9 @@ namespace AFRMonitor
                     },
                     {
                         "HighBoostBHP", "0"
+                    },
+                    {
+                        "ComPort", "COM0"
                     }
                 };
 

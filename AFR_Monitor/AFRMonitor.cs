@@ -10,6 +10,7 @@ using System.Speech.Synthesis;
 using System.PW.Encryption;
 using System.PW.Xml;
 using System.Diagnostics;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace AFRMonitor
 {
@@ -22,6 +23,10 @@ namespace AFRMonitor
         Color LineColor = ColorTranslator.FromHtml(Settings.Elements.GetInnerText("/Root/LineColor"));
         Color WarningLineColor = ColorTranslator.FromHtml(Settings.Elements.GetInnerText("/Root/WarningLineColor"));
 
+        // Mark
+        VerticalLineAnnotation VLA = new VerticalLineAnnotation();
+        int VLACount = 0;
+
         // For voice control only
         SpeechRecognitionEngine sre = new SpeechRecognitionEngine();
         SpeechSynthesizer synthesizer = new SpeechSynthesizer();
@@ -31,6 +36,7 @@ namespace AFRMonitor
         };
         int CountDownCount = 3;
         List<double> Values = new List<double>();
+        List<VerticalLineAnnotation> Marks = new List<VerticalLineAnnotation>();
         bool IsSaved = true;
         public AFRMonitor()
         {
@@ -63,12 +69,21 @@ namespace AFRMonitor
             ChartView.ChartAreas[0].AxisY.Minimum = 8;
             ChartView.ChartAreas[0].AxisY.Maximum = 20;
             ChartView.Series["Value"].Color = LineColor;
+
+            // Mark
+            VLA.AxisX = ChartView.ChartAreas[0].AxisX;
+            VLA.IsInfinitive = true;
+            VLA.LineWidth = 2;
+            VLA.ClipToChartArea = ChartView.ChartAreas[0].Name;
+            VLA.LineColor = Color.Red;
+
             ToggleUI(false);
             
             ReBut_Click(null, null);
             if (ComSelector.Items.Count > 0)
             {
-                ComSelector.SelectedIndex = 0;
+                // Select last used comport from Settings File
+                ComSelector.Text = Settings.Elements.GetInnerText("/Root/ComPort");
             }
             #endregion
         }
@@ -272,6 +287,9 @@ namespace AFRMonitor
                     e.Cancel = true;
                 }
             }
+
+            // Save current selected comport as startup comport
+            Settings.Elements.SetInnerText("/Root/ComPort", ComSelector.Text);
         }
 
         private void Start()
@@ -348,7 +366,7 @@ namespace AFRMonitor
                 try
                 {
 
-                        string PortOutput = SerialP.ReadLine().ToString();;
+                        string PortOutput = SerialP.ReadLine().ToString();
                         double PortOutputDouble = Convert.ToDouble(SerialP.ReadLine().ToString());
 
                         if (PortOutputDouble > 100)
@@ -379,10 +397,20 @@ namespace AFRMonitor
                         }
 
                         LastValue = PortOutputDouble;
+                        ChartView.Invoke(new Action(() => ChartView.Focus()));
 
                         // Limited mode
-                        if (Values.Count >= 200 & !Helper.UnlimitedMode)
+                        if (Values.Count >= 200 && !Helper.UnlimitedMode)
                         {
+                            // Move marks to the left
+                            ChartView.Invoke(new Action(() => ChartView.Annotations.Clear()));
+
+                            foreach (VerticalLineAnnotation vla in Marks)
+                            {
+                                vla.X -= 1;
+                                ChartView.Invoke(new Action(() => ChartView.Annotations.Add(vla)));
+                            }
+
                             ChartView.Series[0].Points.RemoveAt(0);
                         }
                     }
@@ -431,7 +459,9 @@ namespace AFRMonitor
 
         private async Task SaveToFile(bool HighBoost, int ShowSavedTime = 5000)
         {
-            string returns = "";
+            string output = String.Empty;
+            string ValuesString = String.Empty;
+            string MarksString = String.Empty;
 
             // Save depending on highboost or lowboost
             if (HighBoost)
@@ -457,13 +487,28 @@ namespace AFRMonitor
                 }
             }
 
+            // Add Values
             foreach (double d in Values)
             {
-                returns += d.ToString() + "\n";
+                ValuesString += d.ToString() + "\n";
             }
 
+            // Add Marks
+            foreach (VerticalLineAnnotation vla in Marks)
+            {
+                MarksString += vla.X.ToString() + "\n";
+            }
+
+            output += "Lowest Value: " + Helper.LowestValue + "\n";
+            output += "High Boost: " + HighBoost.ToString() + "\n";
+            output += "Total Runtime: " + SampleLength.ToString("0.0") + " sec\n";
+            output += "Sample Interval: " + (SampleLength * 1000 / Values.Count) + "\n";
+            output += "Finished Time: " + DateTime.Now + "\n";
+            output += "Values\n" + ValuesString;
+            output += "Marks\n" + MarksString;
+
             // Encrypt the data
-            string EncOutput = await EasyEncryption.Async.EncryptStringAsync("Lowest Value: " + Helper.LowestValue + "\nHigh Boost: " + HighBoost.ToString() + "\nTotal Runtime: " + SampleLength.ToString("0.0") + " sec" + "\nSample Interval: " + (SampleLength * 1000 / Values.Count) + "\nFinished Time: " + DateTime.Now + "\n\nValues\n" + returns, "File encrypted by AFR Monitor, version: " + Helper.Version + " - Patrick Wildschut");
+            string EncOutput = await EasyEncryption.Async.EncryptStringAsync(output, "File encrypted by AFR Monitor, version: " + Helper.Version + " - Patrick Wildschut");
 
 
             // Save
@@ -502,7 +547,9 @@ namespace AFRMonitor
             STFLB.Text = "Save Low Boost";
             STFHB.Text = "Save High Boost";
             Values.Clear();
+            Marks.Clear();
             ChartView.Series["Value"].Points.Clear();
+            ChartView.Annotations.Clear();
             Helper.LowestValue = int.MaxValue;
             LowValueValue.Text = "--,-";
             SampleLength = 0;
@@ -605,6 +652,34 @@ namespace AFRMonitor
                     LowValueValue.Invoke(new Action(() => LowValueValue.Font = new Font("Arial", 22, FontStyle.Bold)));
                 }
             });
+        }
+
+        private void setupVLA()
+        {
+            VLA = new VerticalLineAnnotation();
+
+            VLA.AxisX = ChartView.ChartAreas[0].AxisX;
+            VLA.IsInfinitive = true;
+            VLA.LineWidth = 2;
+            VLA.ClipToChartArea = ChartView.ChartAreas[0].Name;
+            VLA.LineColor = Color.Red;
+
+            VLA.X = ChartView.Series["Value"].Points.Count;
+
+            VLACount++;
+            VLA.Name = "Mark" + VLACount.ToString();
+        }
+        private void AFRMonitor_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space)
+            {
+                setupVLA();
+                // Add annotation (VLA)
+                ChartView.Annotations.Add(VLA);
+
+                // Add mark with current latest X location to list to store in save file
+                Marks.Add(VLA);
+            }
         }
     }
 }
